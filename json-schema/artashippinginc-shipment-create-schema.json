@@ -1,0 +1,817 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/artashippinginc/main/json-schema/artashippinginc-shipment-create-schema.json",
+  "title": "ShipmentCreate",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/arta-openapi.json#/components/schemas/ShipmentCreate",
+  "oneOf": [
+    {
+      "additionalProperties": false,
+      "description": "Create a standard Arta shipment",
+      "properties": {
+        "shipment": {
+          "properties": {
+            "customs_process": {
+              "default": "ddu",
+              "description": "The customs process for the shipment. \"ddu\" (Delivery Duties Unpaid) means the receiver is responsible for paying duties and taxes. \"ddp\" (Delivery Duties Paid) means the sender prepays duties and taxes. \"ddp_optional\" means the receiver will decide whether to pay estimated duties, fees, and taxes prior to fulfillment",
+              "enum": [
+                "ddu",
+                "ddp",
+                "ddp_optional"
+              ],
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "exceptions": {
+              "description": "An optional list of exceptions to apply at booking time. Only supported for self-ship shipments. Pass an item with `type: \"label_hold\"` to defer automatic label purchase until the exception is resolved.",
+              "items": {
+                "properties": {
+                  "type": {
+                    "description": "The exception type to create at booking. Currently the only accepted value is `label_hold`.",
+                    "enum": [
+                      "label_hold"
+                    ],
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "type": "object",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "internal_reference": {
+              "description": "This field can be used to pass through any data that you may want returned unaltered for your own later usage",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "public_reference": {
+              "description": "A client defined name for the request. The value provided for the public_reference field may appear in notification emails and shipment detail pages",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "quote_id": {
+              "description": "The numeric id of the quote to be booked",
+              "format": "int64",
+              "type": "integer",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "shipping_notes": {
+              "description": "This field can be used to pass through any notes to Arta that a customer might want to provide about the request",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "tags": {
+              "description": "A list of tags to associate with this shipment. Tags present on the request will also be set on the shipment",
+              "items": {
+                "description": "The name of an active tag belonging to your organization.",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          "required": [
+            "quote_id"
+          ],
+          "type": "object",
+          "x-struct": null,
+          "x-validate": null
+        }
+      },
+      "required": [
+        "shipment"
+      ],
+      "title": "ArtaShipmentPayload",
+      "type": "object",
+      "x-struct": null,
+      "x-validate": null
+    },
+    {
+      "additionalProperties": false,
+      "description": "Create a track shipment",
+      "properties": {
+        "shipment": {
+          "properties": {
+            "destination": {
+              "description": "The destination location for the shipment. If provided, the data in this object will overwrite the destination address data for this shipment that is stored on Arta's system, not the one on the commercial carrier's system",
+              "properties": {
+                "access_restrictions": {
+                  "deprecated": true,
+                  "items": {
+                    "description": "Id of location restriction type",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "type": "array",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "address_line_1": {
+                  "description": "First line of address",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "address_line_2": {
+                  "description": "Second line of address",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "address_line_3": {
+                  "description": "Third line of address",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "city": {
+                  "description": "City",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "contacts": {
+                  "description": "A list of contacts at the location",
+                  "items": {
+                    "properties": {
+                      "email_address": {
+                        "type": "string",
+                        "x-struct": null,
+                        "x-validate": null
+                      },
+                      "name": {
+                        "type": "string",
+                        "x-struct": null,
+                        "x-validate": null
+                      },
+                      "phone_number": {
+                        "type": "string",
+                        "x-struct": null,
+                        "x-validate": null
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "type": "object",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "type": "array",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "country": {
+                  "description": "The ISO 3166-1 alpha-2 country code of the current or last known location if available",
+                  "maxLength": 2,
+                  "minLength": 2,
+                  "required": true,
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "postal_code": {
+                  "description": "The postal code",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "region": {
+                  "description": "Political region name, for US states and Canada provinces, use 2 letter abbreviations",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "title": {
+                  "description": "The title or name of the location",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "type": [
+                "object",
+                "null"
+              ],
+              "x-struct": null,
+              "x-validate": null
+            },
+            "internal_reference": {
+              "description": "This field can be used to pass through any data that you may want returned unaltered for your own later usage",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "origin": {
+              "description": "The originating location for the shipment. If provided, the data in this object will overwrite the origin address data for this shipment that is stored on Arta's system, not the one on the commercial carrier's system",
+              "properties": {
+                "access_restrictions": {
+                  "deprecated": true,
+                  "items": {
+                    "description": "Id of location restriction type",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "type": "array",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "address_line_1": {
+                  "description": "First line of address",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "address_line_2": {
+                  "description": "Second line of address",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "address_line_3": {
+                  "description": "Third line of address",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "city": {
+                  "description": "City",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "contacts": {
+                  "description": "A list of contacts at the location",
+                  "items": {
+                    "properties": {
+                      "email_address": {
+                        "type": "string",
+                        "x-struct": null,
+                        "x-validate": null
+                      },
+                      "name": {
+                        "type": "string",
+                        "x-struct": null,
+                        "x-validate": null
+                      },
+                      "phone_number": {
+                        "type": "string",
+                        "x-struct": null,
+                        "x-validate": null
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "type": "object",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "type": "array",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "country": {
+                  "description": "The ISO 3166-1 alpha-2 country code of the current or last known location if available",
+                  "maxLength": 2,
+                  "minLength": 2,
+                  "required": true,
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "postal_code": {
+                  "description": "The postal code",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "region": {
+                  "description": "Political region name, for US states and Canada provinces, use 2 letter abbreviations",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "title": {
+                  "description": "The title or name of the location",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                }
+              },
+              "type": [
+                "object",
+                "null"
+              ],
+              "x-struct": null,
+              "x-validate": null
+            },
+            "packages": {
+              "description": "The shipments packages are formatted as a list, however, Track shipments only support a single package. You can provide details about the package being shipped, including the object details within the package",
+              "items": {
+                "properties": {
+                  "depth": {
+                    "description": "The depth of the object",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "height": {
+                    "description": "The height of the object",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "objects": {
+                    "description": "A list of objects in the package",
+                    "items": {
+                      "properties": {
+                        "components": {
+                          "description": "A list of components in the object. Should be used only with a `prepacked_box` object subtype.\n\nWhen components are present, the object value must equal the sum of component values.",
+                          "items": {
+                            "properties": {
+                              "customs": {
+                                "properties": {
+                                  "country_of_origin": {
+                                    "description": "The ISO 3166-1 alpha-2 country code where the object was made or manufactured",
+                                    "maxLength": 2,
+                                    "minLength": 2,
+                                    "type": "string",
+                                    "x-struct": null,
+                                    "x-validate": null
+                                  },
+                                  "hs_code": {
+                                    "description": "The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products",
+                                    "type": "string",
+                                    "x-struct": null,
+                                    "x-validate": null
+                                  },
+                                  "medium": {
+                                    "description": "The medium of the object. This is a description of the material or materials used to create the object",
+                                    "type": "string",
+                                    "x-struct": null,
+                                    "x-validate": null
+                                  },
+                                  "temporary_admission": {
+                                    "description": "Select true if the goods are currently in the country under a temporary admission declaration",
+                                    "type": "boolean",
+                                    "x-struct": null,
+                                    "x-validate": null
+                                  }
+                                },
+                                "type": "object",
+                                "x-struct": null,
+                                "x-validate": null
+                              },
+                              "details": {
+                                "properties": {
+                                  "creation_date": {
+                                    "description": "Details about the timing in which an object was created",
+                                    "type": "string",
+                                    "x-struct": null,
+                                    "x-validate": null
+                                  },
+                                  "creator": {
+                                    "description": "The creator of the object",
+                                    "type": "string",
+                                    "x-struct": null,
+                                    "x-validate": null
+                                  },
+                                  "notes": {
+                                    "description": "Any notes about the item",
+                                    "type": "string",
+                                    "x-struct": null,
+                                    "x-validate": null
+                                  },
+                                  "title": {
+                                    "description": "The object title",
+                                    "type": "string",
+                                    "x-struct": null,
+                                    "x-validate": null
+                                  }
+                                },
+                                "type": "object",
+                                "x-struct": null,
+                                "x-validate": null
+                              },
+                              "internal_reference": {
+                                "description": "This field can be used to pass through any data that you may want returned unaltered for your own later usage",
+                                "maxLength": 255,
+                                "type": "string",
+                                "x-struct": null,
+                                "x-validate": null
+                              },
+                              "public_reference": {
+                                "description": "A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages",
+                                "maxLength": 255,
+                                "type": "string",
+                                "x-struct": null,
+                                "x-validate": null
+                              },
+                              "type": {
+                                "description": "The object component type ID. Options are defined in the Object Component types metadata endpoint",
+                                "pattern": "^[0-9a-z_]{1,56}$",
+                                "type": "string",
+                                "x-struct": null,
+                                "x-validate": null
+                              },
+                              "value": {
+                                "$ref": "#/$defs/MonetaryAmount"
+                              },
+                              "value_currency": {
+                                "$ref": "#/$defs/Currency"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "value"
+                            ],
+                            "type": "object",
+                            "x-struct": null,
+                            "x-validate": null
+                          },
+                          "type": "array",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "current_packing": {
+                          "description": "A list of packing subtype IDs describing how the item is currently packed",
+                          "items": {
+                            "type": "string",
+                            "x-struct": null,
+                            "x-validate": null
+                          },
+                          "type": "array",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "customs": {
+                          "properties": {
+                            "country_of_origin": {
+                              "description": "The ISO 3166-1 alpha-2 country code where the object was made or manufactured",
+                              "maxLength": 2,
+                              "minLength": 2,
+                              "type": "string",
+                              "x-struct": null,
+                              "x-validate": null
+                            },
+                            "hs_code": {
+                              "description": "The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products",
+                              "type": "string",
+                              "x-struct": null,
+                              "x-validate": null
+                            },
+                            "medium": {
+                              "description": "The medium of the object. This is a description of the material or materials used to create the object",
+                              "type": "string",
+                              "x-struct": null,
+                              "x-validate": null
+                            },
+                            "temporary_admission": {
+                              "description": "Select true if the goods are currently in the country under a temporary admission declaration",
+                              "type": "boolean",
+                              "x-struct": null,
+                              "x-validate": null
+                            }
+                          },
+                          "type": "object",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "depth": {
+                          "description": "The depth of the object",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "details": {
+                          "properties": {
+                            "creation_date": {
+                              "description": "Details about the timing in which an object was created",
+                              "type": "string",
+                              "x-struct": null,
+                              "x-validate": null
+                            },
+                            "creator": {
+                              "description": "The creator of the object",
+                              "type": "string",
+                              "x-struct": null,
+                              "x-validate": null
+                            },
+                            "is_cites": {
+                              "default": false,
+                              "description": "Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora",
+                              "type": "boolean",
+                              "x-struct": null,
+                              "x-validate": null
+                            },
+                            "is_fragile": {
+                              "default": false,
+                              "description": "Set this flag to true is the item is fragile. This may effect packing and handling costs",
+                              "type": "boolean",
+                              "x-struct": null,
+                              "x-validate": null
+                            },
+                            "materials": {
+                              "deprecated": true,
+                              "description": "A list of IDs describing the types of materials used",
+                              "items": {
+                                "type": "string",
+                                "x-struct": null,
+                                "x-validate": null
+                              },
+                              "type": "array",
+                              "x-struct": null,
+                              "x-validate": null
+                            },
+                            "notes": {
+                              "description": "Any notes about the item",
+                              "type": "string",
+                              "x-struct": null,
+                              "x-validate": null
+                            },
+                            "title": {
+                              "description": "The object title",
+                              "type": "string",
+                              "x-struct": null,
+                              "x-validate": null
+                            }
+                          },
+                          "type": "object",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "height": {
+                          "description": "The height of the object",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "images": {
+                          "description": "A list image urls of the object",
+                          "items": {
+                            "format": "uri",
+                            "type": "string",
+                            "x-struct": null,
+                            "x-validate": null
+                          },
+                          "type": "array",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "internal_reference": {
+                          "description": "This field can be used to pass through any data that you may want returned unaltered for your own later usage",
+                          "maxLength": 255,
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "public_reference": {
+                          "description": "A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages",
+                          "maxLength": 255,
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "subtype": {
+                          "description": "The object subtype ID. Options are defined in the Object types metadata endpoint",
+                          "pattern": "^[0-9a-z_]{1,56}$",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "unit_of_measurement": {
+                          "enum": [
+                            "in",
+                            "cm"
+                          ],
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "value": {
+                          "$ref": "#/$defs/MonetaryAmount"
+                        },
+                        "value_currency": {
+                          "$ref": "#/$defs/Currency"
+                        },
+                        "weight": {
+                          "description": "The weight of the object",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "weight_unit": {
+                          "description": "The unit of the object",
+                          "enum": [
+                            "lb",
+                            "kg"
+                          ],
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "width": {
+                          "description": "The width of the object",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        }
+                      },
+                      "type": "object",
+                      "x-struct": null,
+                      "x-validate": null
+                    },
+                    "type": "array",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "packing_materials": {
+                    "description": "The id of a material.",
+                    "items": {
+                      "type": "string",
+                      "x-struct": null,
+                      "x-validate": null
+                    },
+                    "type": "array",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "unit_of_measurement": {
+                    "enum": [
+                      "in",
+                      "cm"
+                    ],
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "weight": {
+                    "description": "The weight of the object",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "weight_unit": {
+                    "description": "The unit of the object",
+                    "enum": [
+                      "lb",
+                      "kg"
+                    ],
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "width": {
+                    "description": "The width of the object",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  }
+                },
+                "type": "object",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "public_reference": {
+              "description": "A client defined name for the request. The value provided for the public_reference field may appear in notification emails and shipment detail pages",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "shipping_notes": {
+              "description": "This field can be used to provide Arta any additional context about the shipment",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "tags": {
+              "description": "A list of tags to associate with this shipment",
+              "items": {
+                "description": "The name of an active tag belonging to your organization.",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "tracking": {
+              "description": "The tracking details for a shipment purchased off of the Arta platform. This information should come from a commercial carrier such as DHL, FedEx, or UPS. Exactly one item is required",
+              "items": {
+                "properties": {
+                  "carrier": {
+                    "description": "The id of a supported commercial carrier. These can be obtained via the GET /metadata/commercial_carriers endpoint",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "tracking_number": {
+                    "description": "The tracking number of the shipment provided by the commercial carrier",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "url": {
+                    "description": "The url that links to the tracking page on the commercial carrier's website",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  }
+                },
+                "required": [
+                  "carrier",
+                  "tracking_number"
+                ],
+                "type": "object",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          "required": [
+            "tracking"
+          ],
+          "type": "object",
+          "x-struct": null,
+          "x-validate": null
+        }
+      },
+      "required": [
+        "shipment"
+      ],
+      "title": "TrackShipmentPayload",
+      "type": "object",
+      "x-struct": null,
+      "x-validate": null
+    }
+  ],
+  "x-struct": "Elixir.DocsWeb.Schemas.RequestBody.ShipmentCreate",
+  "x-validate": null,
+  "$defs": {
+    "Currency": {
+      "default": "USD",
+      "description": "ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint",
+      "maxLength": 3,
+      "minLength": 3,
+      "pattern": "^[A-Z]{3}$",
+      "title": "Currency",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "MonetaryAmount": {
+      "pattern": "^(0|([1-9]+[0-9]*))(\\.[0-9]{1,2})?$",
+      "title": "MonetaryAmount",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    }
+  }
+}

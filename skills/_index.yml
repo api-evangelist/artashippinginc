@@ -1,0 +1,26 @@
+generated: '2026-09-26'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/arta-openapi.json
+skills:
+- file: skills/artashippinginc-create-and-retrieve-quote-request.md
+  name: artashippinginc-create-and-retrieve-quote-request
+  api: openapi/arta-openapi.json
+  operations:
+  - requests/create
+  - requests/get
+- file: skills/artashippinginc-address-verification-workflow.md
+  name: artashippinginc-address-verification-workflow
+  api: openapi/arta-openapi.json
+  operations:
+  - addressVerifications/create
+  - addressVerifications/get
+  - addressVerifications/list
+- file: skills/artashippinginc-manage-uploads.md
+  name: artashippinginc-manage-uploads
+  api: openapi/arta-openapi.json
+  operations:
+  - uploads/list
+  - uploads/create
+  - uploads-get
+  - uploads/delete

@@ -1,0 +1,1341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/artashippinginc/main/json-schema/artashippinginc-shipment-schema.json",
+  "title": "Shipment",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/arta-openapi.json#/components/schemas/Shipment",
+  "properties": {
+    "schedule": {
+      "description": "The schedule for the shipment",
+      "properties": {
+        "delivery_end": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "delivery_start": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "delivery_window_modifier": {
+          "description": "A qualifying word indicating how delivery_start and delivery_end together shape the delivery window. When present, values may be \"after\", \"by\", \"on\", or \"between\"",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "pickup_end": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "pickup_start": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "pickup_window_modifier": {
+          "description": "A qualifying word indicating how delivery_start and delivery_end together shape the delivery window. When present, values may be \"after\", \"by\", \"on\", or \"between\"",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        }
+      },
+      "type": "object",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "insurance_policy": {
+      "properties": {
+        "amount": {
+          "$ref": "#/$defs/MonetaryAmount"
+        },
+        "amount_currency": {
+          "$ref": "#/$defs/Currency"
+        },
+        "id": {
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "insured_value": {
+          "$ref": "#/$defs/MonetaryAmount"
+        },
+        "insured_value_currency": {
+          "$ref": "#/$defs/Currency"
+        }
+      },
+      "type": [
+        "object",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "customs_end_use": {
+      "description": "The intended end use of the items being shipped for customs purposes",
+      "enum": [
+        "for_resale",
+        "not_for_resale"
+      ],
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "origin": {
+      "$ref": "#/$defs/Location"
+    },
+    "in_transit_at": {
+      "description": "A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the in_transit status with microsecond precision. Returns null if the shipment has not entered transit",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "eei_form_url": {
+      "description": "The URL for an associated electronic export information form required for customs clearance. Returns null if the shipment does not have an associated EEI Form",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "quote_type": {
+      "description": "The ID of the quote type associated with this shipment",
+      "enum": [
+        "premium",
+        "select",
+        "parcel",
+        "self_ship"
+      ],
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "eei_form_status": {
+      "description": "The status of an associated electronic export information document required for customs clearance. Returns null if the shipment does not have an associated EEI Form",
+      "enum": [
+        "approved",
+        "cleared",
+        "pending",
+        "rejected",
+        "submitted"
+      ],
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "payment_process": {
+      "description": "The primary method by which payment to Arta will be handled for any shipment booked through this hosted session",
+      "enum": [
+        "checkout",
+        "invoicing"
+      ],
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "internal_reference": {
+      "description": "This field can be used to pass through any character data that you may want returned unaltered for your own later usage",
+      "maxLength": 255,
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "packages": {
+      "items": {
+        "$ref": "#/$defs/Package"
+      },
+      "type": "array",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "status": {
+      "description": "The status for this shipment",
+      "enum": [
+        "pending",
+        "confirmed",
+        "collected",
+        "in_transit",
+        "completed",
+        "cancelled"
+      ],
+      "maxLength": 255,
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "updated_at": {
+      "description": "A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision",
+      "format": "date-time",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "customs_process": {
+      "description": "The customs process for the shipment. \"ddu\" (Delivery Duties Unpaid) means the receiver is responsible for paying duties and taxes. \"ddp\" (Delivery Duties Paid) means the sender prepays duties and taxes. \"ddp_optional\" means the receiver will decide whether to pay estimated duties, fees, and taxes prior to fulfillment",
+      "enum": [
+        "ddu",
+        "ddp",
+        "ddp_optional"
+      ],
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "id": {
+      "description": "The id of the shipment in UUID format",
+      "format": "uuid",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "destination": {
+      "$ref": "#/$defs/Location"
+    },
+    "log_request_id": {
+      "description": "A string identifying the API request that created the shipment. This `log_request_id` may be used to find the Log associated with the source API request",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "tracking": {
+      "description": "A list of tracking details for the packages in a shipment",
+      "items": {
+        "properties": {
+          "carrier_name": {
+            "description": "The name of the carrier providing transport services for a specific package",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "label_format_urls": {
+            "description": "A map of shipping label format types to their respective download URLs. Returns null if no shipping label exists",
+            "properties": {
+              "pdf_4_x_6": {
+                "description": "PDF 4x6 inch label - centered and scaled to full size with 0.5 inch margins on all sides",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-struct": null,
+                "x-validate": null
+              },
+              "pdf_a4": {
+                "description": "PDF A4 (8.3x11.7 inch) - centered and scaled to full size with 1 inch top/bottom and 1.25 inch left/right margins",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-struct": null,
+                "x-validate": null
+              },
+              "pdf_a4_half_page": {
+                "description": "PDF A4 landscape (11.7x8.3 inch) - 4x6 label on left half with 1.15 inch top/bottom and 1.85 inch left/right margins",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-struct": null,
+                "x-validate": null
+              },
+              "pdf_letter": {
+                "description": "PDF US Letter (8.5x11 inch) - centered and scaled to full size with 1 inch margins on all sides",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-struct": null,
+                "x-validate": null
+              },
+              "pdf_letter_half_page": {
+                "description": "PDF US Letter landscape (11x8.5 inch) - 4x6 label on left half with 1.5 inch top/bottom and 1.25 inch left/right margins",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-struct": null,
+                "x-validate": null
+              },
+              "png_4_x_6": {
+                "description": "PNG 4x6 inch label - centered on the page and scaled to fill exactly 4x6 inches (no margins)",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-struct": null,
+                "x-validate": null
+              },
+              "zpl_12dpmm": {
+                "description": "ZPL for 12 dots/mm (300 DPI) printers - 4x6 label centered on the media at native resolution",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-struct": null,
+                "x-validate": null
+              },
+              "zpl_8dpmm": {
+                "description": "ZPL for 8 dots/mm (203 DPI) printers - 4x6 label centered on the media at native resolution",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-struct": null,
+                "x-validate": null
+              }
+            },
+            "type": [
+              "object",
+              "null"
+            ],
+            "x-struct": null,
+            "x-validate": null
+          },
+          "label_url": {
+            "description": "A URL at which parcel package shipping labels may be downloaded and printed",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-struct": null,
+            "x-validate": null
+          },
+          "package_id": {
+            "description": "The ID associated with the tracking detail's corresponding package",
+            "format": "int64",
+            "type": "integer",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "tracking_number": {
+            "description": "The carrier-providing tracking number for this package",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "url": {
+            "description": "A carrier-provided URL for fetching delivery events related to this package's transport",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "type": "object",
+        "x-struct": null,
+        "x-validate": null
+      },
+      "type": "array",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "total_currency": {
+      "$ref": "#/$defs/Currency"
+    },
+    "shipping_notes": {
+      "description": "Any additional unstructured notes to Arta about the shipment",
+      "maxLength": 255,
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "collected_at": {
+      "description": "A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the collected status with microsecond precision. Returns null if the shipment has not been collected",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "emissions_unit": {
+      "description": "The unit of measurement for emissions for this shipment. Typically measured in \"kg_co2e\" or \"kilograms of carbon dioxide equivalent\"",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "object_count": {
+      "description": "The count of objects included in the shipment",
+      "format": "int64",
+      "type": "integer",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "tags": {
+      "description": "A list of tags associated with the shipment",
+      "items": {
+        "$ref": "#/$defs/Tag"
+      },
+      "type": "array",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "url": {
+      "description": "The track URL for this shipment on the Arta web platform",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "exceptions": {
+      "description": "Shipment exceptions provide context about holds, delays, and other circumstances that may interrupt a shipment's fulfillment",
+      "items": {
+        "properties": {
+          "created_at": {
+            "description": "A NaiveDatetime-formatted timestamp describing when the exception was created with microsecond precision",
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "exception_type_label": {
+            "description": "An additional label providing context about the exception type (optional)",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-struct": null,
+            "x-validate": null
+          },
+          "hold_until": {
+            "description": "The date the shipment will be held until",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-struct": null,
+            "x-validate": null
+          },
+          "id": {
+            "description": "The id of the exception in UUID format",
+            "format": "uuid",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "package_id": {
+            "description": "The package associated with this exception (optional)",
+            "format": "int64",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "x-struct": null,
+            "x-validate": null
+          },
+          "resolution": {
+            "description": "A brief description of the method by which this exception was resolved",
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-struct": null,
+            "x-validate": null
+          },
+          "source": {
+            "description": "The source of the exception",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "status": {
+            "description": "The current status for this exception",
+            "enum": [
+              "new",
+              "in_progress",
+              "resolved"
+            ],
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": {
+            "description": "The type of exception",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "updated_at": {
+            "description": "A NaiveDatetime-formatted timestamp describing when the exception was last updated with microsecond precision",
+            "format": "date-time",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          }
+        },
+        "type": "object",
+        "x-struct": null,
+        "x-validate": null
+      },
+      "type": "array",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "confirmed_at": {
+      "description": "A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the confirmed status with microsecond precision. Returns null if the shipment has not been confirmed",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "emissions": {
+      "description": "The estimated CO2 emissions for the shipment",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "package_count": {
+      "description": "The count of packages included in the shipment",
+      "format": "int64",
+      "type": "integer",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "cancelled_at": {
+      "description": "A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the cancelled status with microsecond precision. Returns null if the shipment has not been cancelled",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "completed_at": {
+      "description": "A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the completed status with microsecond precision. Returns null if the shipment has not been completed",
+      "format": "date-time",
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "total": {
+      "$ref": "#/$defs/MonetaryAmount"
+    },
+    "services": {
+      "description": "A list of services included in the shipment",
+      "items": {
+        "$ref": "#/$defs/Service"
+      },
+      "type": "array",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "shortcode": {
+      "description": "A brief identifier for this shipment",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "public_reference": {
+      "description": "A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages",
+      "maxLength": 255,
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "hosted_session_id": {
+      "description": "The ID of the HostedSession through which this shipment was created",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "x-struct": null,
+      "x-validate": null
+    },
+    "created_at": {
+      "description": "A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision",
+      "format": "date-time",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    }
+  },
+  "type": "object",
+  "x-struct": "Elixir.DocsWeb.Schemas.Response.Shipment",
+  "x-validate": null,
+  "$defs": {
+    "Currency": {
+      "default": "USD",
+      "description": "ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint",
+      "maxLength": 3,
+      "minLength": 3,
+      "pattern": "^[A-Z]{3}$",
+      "title": "Currency",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "Location": {
+      "properties": {
+        "access_restrictions": {
+          "deprecated": true,
+          "items": {
+            "description": "Id of location restriction type",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "address_line_1": {
+          "description": "First line of address",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "address_line_2": {
+          "description": "Second line of address",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "address_line_3": {
+          "description": "Third line of address",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "city": {
+          "description": "City",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "contacts": {
+          "description": "A list of contacts at the location",
+          "items": {
+            "properties": {
+              "email_address": {
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "name": {
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "phone_number": {
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "country": {
+          "description": "The ISO 3166-1 alpha-2 country code of the current or last known location if available",
+          "maxLength": 2,
+          "minLength": 2,
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "postal_code": {
+          "description": "The postal code",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "region": {
+          "description": "Political region name, for US states and Canada provinces, use 2 letter abbreviations",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "title": {
+          "description": "The title or name of the location",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        }
+      },
+      "required": [
+        "country"
+      ],
+      "title": "Location",
+      "type": "object",
+      "x-struct": "Elixir.DocsWeb.Schemas.Response.Location",
+      "x-validate": null
+    },
+    "MonetaryAmount": {
+      "pattern": "^(0|([1-9]+[0-9]*))(\\.[0-9]{1,2})?$",
+      "title": "MonetaryAmount",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "Object": {
+      "properties": {
+        "components": {
+          "description": "A list of components in the object. Should be used only with a `prepacked_box` object subtype.\n\nWhen components are present, the object value must equal the sum of component values.",
+          "items": {
+            "properties": {
+              "customs": {
+                "properties": {
+                  "country_of_origin": {
+                    "description": "The ISO 3166-1 alpha-2 country code where the object was made or manufactured",
+                    "maxLength": 2,
+                    "minLength": 2,
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "hs_code": {
+                    "description": "The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "medium": {
+                    "description": "The medium of the object. This is a description of the material or materials used to create the object",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "temporary_admission": {
+                    "description": "Select true if the goods are currently in the country under a temporary admission declaration",
+                    "type": "boolean",
+                    "x-struct": null,
+                    "x-validate": null
+                  }
+                },
+                "type": "object",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "details": {
+                "properties": {
+                  "creation_date": {
+                    "description": "Details about the timing in which an object was created",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "creator": {
+                    "description": "The creator of the object",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "notes": {
+                    "description": "Any notes about the item",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "title": {
+                    "description": "The object title",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  }
+                },
+                "type": "object",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "id": {
+                "description": "The id of the component in UUID format",
+                "format": "uuid",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "internal_reference": {
+                "description": "This field can be used to pass through any data that you may want returned unaltered for your own later usage",
+                "maxLength": 255,
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "public_reference": {
+                "description": "A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages",
+                "maxLength": 255,
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": {
+                "description": "The object component type ID. Options are defined in the Object Component types metadata endpoint",
+                "pattern": "^[0-9a-z_]{1,56}$",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "value": {
+                "$ref": "#/$defs/MonetaryAmount"
+              },
+              "value_currency": {
+                "$ref": "#/$defs/Currency"
+              }
+            },
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "current_packing": {
+          "description": "A list of packing subtype IDs describing how the item is currently packed",
+          "items": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "customs": {
+          "properties": {
+            "country_of_origin": {
+              "description": "The ISO 3166-1 alpha-2 country code where the object was made or manufactured",
+              "maxLength": 2,
+              "minLength": 2,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "hs_code": {
+              "description": "The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products",
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "medium": {
+              "description": "The medium of the object. This is a description of the material or materials used to create the object",
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "temporary_admission": {
+              "description": "Select true if the goods are currently in the country under a temporary admission declaration",
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          "type": "object",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "depth": {
+          "description": "The depth of the object",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "details": {
+          "properties": {
+            "creation_date": {
+              "description": "Details about the timing in which an object was created",
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "creator": {
+              "description": "The creator of the object",
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "is_cites": {
+              "default": false,
+              "description": "Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora",
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "is_fragile": {
+              "default": false,
+              "description": "Set this flag to true is the item is fragile. This may effect packing and handling costs",
+              "type": "boolean",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "materials": {
+              "deprecated": true,
+              "description": "A list of IDs describing the types of materials used",
+              "items": {
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "notes": {
+              "description": "Any notes about the item",
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "title": {
+              "description": "The object title",
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          "type": "object",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "height": {
+          "description": "The height of the object",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "id": {
+          "format": "int64",
+          "type": "integer",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "images": {
+          "description": "A list image urls of the object",
+          "items": {
+            "format": "uri",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "internal_reference": {
+          "description": "This field can be used to pass through any data that you may want returned unaltered for your own later usage",
+          "maxLength": 255,
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "public_reference": {
+          "description": "A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages",
+          "maxLength": 255,
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "subtype": {
+          "description": "The object subtype ID. Options are defined in the Object types metadata endpoint",
+          "pattern": "^[0-9a-z_]{1,56}$",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "type": {
+          "description": "The object type id",
+          "pattern": "^[0-9a-z_]{1,56}$",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "unit_of_measurement": {
+          "enum": [
+            "in",
+            "cm"
+          ],
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "value": {
+          "$ref": "#/$defs/MonetaryAmount"
+        },
+        "value_currency": {
+          "$ref": "#/$defs/Currency"
+        },
+        "weight": {
+          "description": "The weight of the object",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "weight_unit": {
+          "description": "The unit of the object",
+          "enum": [
+            "lb",
+            "kg"
+          ],
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "width": {
+          "description": "The width of the object",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        }
+      },
+      "title": "Object",
+      "type": "object",
+      "x-struct": "Elixir.DocsWeb.Schemas.Response.Object",
+      "x-validate": null
+    },
+    "Package": {
+      "properties": {
+        "depth": {
+          "description": "The depth of the object",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "eta": {
+          "description": "The expected delivery date for this package in the `MM/DD/YYYY` format",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "handle_with_care": {
+          "description": "Set this flag to true if the package should be handled with care",
+          "type": "boolean",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "height": {
+          "description": "The height of the object",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "id": {
+          "description": "The id of the package",
+          "format": "int64",
+          "type": "integer",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "is_sufficiently_packed": {
+          "description": "Set this flag to true if the package is sufficiently packed",
+          "type": "boolean",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "objects": {
+          "description": "A list of objects in the package",
+          "items": {
+            "$ref": "#/$defs/Object"
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "packing_materials": {
+          "description": "The id of a material.",
+          "items": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "status": {
+          "description": "The status of the package",
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "unit_of_measurement": {
+          "enum": [
+            "in",
+            "cm"
+          ],
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "weight": {
+          "description": "The weight of the object",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "weight_unit": {
+          "description": "The unit of the object",
+          "enum": [
+            "lb",
+            "kg"
+          ],
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "width": {
+          "description": "The width of the object",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        }
+      },
+      "title": "Package",
+      "type": "object",
+      "x-struct": "Elixir.DocsWeb.Schemas.Response.Package",
+      "x-validate": null
+    },
+    "Service": {
+      "properties": {
+        "amount": {
+          "$ref": "#/$defs/MonetaryAmount"
+        },
+        "amount_currency": {
+          "$ref": "#/$defs/Currency"
+        },
+        "included_services": {
+          "description": "A list of service IDs that are included in the service",
+          "items": {
+            "properties": {
+              "name": {
+                "description": "The name of the service",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "sub_subtype": {
+                "description": "The service subsubtype ID. Options are defined in the Service types metadata endpoint",
+                "pattern": "^[0-9a-z_]{1,56}$",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "subtype": {
+                "description": "The service subtype ID. Options are defined in the Service types metadata endpoint",
+                "pattern": "^[0-9a-z_]{1,56}$",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": {
+                "description": "The service type ID. Options are defined in the Service types metadata endpoint",
+                "pattern": "^[0-9a-z_]{1,56}$",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              }
+            },
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "is_requested": {
+          "description": "Set this flag to true if the service is requested",
+          "type": "boolean",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "is_required": {
+          "description": "Set this flag to true if the service is required",
+          "type": "boolean",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "metadata": {
+          "description": "Additional data about the service. For services with a `type` value of `\"transport\"` generated through instant quoting, `metadata` may include `reference_rate.provider` and `reference_rate.service_level` fields that indicate the carrier and mode of transport used to price this service",
+          "type": "object",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "name": {
+          "description": "The name of the service",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "sub_subtype": {
+          "description": "The service subsubtype ID. Options are defined in the Service types metadata endpoint",
+          "pattern": "^[0-9a-z_]{1,56}$",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "subtype": {
+          "description": "The service subtype ID. Options are defined in the Service types metadata endpoint",
+          "pattern": "^[0-9a-z_]{1,56}$",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "type": {
+          "description": "The service type ID. Options are defined in the Service types metadata endpoint",
+          "pattern": "^[0-9a-z_]{1,56}$",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        }
+      },
+      "title": "Service",
+      "type": "object",
+      "x-struct": "Elixir.DocsWeb.Schemas.Response.Service",
+      "x-validate": null
+    },
+    "Tag": {
+      "properties": {
+        "color": {
+          "description": "The hexadecimal color code for the tag, without the leading `#`.",
+          "maxLength": 6,
+          "minLength": 6,
+          "pattern": "^[0-9A-F]{6}$",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "created_at": {
+          "description": "A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision",
+          "format": "date-time",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "created_by": {
+          "description": "The user ID associated with the user who created the tag when applicable.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "description": {
+          "description": "An optional, brief description for this tag.",
+          "maxLength": 255,
+          "type": [
+            "string",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "id": {
+          "description": "The id of the tag in UUID format",
+          "format": "uuid",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "is_active": {
+          "description": "Indicates whether or not the tag is active. Inactive tags may not be associated to new resources",
+          "type": "boolean",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "name": {
+          "description": "The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.",
+          "maxLength": 50,
+          "pattern": "^[a-z0-9-]{1,50}$",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "updated_at": {
+          "description": "A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision",
+          "format": "date-time",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "updated_by": {
+          "description": "The user ID associated with the last user to edit the tag when applicable.",
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        }
+      },
+      "title": "Tag",
+      "type": "object",
+      "x-struct": "Elixir.DocsWeb.Schemas.Response.Tag",
+      "x-validate": null
+    }
+  }
+}

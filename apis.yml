@@ -1,23 +1,540 @@
 aid: artashippinginc
 name: Artashippinginc
-description: 'Artashippinginc is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Artashippinginc is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network
+  as a stub for full-pipeline profiling.'
 url: https://raw.githubusercontent.com/api-evangelist/artashippinginc/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-09-26 (modular-v1; was harvest)
 specificationVersion: '0.20'
 created: '2026-09-26'
 modified: '2026-09-26'
 tags:
 - Company
-apis: []
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/artashippinginc-agentic-access.yml
+- type: Spectral
+  url: rules/artashippinginc-rules.yml
+- type: JSONLD
+  url: json-ld/artashippinginc-context.jsonld
+- type: Vocabulary
+  url: vocabulary/artashippinginc-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/artashippinginc-data-model.yml
+- type: ErrorCatalog
+  url: errors/artashippinginc-problem-types.yml
+- type: Conformance
+  url: conformance/artashippinginc-conformance.yml
+- type: Hosts
+  url: hosts/artashippinginc-hosts.yml
+- type: Vendors
+  url: vendors/artashippinginc-vendors.yml
+- type: DomainSecurity
+  url: security/artashippinginc-domain-security.yml
 - type: Website
   url: https://equityzen.com/company/artashippinginc
+apis:
+- aid: artashippinginc:artashippinginc-address-verifications-api
+  name: Artashippinginc Address Verifications API
+  description: >-
+    The address_verifications API from Artashippinginc — 2 operation(s) for address_verifications.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - address_verifications
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-address-verifications-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-api-keys-api
+  name: Artashippinginc API Keys API
+  description: The api_keys API from Artashippinginc — 2 operation(s) for api_keys.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - api_keys
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-api-keys-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-attachments-api
+  name: Artashippinginc Attachments API
+  description: The attachments API from Artashippinginc — 2 operation(s) for attachments.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-attachments-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-collection-tag-rules-api
+  name: Artashippinginc Collection Tag Rules API
+  description: >-
+    The collection_tag_rules API from Artashippinginc — 2 operation(s) for collection_tag_rules.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - collection_tag_rules
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-collection-tag-rules-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-email-rules-api
+  name: Artashippinginc Email Rules API
+  description: The email_rules API from Artashippinginc — 2 operation(s) for email_rules.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - email_rules
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-email-rules-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-email-subscriptions-api
+  name: Artashippinginc Email Subscriptions API
+  description: >-
+    The email_subscriptions API from Artashippinginc — 2 operation(s) for email_subscriptions.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - email_subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-email-subscriptions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-hosted-sessions-api
+  name: Artashippinginc Hosted Sessions API
+  description: The hosted_sessions API from Artashippinginc — 3 operation(s) for hosted_sessions.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - hosted_sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-hosted-sessions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-import-cost-estimates-api
+  name: Artashippinginc Import Cost Estimates API
+  description: >-
+    The import_cost_estimates API from Artashippinginc — 2 operation(s) for import_cost_estimates.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - import_cost_estimates
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-import-cost-estimates-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-invoice-payments-api
+  name: Artashippinginc Invoice Payments API
+  description: The invoice_payments API from Artashippinginc — 2 operation(s) for invoice_payments.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - invoice_payments
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-invoice-payments-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-invoices-api
+  name: Artashippinginc Invoices API
+  description: The invoices API from Artashippinginc — 2 operation(s) for invoices.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-invoices-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-logs-api
+  name: Artashippinginc Logs API
+  description: The logs API from Artashippinginc — 2 operation(s) for logs.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - logs
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-logs-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-metadata-api
+  name: Artashippinginc Metadata API
+  description: The metadata API from Artashippinginc — 24 operation(s) for metadata.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-metadata-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-organization-api
+  name: Artashippinginc Organization API
+  description: The organization API from Artashippinginc — 1 operation(s) for organization.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - organization
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-organization-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-payments-api
+  name: Artashippinginc Payments API
+  description: The payments API from Artashippinginc — 2 operation(s) for payments.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - payments
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-payments-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-requests-api
+  name: Artashippinginc Requests API
+  description: The requests API from Artashippinginc — 5 operation(s) for requests.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - requests
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-requests-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-self-ship-collections-api
+  name: Artashippinginc Self Ship Collections API
+  description: >-
+    The self_ship_collections API from Artashippinginc — 4 operation(s) for self_ship_collections.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - self_ship_collections
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-self-ship-collections-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-shipment-exceptions-api
+  name: Artashippinginc Shipment Exceptions API
+  description: >-
+    The shipment_exceptions API from Artashippinginc — 2 operation(s) for shipment_exceptions.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - shipment_exceptions
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-shipment-exceptions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-shipments-api
+  name: Artashippinginc Shipments API
+  description: The shipments API from Artashippinginc — 2 operation(s) for shipments.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - shipments
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-shipments-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-tags-api
+  name: Artashippinginc Tags API
+  description: The tags API from Artashippinginc — 2 operation(s) for tags.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - tags
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-tags-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-trackings-api
+  name: Artashippinginc Trackings API
+  description: The trackings API from Artashippinginc — 1 operation(s) for trackings.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - trackings
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-trackings-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-uploads-api
+  name: Artashippinginc Uploads API
+  description: The uploads API from Artashippinginc — 2 operation(s) for uploads.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - uploads
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-uploads-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-webhook-deliveries-api
+  name: Artashippinginc Webhook Deliveries API
+  description: The webhook_deliveries API from Artashippinginc — 2 operation(s) for webhook_deliveries.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - webhook_deliveries
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-webhook-deliveries-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+- aid: artashippinginc:artashippinginc-webhooks-api
+  name: Artashippinginc Webhooks API
+  description: The webhooks API from Artashippinginc — 5 operation(s) for webhooks.
+  humanURL: https://api-reference.arta.io
+  tags:
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/artashippinginc-webhooks-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-shipment-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-request-create-schema.json
+  - type: JSONSchema
+    url: json-schema/artashippinginc-hosted-session-schema.json
+x-enrichment:
+  date: '2026-09-26'
+  status: enriched
+  artifacts_added: 17
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local

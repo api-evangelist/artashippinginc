@@ -1,0 +1,1063 @@
+openapi: 3.2.0
+info:
+  contact:
+    email: hello@arta.io
+    name: Arta
+    url: https://manual.arta.io/
+  description: The Arta Public API provides quote generation, transport booking, and tracking capabilities. Additionally the API enables Arta partner organizations to configure email and webhook notifications for their accounts.
+  termsOfService: https://www.arta.io/legal/terms
+  title: Arta Public Webhooks API
+  version: '2021-01-01'
+servers:
+- url: https://api.arta.io
+  variables: {}
+security: []
+tags:
+- name: Webhooks
+paths:
+  /webhooks:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieve a paginated collection of Webhooks belonging to your Organization
+      operationId: webhooks/list
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: Page number of the results to fetch.
+        in: query
+        name: page
+        schema:
+          default: 1
+          type: integer
+          x-struct: null
+          x-validate: null
+      - description: Results per page (max 50)
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          type: integer
+          x-struct: null
+          x-validate: null
+      - description: An optional sort order for the returned collection.
+        in: query
+        name: sort
+        required: false
+        schema:
+          enum:
+          - created_at_asc
+          - created_at_desc
+          - updated_at_asc
+          - updated_at_desc
+          type: string
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  items:
+                    items:
+                      $ref: '#/components/schemas/Webhook'
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  metadata:
+                    properties:
+                      page:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      page_size:
+                        example: 20
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      total_count:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+          description: A collection of Webhooks
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: List Webhooks
+      tags:
+      - Webhooks
+    post:
+      callbacks: {}
+      deprecated: false
+      description: Create a new webhook for your organization.
+      operationId: webhooks/create
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+        required: false
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: The created webhook
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '400':
+          content:
+            application/json: {}
+          description: Bad Request
+      summary: Create a Webhook
+      tags:
+      - Webhooks
+  /webhooks/{webhook_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieve an existing Webhook request
+      operationId: webhooks-get
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: webhook_id parameter
+        in: path
+        name: webhook_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: Successful Webhook response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Get a Webhook
+      tags:
+      - Webhooks
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: Update an existing Webhook request
+      operationId: webhooks/patch
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: webhook_id parameter
+        in: path
+        name: webhook_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookUpdate'
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: Successful Webhook response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Update a Webhook
+      tags:
+      - Webhooks
+    delete:
+      callbacks: {}
+      deprecated: false
+      operationId: webhooks/delete
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: webhook_id parameter
+        in: path
+        name: webhook_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '204':
+          content:
+            application/json: {}
+          description: No content
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Delete a Webhook
+      tags:
+      - Webhooks
+  /webhooks/{webhook_id}/ping:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: Trigger Arta to deliver a test message to an existing Webhook endpoint
+      operationId: webhooks-post
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: webhook_id parameter
+        in: path
+        name: webhook_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+          description: Successful Webhook response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Ping a Webhook
+      tags:
+      - Webhooks
+  /webhooks/{webhook_id}/secret_token:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieve the secret token associated with a webhook endpoint resource
+      operationId: webhooks-secret-token-get
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: webhook_id parameter
+        in: path
+        name: webhook_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSecretToken'
+          description: Successful Webhook response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Get a Web Hook Secret Token
+      tags:
+      - Webhooks
+  /webhooks/{webhook_id}/secret_token/reset:
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: Regenerate the secret token associated with a webhook endpoint resource
+      operationId: webhooks-secret-token-reset-patch
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: webhook_id parameter
+        in: path
+        name: webhook_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSecretToken'
+          description: Successful Webhook response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Reset a Web Hook Secret Token
+      tags:
+      - Webhooks
+components:
+  schemas:
+    WebhookCreate:
+      additionalProperties: false
+      properties:
+        webhook:
+          properties:
+            name:
+              description: The name for this Webhook.
+              example: Production webhooks endpoint
+              type: string
+              x-struct: null
+              x-validate: null
+            url:
+              description: The URL for this Webhook.
+              example: https://notifications.example.com/
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - webhook
+      title: WebhookCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.WebhookCreate
+      x-validate: null
+    Webhook:
+      example:
+        created_at: '2020-10-22T21:12:48.839165'
+        id: 4
+        name: Notifications Endpoint
+        updated_at: '2020-10-22T21:12:48.839165'
+        url: https://notifications.example.com/hooks/
+      properties:
+        created_at:
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        name:
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          type: string
+          x-struct: null
+          x-validate: null
+        url:
+          type: string
+          x-struct: null
+          x-validate: null
+      title: Webhook
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Webhook
+      x-validate: null
+    WebhookSecretToken:
+      properties:
+        secret_token:
+          description: The secret token associated with the webhook endpoint
+          example: zASePCHfe2FYKjXl1YhFukNY5T7hCqgX0RRBUVi_289ubnhBvN9U03uOqG8oB2Oz
+          type: string
+          x-struct: null
+          x-validate: null
+      title: WebhookSecretToken
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.WebhookSecretToken
+      x-validate: null
+    WebhookUpdate:
+      additionalProperties: false
+      properties:
+        webhook:
+          properties:
+            name:
+              description: The name for this Webhook.
+              example: hello@shiparta.com
+              type: string
+              x-struct: null
+              x-validate: null
+            url:
+              description: The URL for this Webhook.
+              example: Arta
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - webhook
+      title: WebhookUpdate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.WebhookUpdate
+      x-validate: null
+x-topics:
+- content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.
+
+
+    Using your API key to authenticate an API call is straightforward. Simply include your API Key token in the Authorization header of every call made to the system. This is the only place that it is accepted.'
+  example: "```shell\n\n$ curl \\ \n\n -X GET https://api.arta.io/shipments \\ \n\n -H \"Authorization: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y\""
+  title: Authentication
+- content: "Arta imposes rate limits on API requests to maintain system stability and ensure fair usage. If you exceed these limits, the API will return a `429 Too Many Requests` error. Below are the rate limits for both Live and Test modes.\n\n**Live Mode:**\n\n*\tConcurrent requests: 15 API calls at the same time (any type)\n* Instant quote requests: 20 calls per minute\n* Overall requests: 1000 API calls per minute (any type)\n\n**Test Mode:**\n\n* Concurrent requests: 10 API calls at the same time (any type)\n* Instant quote requests: 10 calls per minute\n* Overall requests: 500 API calls per minute (any type)\n\nWhen a rate limit is exceeded, we recommend implementing retry logic with exponential backoff to handle 429 errors effectively."
+  title: Rate Limits
+- content: 'The Arta API supports flexible search functionality across multiple resources, including Shipments, Requests, Hosted Sessions, Tags, and others. Using the search query parameter, you can construct structured queries to filter results based on specific criteria.
+
+
+    Key features of the search functionality include:
+
+
+    * Support for negation, wildcards, numeric filters, and date comparisons.
+
+    * Each search query consists of one or more clauses, where each clause contains a `field`, an operator, and a `value`.
+
+    * Clauses operating on the same field are combined using OR logic, while clauses across different fields are combined using AND logic.
+
+
+    * Use quotation marks to keep multi-word search terms together.
+
+
+    This allows for powerful and precise filtering to retrieve the exact data you need from the API.
+
+
+    **Syntax and operators**
+
+
+    The following table lists the operators and syntax that you can use to construct a search query clause.
+
+
+    | Operator     | Usage                          | Description                                                                 | Examples                                                            |
+
+    |------------|--------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------|
+
+    | `:`        | `field:value`                  | Exact match operator (case insensitive)                                     | `status:pending` returns records where the status is `pending` |
+
+    | `*`        | `value*`                       | Use an asterisk (wildcard operator) at the end of a term to match fields that start with the fragment                                    | `art*` returns records that match "arta" and "artist" but not "smart" |
+
+    | `*`        | `*value`                       | Use an asterisk at the start of a term to match fields that end with the fragment                                    | `*art` returns "smart" but not "martian" |
+
+    | `-`        | `-field:value`                 | Returns records that don’t match the clause                                 | `-status:pending` returns records that do not have a status of pending                 |
+
+    | `>, <, =`  | `field:<value`, `field:>value`, `field:>=value`, `field:<=value` | Greater than/less than operators              | `created-at:<=2021-01-01` returns records from the beginning of time through January 1, 2021   |
+
+    | `..`       | `field:value1..value2`                 | Filters for values within a given range where the first number is the lowest value and the second is the highest                                 | `created-at:2021-05-01..2021-05-15` returns records where the `created_at` field is between May 1, 2021 and May 15, 2021                 |
+
+
+
+
+    **Hosted Session search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `insurance` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `type` | string |
+
+    | `tags` | string |
+
+
+    **Request search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `bookable` | string |
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+
+    **Shipment search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `eei-form-status` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `request-shortcode` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+    | `total` | numeric |
+
+    | `total-currency` | string |
+
+    | `tracking-numbers` | string |
+
+
+    **Tag search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `color` | string |
+
+    | `description` | string |
+
+    | `is_active` | string |
+
+    | `name` | string |
+
+
+    '
+  title: Search

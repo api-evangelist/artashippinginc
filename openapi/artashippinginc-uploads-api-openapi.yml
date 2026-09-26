@@ -1,0 +1,949 @@
+openapi: 3.2.0
+info:
+  contact:
+    email: hello@arta.io
+    name: Arta
+    url: https://manual.arta.io/
+  description: The Arta Public API provides quote generation, transport booking, and tracking capabilities. Additionally the API enables Arta partner organizations to configure email and webhook notifications for their accounts.
+  termsOfService: https://www.arta.io/legal/terms
+  title: Arta Public Uploads API
+  version: '2021-01-01'
+servers:
+- url: https://api.arta.io
+  variables: {}
+security: []
+tags:
+- name: Uploads
+paths:
+  /uploads:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieve a paginated collection of Uploads belonging to your Organization
+      operationId: uploads/list
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: Page number of the results to fetch.
+        in: query
+        name: page
+        schema:
+          default: 1
+          type: integer
+          x-struct: null
+          x-validate: null
+      - description: Results per page (max 50)
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          type: integer
+          x-struct: null
+          x-validate: null
+      - description: An optional sort order for the returned collection.
+        in: query
+        name: sort
+        required: false
+        schema:
+          enum:
+          - created_at_asc
+          - created_at_desc
+          - updated_at_asc
+          - updated_at_desc
+          type: string
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  items:
+                    items:
+                      $ref: '#/components/schemas/Upload'
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  metadata:
+                    properties:
+                      page:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      page_size:
+                        example: 20
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      total_count:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+          description: A collection of Upload records
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: List Uploads
+      tags:
+      - Uploads
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Uploading a file to Arta via API is a two step process.
+
+
+        The first step is to make an authenticated HTTP request to the `POST /uploads` endpoint described here. Successful requests to this endpoint will create an upload resource with a "pending" `status` as well as a `presigned_url` attribute.
+
+
+        The second step is to create a `PUT` HTTP request to the URL defined in the `presigned_url` field of the successful create response. This second request must include the raw data of the file as the request `body` and a `content-type` header. The `content-type` header must match the `mime_type` provided in your initial request. The size of the raw data must match the `size` param provided in your initial request.
+
+
+        For example, if you provided a `mime_type` of `text/csv` and a `size` of `13` bytes in the initial request to create the resource and if it successfully responded with a `presigned_url` value of `https://cdn.arta.io/uploads/my-file.csv`, your second request will look something like the following:
+
+
+        ```
+
+        curl --location --request PUT ''https://cdn.arta.io/uploads/my-file.csv'' \
+
+        --header ''Content-Type: text/csv'' \
+
+        --data-raw ''hello,world,
+
+        ''
+
+        ```'
+      operationId: uploads/create
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadCreate'
+        required: false
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadWithPresignedURL'
+          description: response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: BadRequest
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Bad Request
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Create an Upload
+      tags:
+      - Uploads
+  /uploads/{upload_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieve an existing Upload
+      operationId: uploads-get
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: upload_id parameter
+        in: path
+        name: upload_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Upload'
+          description: Successful Upload response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Get an Upload
+      tags:
+      - Uploads
+    delete:
+      callbacks: {}
+      deprecated: false
+      operationId: uploads/delete
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: upload_id parameter
+        in: path
+        name: upload_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '204':
+          content:
+            application/json: {}
+          description: No content
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Delete an Upload
+      tags:
+      - Uploads
+components:
+  schemas:
+    UploadWithPresignedURL:
+      properties:
+        created_at:
+          example: '2021-10-27T16:48:38.657228'
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        document_type:
+          description: The document type of the uploaded file
+          enum:
+          - bill_of_lading
+          - certificate_of_insurance
+          - certificate_of_insurance_template
+          - condition_report
+          - condition_check
+          - image
+          - instructions
+          - airway_bill
+          - commercial_invoice
+          - power_of_attorney
+          - proof_of_export
+          - proof_of_delivery
+          - quote
+          - shipping_label
+          - other
+          example: other
+          type: string
+          x-struct: null
+          x-validate: null
+        document_type_label:
+          description: A brief label providing additional context about the `document_type`. Required when "other" is the `document_type`
+          example: Inventory List
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        download_url:
+          example: https://api.arta.io/downloads/kikhAFZ565BzbGooRqLZl
+          nullable: true
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        file_name:
+          description: The name of the uploaded file
+          example: inventory_list_27148_16.pdf
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          example: 1942
+          readOnly: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        mime_type:
+          description: The mime-type of the uploaded file
+          enum:
+          - application/pdf
+          - application/vnd.ms-excel
+          - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+          - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+          - image/jpeg
+          - image/png
+          - text/csv
+          - video/mp4
+          - video/quicktime
+          - application/msword
+          example: application/pdf
+          type: string
+          x-struct: null
+          x-validate: null
+        presigned_url:
+          description: A pre-signed and secure URL to use to send the file to Arta via a PUT HTTP request within 20 seconds of the upload resource being created
+          example: https://api.arta.io/downloads/35fc1956-71fc-4b1c-846b-6ea963182a8c
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        size:
+          description: The size of the uploaded file in bytes
+          example: 58550
+          type: integer
+          x-struct: null
+          x-validate: null
+        status:
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+      required:
+      - document_type
+      - file_name
+      - mime_type
+      - size
+      title: UploadWithPresignedURL
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.UploadWithPresignedURL
+      x-validate: null
+    UploadCreate:
+      additionalProperties: false
+      properties:
+        upload:
+          properties:
+            document_type:
+              description: The document type of the file being uploaded
+              enum:
+              - bill_of_lading
+              - certificate_of_insurance
+              - certificate_of_insurance_template
+              - condition_report
+              - condition_check
+              - image
+              - instructions
+              - airway_bill
+              - commercial_invoice
+              - power_of_attorney
+              - proof_of_export
+              - proof_of_delivery
+              - quote
+              - shipping_label
+              - other
+              type: string
+              x-struct: null
+              x-validate: null
+            document_type_label:
+              description: A brief label providing additional context about the document_type. Required when "other" is the "document_type"
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            file_name:
+              description: The name of the file being uploaded
+              example: my-file.csv
+              type: string
+              x-struct: null
+              x-validate: null
+            mime_type:
+              description: The mime-type for the file being uploaded
+              enum:
+              - application/pdf
+              - application/vnd.ms-excel
+              - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+              - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+              - image/jpeg
+              - image/png
+              - text/csv
+              - video/mp4
+              - video/quicktime
+              - application/msword
+              example: text/csv
+              type: string
+              x-struct: null
+              x-validate: null
+            size:
+              description: The size of the file being uploaded in bytes
+              example: 22
+              type: integer
+              x-struct: null
+              x-validate: null
+          required:
+          - document_type
+          - file_name
+          - mime_type
+          - size
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - upload
+      title: UploadCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.UploadCreate
+      x-validate: null
+    Upload:
+      properties:
+        created_at:
+          example: '2021-10-27T16:48:38.657228'
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        document_type:
+          description: The document type of the uploaded file
+          enum:
+          - bill_of_lading
+          - certificate_of_insurance
+          - certificate_of_insurance_template
+          - condition_report
+          - condition_check
+          - image
+          - instructions
+          - airway_bill
+          - commercial_invoice
+          - power_of_attorney
+          - proof_of_export
+          - proof_of_delivery
+          - quote
+          - shipping_label
+          - other
+          example: other
+          type: string
+          x-struct: null
+          x-validate: null
+        document_type_label:
+          description: A brief label providing additional context about the `document_type`. Required when "other" is the `document_type`
+          example: Inventory List
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        download_url:
+          example: https://api.arta.io/downloads/kikhAFZ565BzbGooRqLZl
+          nullable: true
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        file_name:
+          description: The name of the uploaded file
+          example: inventory_list_27148_16.pdf
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          example: 1942
+          readOnly: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        mime_type:
+          description: The mime-type of the uploaded file
+          enum:
+          - application/pdf
+          - application/vnd.ms-excel
+          - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+          - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+          - image/jpeg
+          - image/png
+          - text/csv
+          - video/mp4
+          - video/quicktime
+          - application/msword
+          example: application/pdf
+          type: string
+          x-struct: null
+          x-validate: null
+        size:
+          description: The size of the uploaded file in bytes
+          example: 58550
+          type: integer
+          x-struct: null
+          x-validate: null
+        status:
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+      required:
+      - document_type
+      - file_name
+      - mime_type
+      - size
+      title: Upload
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Upload
+      x-validate: null
+x-topics:
+- content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.
+
+
+    Using your API key to authenticate an API call is straightforward. Simply include your API Key token in the Authorization header of every call made to the system. This is the only place that it is accepted.'
+  example: "```shell\n\n$ curl \\ \n\n -X GET https://api.arta.io/shipments \\ \n\n -H \"Authorization: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y\""
+  title: Authentication
+- content: "Arta imposes rate limits on API requests to maintain system stability and ensure fair usage. If you exceed these limits, the API will return a `429 Too Many Requests` error. Below are the rate limits for both Live and Test modes.\n\n**Live Mode:**\n\n*\tConcurrent requests: 15 API calls at the same time (any type)\n* Instant quote requests: 20 calls per minute\n* Overall requests: 1000 API calls per minute (any type)\n\n**Test Mode:**\n\n* Concurrent requests: 10 API calls at the same time (any type)\n* Instant quote requests: 10 calls per minute\n* Overall requests: 500 API calls per minute (any type)\n\nWhen a rate limit is exceeded, we recommend implementing retry logic with exponential backoff to handle 429 errors effectively."
+  title: Rate Limits
+- content: 'The Arta API supports flexible search functionality across multiple resources, including Shipments, Requests, Hosted Sessions, Tags, and others. Using the search query parameter, you can construct structured queries to filter results based on specific criteria.
+
+
+    Key features of the search functionality include:
+
+
+    * Support for negation, wildcards, numeric filters, and date comparisons.
+
+    * Each search query consists of one or more clauses, where each clause contains a `field`, an operator, and a `value`.
+
+    * Clauses operating on the same field are combined using OR logic, while clauses across different fields are combined using AND logic.
+
+
+    * Use quotation marks to keep multi-word search terms together.
+
+
+    This allows for powerful and precise filtering to retrieve the exact data you need from the API.
+
+
+    **Syntax and operators**
+
+
+    The following table lists the operators and syntax that you can use to construct a search query clause.
+
+
+    | Operator     | Usage                          | Description                                                                 | Examples                                                            |
+
+    |------------|--------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------|
+
+    | `:`        | `field:value`                  | Exact match operator (case insensitive)                                     | `status:pending` returns records where the status is `pending` |
+
+    | `*`        | `value*`                       | Use an asterisk (wildcard operator) at the end of a term to match fields that start with the fragment                                    | `art*` returns records that match "arta" and "artist" but not "smart" |
+
+    | `*`        | `*value`                       | Use an asterisk at the start of a term to match fields that end with the fragment                                    | `*art` returns "smart" but not "martian" |
+
+    | `-`        | `-field:value`                 | Returns records that don’t match the clause                                 | `-status:pending` returns records that do not have a status of pending                 |
+
+    | `>, <, =`  | `field:<value`, `field:>value`, `field:>=value`, `field:<=value` | Greater than/less than operators              | `created-at:<=2021-01-01` returns records from the beginning of time through January 1, 2021   |
+
+    | `..`       | `field:value1..value2`                 | Filters for values within a given range where the first number is the lowest value and the second is the highest                                 | `created-at:2021-05-01..2021-05-15` returns records where the `created_at` field is between May 1, 2021 and May 15, 2021                 |
+
+
+
+
+    **Hosted Session search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `insurance` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `type` | string |
+
+    | `tags` | string |
+
+
+    **Request search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `bookable` | string |
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+
+    **Shipment search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `eei-form-status` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `request-shortcode` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+    | `total` | numeric |
+
+    | `total-currency` | string |
+
+    | `tracking-numbers` | string |
+
+
+    **Tag search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `color` | string |
+
+    | `description` | string |
+
+    | `is_active` | string |
+
+    | `name` | string |
+
+
+    '
+  title: Search

@@ -1,0 +1,3238 @@
+openapi: 3.2.0
+info:
+  contact:
+    email: hello@arta.io
+    name: Arta
+    url: https://manual.arta.io/
+  description: The Arta Public API provides quote generation, transport booking, and tracking capabilities. Additionally the API enables Arta partner organizations to configure email and webhook notifications for their accounts.
+  termsOfService: https://www.arta.io/legal/terms
+  title: Arta Public Hosted Sessions API
+  version: '2021-01-01'
+servers:
+- url: https://api.arta.io
+  variables: {}
+security: []
+tags:
+- name: hosted_sessions
+paths:
+  /hosted_sessions:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieve a paginated collection of hosted sessions belonging to your organization
+      operationId: hostedSessions/list
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: Page number of the results to fetch.
+        in: query
+        name: page
+        schema:
+          default: 1
+          type: integer
+          x-struct: null
+          x-validate: null
+      - description: Results per page (max 50)
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          type: integer
+          x-struct: null
+          x-validate: null
+      - description: An optional sort order for the returned collection.
+        in: query
+        name: sort
+        required: false
+        schema:
+          enum:
+          - created_at_asc
+          - created_at_desc
+          - updated_at_asc
+          - updated_at_desc
+          type: string
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  items:
+                    items:
+                      $ref: '#/components/schemas/HostedSessionListItem'
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  metadata:
+                    properties:
+                      page:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      page_size:
+                        example: 20
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      total_count:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+          description: A paginated collection of hosted sessions
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: List Hosted Sessions
+      tags:
+      - hosted_sessions
+    post:
+      callbacks: {}
+      deprecated: false
+      description: '**Availability for Inbound Booking Sessions: Public Preview**
+
+
+        *Inbound Booking is currently in public preview and available only to approved accounts. Please contact Arta to request access for your organization.*
+
+
+        Create a hosted session resource to generate an Arta Booking url.
+
+
+        This endpoint expects one of three types of the hosted_session schema:
+
+
+        * **Booking Sessions**: With this schema, you must minimally include valid objects and origin details in your API call. Your customers will be able to confirm their destination details and book their preferred shipment quote. Additionally, you may provide a success_url and a cancel_url to determine where Arta will redirect the user after the session is complete.
+
+
+        * **Inbound Booking Sessions**: With this schema, you must minimally include valid objects and destination details in your API call. Your customers will be able to confirm their origin details and book their preferred shipment quote. For Self Ship quotes, Arta will make any labels available for download. Customers may optionally review and update object dimension details in the hosted session workflow if `can_user_confirm_object_dimensions` is set to true. Additionally, you may provide a success_url and a cancel_url to determine where Arta will redirect the user after the session is complete.
+
+
+        * **Shared Requests**: Alternatively, you may share an existing quote request by sending a `hosted_session` object with the corresponding request''s request_id.
+
+
+        Use the private url in the successful hosted session response to direct your users to the Arta Booking web page so that they may configure and book their own shipment.'
+      operationId: hostedSessions/create
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostedSessionCreate'
+        required: false
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostedSession'
+          description: the created hosted sessions
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: BadRequest
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Bad Request
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Create a Hosted Session
+      tags:
+      - hosted_sessions
+  /hosted_sessions/{hosted_session_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieve an existing hosted session resource
+      operationId: hostedSessions/get
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: hosted_session_id parameter
+        in: path
+        name: hosted_session_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostedSession'
+          description: Successful Hosted Session response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Get a Hosted Session
+      tags:
+      - hosted_sessions
+  /hosted_sessions/{hosted_session_id}/cancel:
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: Cancel an existing hosted session resource
+      operationId: hostedSessions/cancel
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: hosted_session_id parameter
+        in: path
+        name: hosted_session_id
+        required: true
+        schema:
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostedSession'
+          description: Successfully cancelled Hosted Session response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Cancel a Hosted Session
+      tags:
+      - hosted_sessions
+components:
+  schemas:
+    Currency:
+      default: USD
+      description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+      example: USD
+      maxLength: 3
+      minLength: 3
+      pattern: ^[A-Z]{3}$
+      title: Currency
+      type: string
+      x-struct: null
+      x-validate: null
+    Location:
+      properties:
+        access_restrictions:
+          deprecated: true
+          items:
+            description: Id of location restriction type
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        address_line_1:
+          description: First line of address
+          example: 87 Richardson St
+          type: string
+          x-struct: null
+          x-validate: null
+        address_line_2:
+          description: Second line of address
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        address_line_3:
+          description: Third line of address
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        city:
+          description: City
+          example: Brooklyn
+          type: string
+          x-struct: null
+          x-validate: null
+        contacts:
+          description: A list of contacts at the location
+          items:
+            properties:
+              email_address:
+                example: docs@arta.io
+                type: string
+                x-struct: null
+                x-validate: null
+              name:
+                example: Contact Name
+                type: string
+                x-struct: null
+                x-validate: null
+              phone_number:
+                example: 646 828 7333
+                type: string
+                x-struct: null
+                x-validate: null
+            required:
+            - name
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        country:
+          description: The ISO 3166-1 alpha-2 country code of the current or last known location if available
+          example: US
+          maxLength: 2
+          minLength: 2
+          type: string
+          x-struct: null
+          x-validate: null
+        postal_code:
+          description: The postal code
+          example: '11211'
+          type: string
+          x-struct: null
+          x-validate: null
+        region:
+          description: Political region name, for US states and Canada provinces, use 2 letter abbreviations
+          example: NY
+          type: string
+          x-struct: null
+          x-validate: null
+        title:
+          description: The title or name of the location
+          example: Gallery
+          type: string
+          x-struct: null
+          x-validate: null
+      required:
+      - country
+      title: Location
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Location
+      x-validate: null
+    HostedSessionCreate:
+      oneOf:
+      - additionalProperties: false
+        description: Create hosted booking session
+        properties:
+          hosted_session:
+            properties:
+              additional_services:
+                description: Any desired services, such as unpacking, installation, etc. can be sent through in the request and will be treated as if that requested service is required, meaning this may disqualify certain segments of shipping services we offer.
+                items:
+                  description: The id of a service.
+                  example: signature_delivery
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                type: array
+                x-struct: null
+                x-validate: null
+              cancel_url:
+                description: The URL the user will be redirected to after a Arta Booking session is cancelled
+                example: http://example.com/cancelled
+                type: string
+                x-struct: null
+                x-validate: null
+              customs_end_use:
+                default: not_for_resale
+                description: The intended end use of the items being shipped for customs purposes
+                enum:
+                - for_resale
+                - not_for_resale
+                example: not_for_resale
+                type: string
+                x-struct: null
+                x-validate: null
+              customs_process:
+                default: ddu
+                description: The customs process for the shipment. "ddu" (Delivery Duties Unpaid) means the receiver is responsible for paying duties and taxes. "ddp" (Delivery Duties Paid) means the sender prepays duties and taxes. "ddp_optional" means the receiver will decide whether to pay estimated duties, fees, and taxes prior to fulfillment
+                enum:
+                - ddu
+                - ddp
+                - ddp_optional
+                example: ddu
+                type: string
+                x-struct: null
+                x-validate: null
+              destination:
+                properties:
+                  access_restrictions:
+                    deprecated: true
+                    items:
+                      description: Id of location restriction type
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  address_line_1:
+                    description: First line of address
+                    example: 87 Richardson St
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  address_line_2:
+                    description: Second line of address
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  address_line_3:
+                    description: Third line of address
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  city:
+                    description: City
+                    example: Brooklyn
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  contacts:
+                    description: A list of contacts at the location
+                    items:
+                      properties:
+                        email_address:
+                          example: docs@arta.io
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        name:
+                          example: Contact Name
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        phone_number:
+                          example: 646 828 7333
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                      required:
+                      - name
+                      type: object
+                      x-struct: null
+                      x-validate: null
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  country:
+                    description: The ISO 3166-1 alpha-2 country code of the current or last known location if available
+                    example: US
+                    maxLength: 2
+                    minLength: 2
+                    required: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  postal_code:
+                    description: The postal code
+                    example: '11211'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  region:
+                    description: Political region name, for US states and Canada provinces, use 2 letter abbreviations
+                    example: NY
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  title:
+                    description: The title or name of the location
+                    example: Gallery
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              insurance:
+                description: The ID of the requested Arta insurance type. Options are defined in the Insurances metadata endpoint
+                example: arta_transit_insurance
+                type: string
+                x-struct: null
+                x-validate: null
+              internal_reference:
+                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                example: 'Purchase Order: 2801'
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              objects:
+                items:
+                  properties:
+                    components:
+                      description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
+
+
+                        When components are present, the object value must equal the sum of component values.'
+                      items:
+                        properties:
+                          customs:
+                            properties:
+                              country_of_origin:
+                                description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+                                example: US
+                                maxLength: 2
+                                minLength: 2
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              hs_code:
+                                description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+                                example: '123456'
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              medium:
+                                description: The medium of the object. This is a description of the material or materials used to create the object
+                                example: oil on canvas
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              temporary_admission:
+                                description: Select true if the goods are currently in the country under a temporary admission declaration
+                                example: true
+                                type: boolean
+                                x-struct: null
+                                x-validate: null
+                            type: object
+                            x-struct: null
+                            x-validate: null
+                          details:
+                            properties:
+                              creation_date:
+                                description: Details about the timing in which an object was created
+                                example: '1980'
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              creator:
+                                description: The creator of the object
+                                example: Bob Smithson
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              notes:
+                                description: Any notes about the item
+                                example: Artist signature in the lower left corner
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              title:
+                                description: The object title
+                                example: Black Rectangle
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                            type: object
+                            x-struct: null
+                            x-validate: null
+                          internal_reference:
+                            description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                            example: 'Accession ID: 823'
+                            maxLength: 255
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          public_reference:
+                            description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+                            example: Round Smithson work
+                            maxLength: 255
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          type:
+                            description: The object component type ID. Options are defined in the Object Component types metadata endpoint
+                            example: painting_framed
+                            pattern: ^[0-9a-z_]{1,56}$
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          value:
+                            $ref: '#/components/schemas/MonetaryAmount'
+                          value_currency:
+                            $ref: '#/components/schemas/Currency'
+                        required:
+                        - type
+                        - value
+                        type: object
+                        x-struct: null
+                        x-validate: null
+                      type: array
+                      x-struct: null
+                      x-validate: null
+                    current_packing:
+                      description: A list of packing subtype IDs describing how the item is currently packed
+                      items:
+                        example: no_packing
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                      type: array
+                      x-struct: null
+                      x-validate: null
+                    customs:
+                      properties:
+                        country_of_origin:
+                          description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+                          example: US
+                          maxLength: 2
+                          minLength: 2
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        hs_code:
+                          description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+                          example: '123456'
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        medium:
+                          description: The medium of the object. This is a description of the material or materials used to create the object
+                          example: oil on canvas
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        temporary_admission:
+                          description: Select true if the goods are currently in the country under a temporary admission declaration
+                          example: true
+                          type: boolean
+                          x-struct: null
+                          x-validate: null
+                      type: object
+                      x-struct: null
+                      x-validate: null
+                    depth:
+                      description: The depth of the object
+                      example: '3'
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    details:
+                      properties:
+                        creation_date:
+                          description: Details about the timing in which an object was created
+                          example: '1980'
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        creator:
+                          description: The creator of the object
+                          example: Bob Smithson
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        is_cites:
+                          default: false
+                          description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
+                          type: boolean
+                          x-struct: null
+                          x-validate: null
+                        is_fragile:
+                          default: false
+                          description: Set this flag to true is the item is fragile. This may effect packing and handling costs
+                          type: boolean
+                          x-struct: null
+                          x-validate: null
+                        materials:
+                          deprecated: true
+                          description: A list of IDs describing the types of materials used
+                          items:
+                            example: canvas
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          type: array
+                          x-struct: null
+                          x-validate: null
+                        notes:
+                          description: Any notes about the item
+                          example: Artist signature in the lower left corner
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        title:
+                          description: The object title
+                          example: Black Rectangle
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                      type: object
+                      x-struct: null
+                      x-validate: null
+                    height:
+                      description: The height of the object
+                      example: '32'
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    images:
+                      description: A list image urls of the object
+                      items:
+                        example: http://example.com/image.jpg
+                        format: uri
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                      type: array
+                      x-struct: null
+                      x-validate: null
+                    internal_reference:
+                      description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                      example: 'Accession ID: 823'
+                      maxLength: 255
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    public_reference:
+                      description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+                      example: Round Smithson work
+                      maxLength: 255
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    subtype:
+                      description: The object subtype ID. Options are defined in the Object types metadata endpoint
+                      example: painting_unframed
+                      pattern: ^[0-9a-z_]{1,56}$
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    unit_of_measurement:
+                      enum:
+                      - in
+                      - cm
+                      example: in
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    value:
+                      $ref: '#/components/schemas/MonetaryAmount'
+                    value_currency:
+                      $ref: '#/components/schemas/Currency'
+                    weight:
+                      description: The weight of the object
+                      example: '3.0'
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    weight_unit:
+                      description: The unit of the object
+                      enum:
+                      - lb
+                      - kg
+                      example: lb
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    width:
+                      description: The width of the object
+                      example: '15'
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                  required:
+                  - depth
+                  - height
+                  - subtype
+                  - width
+                  - unit_of_measurement
+                  - weight_unit
+                  - value
+                  - value_currency
+                  type: object
+                  x-struct: null
+                  x-validate: null
+                type: array
+                x-struct: null
+                x-validate: null
+              origin:
+                properties:
+                  access_restrictions:
+                    deprecated: true
+                    items:
+                      description: Id of location restriction type
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  address_line_1:
+                    description: First line of address
+                    example: 87 Richardson St
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  address_line_2:
+                    description: Second line of address
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  address_line_3:
+                    description: Third line of address
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  city:
+                    description: City
+                    example: Brooklyn
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  contacts:
+                    description: A list of contacts at the location
+                    items:
+                      properties:
+                        email_address:
+                          example: docs@arta.io
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        name:
+                          example: Contact Name
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        phone_number:
+                          example: 646 828 7333
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                      required:
+                      - name
+                      type: object
+                      x-struct: null
+                      x-validate: null
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  country:
+                    description: The ISO 3166-1 alpha-2 country code of the current or last known location if available
+                    example: US
+                    maxLength: 2
+                    minLength: 2
+                    required: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  postal_code:
+                    description: The postal code
+                    example: '11211'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  region:
+                    description: Political region name, for US states and Canada provinces, use 2 letter abbreviations
+                    example: NY
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  title:
+                    description: The title or name of the location
+                    example: Gallery
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              preferred_parcel_transport_services:
+                description: Optionally instruct the Arta API to filter Parcel and Self Ship quotes for specific transport services. For example, if you would prefer to only return `ground` quotes, you can set this field to `["ground"]` The list of valid transport service IDs is available at the /metadata/parcel_transport_services endpoint.
+                example:
+                - ground
+                items:
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                nullable: true
+                type: array
+                x-struct: null
+                x-validate: null
+              preferred_quote_types:
+                description: Optionally instruct the Arta API to return a subset of quote types for the requests generated through this hosted session. For example if you would prefer to only return Select quotes, you can set this field to `["select"]` The list valid quote type IDs are available at the /metadata/quotes endpoint.
+                example:
+                - parcel
+                items:
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                nullable: true
+                type: array
+                x-struct: null
+                x-validate: null
+              public_instructions_booking_review:
+                description: 'A client defined multi-line block of text presented to users in the quote review modal window prior to booking a shipment for booking, shared request, and inbound booking sessions.
+
+
+                  - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+                  - Rendered text supports a maximum of 400 characters not including links and markup'
+                type: string
+                x-struct: null
+                x-validate: null
+              public_instructions_confirmation:
+                description: 'A client defined multi-line block of text presented to users on the post-shipment booking confirmation view for booking, shared request, and inbound booking hosted sessions.
+
+
+                  - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+                  - Rendered text supports a maximum of 400 characters not including links and markup'
+                type: string
+                x-struct: null
+                x-validate: null
+              public_instructions_location_quotes:
+                description: 'A client defined multi-line block of text presented to users on the location and quote selection view for booking, shared request, and inbound booking hosted sessions.
+
+
+                  - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+                  - Rendered text supports a maximum of 400 characters not including links and markup'
+                type: string
+                x-struct: null
+                x-validate: null
+              public_instructions_payment:
+                description: 'A client defined multi-line block of text presented to users on the post-shipment booking payment view when required for booking, shared request, and inbound booking hosted sessions.
+
+
+                  - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+                  - Rendered text supports a maximum of 400 characters not including links and markup'
+                type: string
+                x-struct: null
+                x-validate: null
+              public_reference:
+                description: A client defined name for the request. The value provided for the public_reference field may appear in notification emails and shipment detail pages
+                example: 'Order #1437'
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              quoting_strategy:
+                default: best_rate
+                description: The quoting strategy used when creating quote requests for this booking session. Determines whether the API returns a single best-rate option per transport speed or multiple carrier options for comparison
+                enum:
+                - best_rate
+                - compare_carriers
+                example: best_rate
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              shipping_notes:
+                description: This field can be used to pass through any notes to Arta that a customer might want to provide about the request
+                example: New customer
+                type: string
+                x-struct: null
+                x-validate: null
+              success_url:
+                description: The URL the user will be redirected to after a Arta Booking session is completed
+                example: http://example.com/success
+                type: string
+                x-struct: null
+                x-validate: null
+              tags:
+                description: A list of tags to associate with this hosted session
+                items:
+                  description: The name of an active tag belonging to your organization.
+                  example: spring-jewelry-sale
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                type: array
+                x-struct: null
+                x-validate: null
+              type:
+                default: booking
+                description: The type of the hosted session
+                enum:
+                - booking
+                type: string
+                x-struct: null
+                x-validate: null
+            required:
+            - objects
+            - origin
+            type: object
+            x-struct: null
+            x-validate: null
+        required:
+        - hosted_session
+        title: BookingSession
+        type: object
+        x-struct: null
+        x-validate: null
+      - additionalProperties: false
+        description: Create hosted booking session from an existing quote request
+        properties:
+          hosted_session:
+            properties:
+              request_id:
+                description: The ID of an existing Request to be shared.
+                required: true
+                type: string
+                x-struct: null
+                x-validate: null
+            type: object
+            x-struct: null
+            x-validate: null
+        required:
+        - hosted_session
+        title: ShareRequest
+        type: object
+        x-struct: null
+        x-validate: null
+      - additionalProperties: false
+        description: Create hosted inbound booking session
+        properties:
+          hosted_session:
+            properties:
+              additional_services:
+                description: Any desired services, such as unpacking, installation, etc. can be sent through in the request and will be treated as if that requested service is required, meaning this may disqualify certain segments of shipping services we offer.
+                items:
+                  description: The id of a service.
+                  example: signature_delivery
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                type: array
+                x-struct: null
+                x-validate: null
+              can_user_confirm_object_dimensions:
+                default: false
+                description: Determines whether your customer can verify and update object dimension information when completing an inbound booking session.
+                type: boolean
+                x-struct: null
+                x-validate: null
+              cancel_url:
+                description: The URL the user will be redirected to after a Arta Booking session is cancelled
+                example: http://example.com/cancelled
+                type: string
+                x-struct: null
+                x-validate: null
+              customs_end_use:
+                default: not_for_resale
+                description: The intended end use of the items being shipped for customs purposes
+                enum:
+                - for_resale
+                - not_for_resale
+                example: not_for_resale
+                type: string
+                x-struct: null
+                x-validate: null
+              customs_process:
+                default: ddu
+                description: The customs process for the shipment. "ddu" (Delivery Duties Unpaid) means the receiver is responsible for paying duties and taxes. "ddp" (Delivery Duties Paid) means the sender prepays duties and taxes. "ddp_optional" means the receiver will decide whether to pay estimated duties, fees, and taxes prior to fulfillment
+                enum:
+                - ddu
+                - ddp
+                - ddp_optional
+                example: ddu
+                type: string
+                x-struct: null
+                x-validate: null
+              destination:
+                properties:
+                  access_restrictions:
+                    deprecated: true
+                    items:
+                      description: Id of location restriction type
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  address_line_1:
+                    description: First line of address
+                    example: 87 Richardson St
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  address_line_2:
+                    description: Second line of address
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  address_line_3:
+                    description: Third line of address
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  city:
+                    description: City
+                    example: Brooklyn
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  contacts:
+                    description: A list of contacts at the location
+                    items:
+                      properties:
+                        email_address:
+                          example: docs@arta.io
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        name:
+                          example: Contact Name
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        phone_number:
+                          example: 646 828 7333
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                      required:
+                      - name
+                      type: object
+                      x-struct: null
+                      x-validate: null
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  country:
+                    description: The ISO 3166-1 alpha-2 country code of the current or last known location if available
+                    example: US
+                    maxLength: 2
+                    minLength: 2
+                    required: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  postal_code:
+                    description: The postal code
+                    example: '11211'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  region:
+                    description: Political region name, for US states and Canada provinces, use 2 letter abbreviations
+                    example: NY
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  title:
+                    description: The title or name of the location
+                    example: Gallery
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              insurance:
+                description: The ID of the requested Arta insurance type. Options are defined in the Insurances metadata endpoint
+                example: arta_transit_insurance
+                type: string
+                x-struct: null
+                x-validate: null
+              internal_reference:
+                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                example: 'Purchase Order: 2801'
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              objects:
+                items:
+                  properties:
+                    components:
+                      description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
+
+
+                        When components are present, the object value must equal the sum of component values.'
+                      items:
+                        properties:
+                          customs:
+                            properties:
+                              country_of_origin:
+                                description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+                                example: US
+                                maxLength: 2
+                                minLength: 2
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              hs_code:
+                                description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+                                example: '123456'
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              medium:
+                                description: The medium of the object. This is a description of the material or materials used to create the object
+                                example: oil on canvas
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              temporary_admission:
+                                description: Select true if the goods are currently in the country under a temporary admission declaration
+                                example: true
+                                type: boolean
+                                x-struct: null
+                                x-validate: null
+                            type: object
+                            x-struct: null
+                            x-validate: null
+                          details:
+                            properties:
+                              creation_date:
+                                description: Details about the timing in which an object was created
+                                example: '1980'
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              creator:
+                                description: The creator of the object
+                                example: Bob Smithson
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              notes:
+                                description: Any notes about the item
+                                example: Artist signature in the lower left corner
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                              title:
+                                description: The object title
+                                example: Black Rectangle
+                                type: string
+                                x-struct: null
+                                x-validate: null
+                            type: object
+                            x-struct: null
+                            x-validate: null
+                          internal_reference:
+                            description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                            example: 'Accession ID: 823'
+                            maxLength: 255
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          public_reference:
+                            description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+                            example: Round Smithson work
+                            maxLength: 255
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          type:
+                            description: The object component type ID. Options are defined in the Object Component types metadata endpoint
+                            example: painting_framed
+                            pattern: ^[0-9a-z_]{1,56}$
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          value:
+                            $ref: '#/components/schemas/MonetaryAmount'
+                          value_currency:
+                            $ref: '#/components/schemas/Currency'
+                        required:
+                        - type
+                        - value
+                        type: object
+                        x-struct: null
+                        x-validate: null
+                      type: array
+                      x-struct: null
+                      x-validate: null
+                    current_packing:
+                      description: A list of packing subtype IDs describing how the item is currently packed
+                      items:
+                        example: no_packing
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                      type: array
+                      x-struct: null
+                      x-validate: null
+                    customs:
+                      properties:
+                        country_of_origin:
+                          description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+                          example: US
+                          maxLength: 2
+                          minLength: 2
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        hs_code:
+                          description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+                          example: '123456'
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        medium:
+                          description: The medium of the object. This is a description of the material or materials used to create the object
+                          example: oil on canvas
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        temporary_admission:
+                          description: Select true if the goods are currently in the country under a temporary admission declaration
+                          example: true
+                          type: boolean
+                          x-struct: null
+                          x-validate: null
+                      type: object
+                      x-struct: null
+                      x-validate: null
+                    depth:
+                      description: The depth of the object
+                      example: '3'
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    details:
+                      properties:
+                        creation_date:
+                          description: Details about the timing in which an object was created
+                          example: '1980'
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        creator:
+                          description: The creator of the object
+                          example: Bob Smithson
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        is_cites:
+                          default: false
+                          description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
+                          type: boolean
+                          x-struct: null
+                          x-validate: null
+                        is_fragile:
+                          default: false
+                          description: Set this flag to true is the item is fragile. This may effect packing and handling costs
+                          type: boolean
+                          x-struct: null
+                          x-validate: null
+                        materials:
+                          deprecated: true
+                          description: A list of IDs describing the types of materials used
+                          items:
+                            example: canvas
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          type: array
+                          x-struct: null
+                          x-validate: null
+                        notes:
+                          description: Any notes about the item
+                          example: Artist signature in the lower left corner
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        title:
+                          description: The object title
+                          example: Black Rectangle
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                      type: object
+                      x-struct: null
+                      x-validate: null
+                    height:
+                      description: The height of the object
+                      example: '32'
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    images:
+                      description: A list image urls of the object
+                      items:
+                        example: http://example.com/image.jpg
+                        format: uri
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                      type: array
+                      x-struct: null
+                      x-validate: null
+                    internal_reference:
+                      description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                      example: 'Accession ID: 823'
+                      maxLength: 255
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    public_reference:
+                      description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+                      example: Round Smithson work
+                      maxLength: 255
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    subtype:
+                      description: The object subtype ID. Options are defined in the Object types metadata endpoint
+                      example: painting_unframed
+                      pattern: ^[0-9a-z_]{1,56}$
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    unit_of_measurement:
+                      enum:
+                      - in
+                      - cm
+                      example: in
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    value:
+                      $ref: '#/components/schemas/MonetaryAmount'
+                    value_currency:
+                      $ref: '#/components/schemas/Currency'
+                    weight:
+                      description: The weight of the object
+                      example: '3.0'
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    weight_unit:
+                      description: The unit of the object
+                      enum:
+                      - lb
+                      - kg
+                      example: lb
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    width:
+                      description: The width of the object
+                      example: '15'
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                  required:
+                  - subtype
+                  - value
+                  type: object
+                  x-struct: null
+                  x-validate: null
+                type: array
+                x-struct: null
+                x-validate: null
+              origin:
+                properties:
+                  access_restrictions:
+                    deprecated: true
+                    items:
+                      description: Id of location restriction type
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  address_line_1:
+                    description: First line of address
+                    example: 87 Richardson St
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  address_line_2:
+                    description: Second line of address
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  address_line_3:
+                    description: Third line of address
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  city:
+                    description: City
+                    example: Brooklyn
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  contacts:
+                    description: A list of contacts at the location
+                    items:
+                      properties:
+                        email_address:
+                          example: docs@arta.io
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        name:
+                          example: Contact Name
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                        phone_number:
+                          example: 646 828 7333
+                          type: string
+                          x-struct: null
+                          x-validate: null
+                      required:
+                      - name
+                      type: object
+                      x-struct: null
+                      x-validate: null
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  country:
+                    description: The ISO 3166-1 alpha-2 country code of the current or last known location if available
+                    example: US
+                    maxLength: 2
+                    minLength: 2
+                    required: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  postal_code:
+                    description: The postal code
+                    example: '11211'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  region:
+                    description: Political region name, for US states and Canada provinces, use 2 letter abbreviations
+                    example: NY
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  title:
+                    description: The title or name of the location
+                    example: Gallery
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              preferred_parcel_transport_services:
+                description: Optionally instruct the Arta API to filter Parcel and Self Ship quotes for specific transport services. For example, if you would prefer to only return `ground` quotes, you can set this field to `["ground"]` The list of valid transport service IDs is available at the /metadata/parcel_transport_services endpoint.
+                example:
+                - ground
+                items:
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                nullable: true
+                type: array
+                x-struct: null
+                x-validate: null
+              preferred_quote_types:
+                description: Optionally instruct the Arta API to return a subset of quote types for the requests generated through this hosted session. For example if you would prefer to only return Select quotes, you can set this field to `["select"]` The list valid quote type IDs are available at the /metadata/quotes endpoint.
+                example:
+                - parcel
+                items:
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                nullable: true
+                type: array
+                x-struct: null
+                x-validate: null
+              public_instructions_booking_review:
+                description: 'A client defined multi-line block of text presented to users in the quote review modal window prior to booking a shipment for booking, shared request, and inbound booking sessions.
+
+
+                  - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+                  - Rendered text supports a maximum of 400 characters not including links and markup'
+                type: string
+                x-struct: null
+                x-validate: null
+              public_instructions_confirmation:
+                description: 'A client defined multi-line block of text presented to users on the post-shipment booking confirmation view for booking, shared request, and inbound booking hosted sessions.
+
+
+                  - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+                  - Rendered text supports a maximum of 400 characters not including links and markup'
+                type: string
+                x-struct: null
+                x-validate: null
+              public_instructions_location_quotes:
+                description: 'A client defined multi-line block of text presented to users on the location and quote selection view for booking, shared request, and inbound booking hosted sessions.
+
+
+                  - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+                  - Rendered text supports a maximum of 400 characters not including links and markup'
+                type: string
+                x-struct: null
+                x-validate: null
+              public_instructions_object_details:
+                description: 'A client defined multi-line block of text presented to users on the object form in inbound booking hosted sessions.
+
+
+                  - Only visible if `can_user_confirm_object_dimensions` is true
+
+
+                  - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+                  - Rendered text supports a maximum of 400 characters not including links and markup'
+                example: Please confirm the dimensions of the objects you are shipping.
+                type: string
+                x-struct: null
+                x-validate: null
+              public_instructions_payment:
+                description: 'A client defined multi-line block of text presented to users on the post-shipment booking payment view when required for booking, shared request, and inbound booking hosted sessions.
+
+
+                  - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+                  - Rendered text supports a maximum of 400 characters not including links and markup'
+                type: string
+                x-struct: null
+                x-validate: null
+              public_reference:
+                description: A client defined name for the request. The value provided for the public_reference field may appear in notification emails and shipment detail pages
+                example: 'Order #1437'
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              quoting_strategy:
+                default: best_rate
+                description: The quoting strategy used when creating quote requests for this booking session. Determines whether the API returns a single best-rate option per transport speed or multiple carrier options for comparison
+                enum:
+                - best_rate
+                - compare_carriers
+                example: best_rate
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              shipping_notes:
+                description: This field can be used to pass through any notes to Arta that a customer might want to provide about the request
+                example: New customer
+                type: string
+                x-struct: null
+                x-validate: null
+              success_url:
+                description: The URL the user will be redirected to after a Arta Booking session is completed
+                example: http://example.com/success
+                type: string
+                x-struct: null
+                x-validate: null
+              tags:
+                description: A list of tags to associate with this hosted session
+                items:
+                  description: The name of an active tag belonging to your organization.
+                  example: spring-jewelry-sale
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                type: array
+                x-struct: null
+                x-validate: null
+              type:
+                default: inbound_booking
+                description: The type of the hosted session
+                enum:
+                - inbound_booking
+                type: string
+                x-struct: null
+                x-validate: null
+            required:
+            - destination
+            - type
+            type: object
+            x-struct: null
+            x-validate: null
+        required:
+        - hosted_session
+        title: InboundBookingSession
+        type: object
+        x-struct: null
+        x-validate: null
+      title: HostedSessionCreate
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.HostedSessionCreate
+      x-validate: null
+    HostedSessionListItem:
+      example:
+        additional_services:
+        - signature_delivery
+        can_user_confirm_object_dimensions: false
+        cancel_url: http://example.com/cancel
+        created_at: '2021-01-21T17:22:08.818747'
+        destination: null
+        id: 42
+        insurance: null
+        internal_reference: null
+        objects:
+        - components:
+          - customs:
+              country_of_origin: US
+              hs_code: '123456'
+              medium: oil on canvas
+              temporary_admission: true
+            details:
+              creation_date: '1980'
+              creator: Bob Smithson
+              notes: Artist signature in the lower left corner
+              title: Black Rectangle
+            id: 1f26b6e1-ce25-43a9-b4ea-2ceaac24ec3a
+            internal_reference: 'Accession ID: 823'
+            public_reference: Round Smithson work
+            type: painting_framed
+            value: '15000'
+            value_currency: USD
+          current_packing:
+          - cardboard_box
+          depth: '2'
+          details:
+            creation_date: null
+            creator: null
+            is_cites: false
+            is_fragile: false
+            materials: []
+            notes: null
+            title: null
+          height: '10.5'
+          id: 12346
+          images: []
+          internal_reference: null
+          public_reference: null
+          subtype: prepacked_box
+          type: client_package
+          unit_of_measurement: in
+          value: '15000'
+          value_currency: USD
+          weight: '3.5'
+          weight_unit: lb
+          width: '10'
+        - components: []
+          current_packing: []
+          customs:
+            country_of_origin: US
+            hs_code: '123456'
+            medium: oil on canvas
+            temporary_admission: true
+          depth: '2'
+          details:
+            creation_date: null
+            creator: Robert Irwin
+            is_cites: false
+            is_fragile: false
+            materials: []
+            notes: notes
+            title: It's just jazz
+          height: '24'
+          id: 12345
+          images: []
+          internal_reference: null
+          public_reference: null
+          subtype: painting_unframed
+          type: art
+          unit_of_measurement: in
+          value: '100.00'
+          value_currency: USD
+          weight: '1'
+          weight_unit: lb
+          width: '36'
+        origin:
+          access_restrictions: []
+          address_line_1: 11 W 53rd St
+          address_line_2: null
+          address_line_3: null
+          city: New York
+          contacts:
+          - email_address: mary@example.com
+            name: Mary Quinn Sullivan
+            phone_number: (333) 333-3333
+          country: US
+          postal_code: '10019'
+          region: NY
+          title: Warehouse
+        payment_process: invoicing
+        preferred_quote_types: []
+        private_token: 6f76b6e1-ce25-43a9-b4ea-2ceaac24ec7e
+        public_reference: null
+        quoting_strategy: best_rate
+        shipping_notes: null
+        shortcode: DEMO-BA9SVZ
+        status: new
+        success_url: http://example.com/success
+        tags: []
+        type: booking
+        updated_at: '2021-01-21T17:22:10.129653'
+        url: https://book.arta.io/b/42/6f76b6e1-ce25-43a9-b4ea-2ceaac24ec7e
+      properties:
+        additional_services:
+          description: Any desired services, such as unpacking, installation, etc. can be sent through in the request and will be treated as if that requested service is required. Requested services may disqualify certain segments of shipping services offered by Arta depending on location and object details.
+          items:
+            description: The id of a service.
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        can_user_confirm_object_dimensions:
+          description: Determines whether your customer can verify and update object dimension information when completing an inbound booking session.
+          type: boolean
+          x-struct: null
+          x-validate: null
+        cancel_url:
+          description: The URL the user will be redirected to after an Arta Booking session is cancelled
+          type: string
+          x-struct: null
+          x-validate: null
+        created_at:
+          type: string
+          x-struct: null
+          x-validate: null
+        destination:
+          $ref: '#/components/schemas/NullableLocation'
+        id:
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        insurance:
+          description: The id of an insurance type. If requesting Arta insurance, object values must be provided.
+          example: arta_transit_insurance
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any data about the request you may want returned unaltered for your own later usage
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        objects:
+          description: A list of objects to be shipped
+          items:
+            $ref: '#/components/schemas/Object'
+          type: array
+          x-struct: null
+          x-validate: null
+        origin:
+          $ref: '#/components/schemas/Location'
+        payment_process:
+          description: The primary method by which payment to Arta will be handled for any shipment booked through this hosted session
+          enum:
+          - checkout
+          - invoicing
+          example: checkout
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        preferred_parcel_transport_services:
+          description: Optionally instruct the Arta API to filter Parcel and Self Ship quotes for specific transport services. For example, if you would prefer to only return `ground` quotes, you can set this field to `["ground"]` The list of valid transport service IDs is available at the /metadata/parcel_transport_services endpoint.
+          example:
+          - ground
+          items:
+            type: string
+            x-struct: null
+            x-validate: null
+          nullable: true
+          type: array
+          x-struct: null
+          x-validate: null
+        preferred_quote_types:
+          description: An optional field presenting the list of quote types the caller instructed Arta to return as part of the hosted session
+          items:
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        private_token:
+          description: A private access token for this resource. It is used to generate the private URL for the hosted session
+          type: string
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        quoting_strategy:
+          default: best_rate
+          description: The quoting strategy used when creating quote requests for this booking session. Determines whether the API returns a single best-rate option per transport speed or multiple carrier options for comparison
+          enum:
+          - best_rate
+          - compare_carriers
+          example: best_rate
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        shipping_notes:
+          description: This field can be used to pass through any notes to Arta that a customer might want to provide about the request
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        shortcode:
+          description: A brief and unique string identifier for the resource
+          example: DEMO-B8FIRV
+          type: string
+          x-struct: null
+          x-validate: null
+        status:
+          example: quoted
+          type: string
+          x-struct: null
+          x-validate: null
+        success_url:
+          description: The URL the user will be redirected to after an Arta Booking session is completed
+          type: string
+          x-struct: null
+          x-validate: null
+        tags:
+          description: A list of tags associated with this hosted session
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+          x-struct: null
+          x-validate: null
+        type:
+          description: The type of the hosted session
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          type: string
+          x-struct: null
+          x-validate: null
+        url:
+          description: The Arta Booking web URL for this Hosted Session
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+      title: HostedSessionListItem
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.HostedSessionListItem
+      x-validate: null
+    Tag:
+      example:
+        color: 008000
+        created_at: '2024-09-25T19:17:54.871490'
+        created_by: null
+        description: null
+        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
+        is_active: false
+        name: ct-warehouse
+        updated_at: '2024-09-25T19:19:01.648283'
+        updated_by: null
+      properties:
+        color:
+          description: The hexadecimal color code for the tag, without the leading `#`.
+          example: 0000FF
+          maxLength: 6
+          minLength: 6
+          pattern: ^[0-9A-F]{6}$
+          type: string
+          x-struct: null
+          x-validate: null
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        created_by:
+          description: The user ID associated with the user who created the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        description:
+          description: An optional, brief description for this tag.
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the tag in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        is_active:
+          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
+          type: boolean
+          x-struct: null
+          x-validate: null
+        name:
+          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
+          example: la-warehouse
+          maxLength: 50
+          pattern: ^[a-z0-9-]{1,50}$
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_by:
+          description: The user ID associated with the last user to edit the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+      title: Tag
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
+      x-validate: null
+    HostedSession:
+      example:
+        additional_services:
+        - signature_delivery
+        can_user_confirm_object_dimensions: false
+        cancel_url: http://example.com/cancel
+        created_at: '2021-01-21T17:22:08.818747'
+        customs_end_use: not_for_resale
+        customs_process: ddu
+        destination: null
+        id: 42
+        insurance: null
+        internal_reference: null
+        objects:
+        - components:
+          - customs:
+              country_of_origin: US
+              hs_code: '123456'
+              medium: oil on canvas
+              temporary_admission: true
+            details:
+              creation_date: '1980'
+              creator: Bob Smithson
+              notes: Artist signature in the lower left corner
+              title: Black Rectangle
+            id: 1f26b6e1-ce25-43a9-b4ea-2ceaac24ec3a
+            internal_reference: 'Accession ID: 823'
+            public_reference: Round Smithson work
+            type: painting_framed
+            value: '15000'
+            value_currency: USD
+          current_packing:
+          - cardboard_box
+          depth: '2'
+          details:
+            creation_date: null
+            creator: null
+            is_cites: false
+            is_fragile: false
+            materials: []
+            notes: null
+            title: null
+          height: '10.5'
+          id: 12346
+          images: []
+          internal_reference: null
+          public_reference: null
+          subtype: prepacked_box
+          type: client_package
+          unit_of_measurement: in
+          value: '15000'
+          value_currency: USD
+          weight: '3.5'
+          weight_unit: lb
+          width: '10'
+        - components: []
+          current_packing: []
+          customs:
+            country_of_origin: US
+            hs_code: '123456'
+            medium: oil on canvas
+            temporary_admission: true
+          depth: '2'
+          details:
+            creation_date: null
+            creator: Robert Irwin
+            is_cites: false
+            is_fragile: false
+            materials: []
+            notes: notes
+            title: It's just jazz
+          height: '24'
+          id: 12345
+          images: []
+          internal_reference: null
+          public_reference: null
+          subtype: painting_unframed
+          type: art
+          unit_of_measurement: in
+          value: '100.00'
+          value_currency: USD
+          weight: '1'
+          weight_unit: lb
+          width: '36'
+        origin:
+          access_restrictions: []
+          address_line_1: 11 W 53rd St
+          address_line_2: null
+          address_line_3: null
+          city: New York
+          contacts:
+          - email_address: mary@example.com
+            name: Mary Quinn Sullivan
+            phone_number: (333) 333-3333
+          country: US
+          postal_code: '10019'
+          region: NY
+          title: Warehouse
+        payment_process: invoicing
+        preferred_quote_types: []
+        private_token: 6f76b6e1-ce25-43a9-b4ea-2ceaac24ec7e
+        public_instructions_booking_review: null
+        public_instructions_confirmation: null
+        public_instructions_location_quotes: null
+        public_instructions_object_details: null
+        public_instructions_payment: null
+        public_reference: null
+        quoting_strategy: best_rate
+        shipping_notes: null
+        shortcode: DEMO-B49SVZ
+        status: new
+        success_url: http://example.com/success
+        tags: []
+        type: booking
+        updated_at: '2021-01-21T17:22:10.129653'
+        url: https://book.arta.io/b/42/6f76b6e1-ce25-43a9-b4ea-2ceaac24ec7e
+      properties:
+        additional_services:
+          description: Any desired services, such as unpacking, installation, etc. can be sent through in the request and will be treated as if that requested service is required. Requested services may disqualify certain segments of shipping services offered by Arta depending on location and object details.
+          items:
+            description: The id of a service.
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        can_user_confirm_object_dimensions:
+          description: Determines whether your customer can verify and update object dimension information when completing an inbound booking session.
+          type: boolean
+          x-struct: null
+          x-validate: null
+        cancel_url:
+          description: The URL the user will be redirected to after an Arta Booking session is cancelled
+          type: string
+          x-struct: null
+          x-validate: null
+        created_at:
+          type: string
+          x-struct: null
+          x-validate: null
+        customs_end_use:
+          description: The intended end use of the items being shipped for customs purposes
+          enum:
+          - for_resale
+          - not_for_resale
+          example: not_for_resale
+          type: string
+          x-struct: null
+          x-validate: null
+        customs_process:
+          description: The customs process for the shipment. "ddu" (Delivery Duties Unpaid) means the receiver is responsible for paying duties and taxes. "ddp" (Delivery Duties Paid) means the sender prepays duties and taxes. "ddp_optional" means the receiver will decide whether to pay estimated duties, fees, and taxes prior to fulfillment
+          enum:
+          - ddu
+          - ddp
+          - ddp_optional
+          example: ddu
+          type: string
+          x-struct: null
+          x-validate: null
+        destination:
+          $ref: '#/components/schemas/NullableLocation'
+        id:
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        insurance:
+          description: The id of an insurance type. If requesting Arta insurance, object values must be provided.
+          example: arta_transit_insurance
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any data about the request you may want returned unaltered for your own later usage
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        objects:
+          description: A list of objects to be shipped
+          items:
+            $ref: '#/components/schemas/Object'
+          type: array
+          x-struct: null
+          x-validate: null
+        origin:
+          $ref: '#/components/schemas/Location'
+        payment_process:
+          description: The primary method by which payment to Arta will be handled for any shipment booked through this hosted session
+          enum:
+          - checkout
+          - invoicing
+          example: checkout
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        preferred_parcel_transport_services:
+          description: Optionally instruct the Arta API to filter Parcel and Self Ship quotes for specific transport services. For example, if you would prefer to only return `ground` quotes, you can set this field to `["ground"]` The list of valid transport service IDs is available at the /metadata/parcel_transport_services endpoint.
+          example:
+          - ground
+          items:
+            type: string
+            x-struct: null
+            x-validate: null
+          nullable: true
+          type: array
+          x-struct: null
+          x-validate: null
+        preferred_quote_types:
+          description: An optional field presenting the list of quote types the caller instructed Arta to return as part of the hosted session
+          items:
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        private_token:
+          description: A private access token for this resource. It is used to generate the private URL for the hosted session
+          type: string
+          x-struct: null
+          x-validate: null
+        public_instructions_booking_review:
+          description: 'A client defined multi-line block of text presented to users in the quote review modal window prior to booking a shipment for booking, shared request, and inbound booking sessions.
+
+
+            - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+            - Rendered text supports a maximum of 400 characters not including links and markup'
+          type: string
+          x-struct: null
+          x-validate: null
+        public_instructions_confirmation:
+          description: 'A client defined multi-line block of text presented to users on the post-shipment booking confirmation view for booking, shared request, and inbound booking hosted sessions.
+
+
+            - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+            - Rendered text supports a maximum of 400 characters not including links and markup'
+          type: string
+          x-struct: null
+          x-validate: null
+        public_instructions_location_quotes:
+          description: 'A client defined multi-line block of text presented to users on the location and quote selection view for booking, shared request, and inbound booking hosted sessions.
+
+
+            - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+            - Rendered text supports a maximum of 400 characters not including links and markup'
+          type: string
+          x-struct: null
+          x-validate: null
+        public_instructions_object_details:
+          description: 'A client defined multi-line block of text presented to users on the object form in inbound booking hosted sessions.
+
+
+            - Only visible if `can_user_confirm_object_dimensions` is true
+
+
+            - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+            - Rendered text supports a maximum of 400 characters not including links and markup'
+          example: Please confirm the dimensions of the objects you are shipping.
+          type: string
+          x-struct: null
+          x-validate: null
+        public_instructions_payment:
+          description: 'A client defined multi-line block of text presented to users on the post-shipment booking payment view when required for booking, shared request, and inbound booking hosted sessions.
+
+
+            - Supports multiple lines and markdown-inspired anchor link syntax `[view more](https://moma.org/)`
+
+
+            - Rendered text supports a maximum of 400 characters not including links and markup'
+          type: string
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        quoting_strategy:
+          default: best_rate
+          description: The quoting strategy used when creating quote requests for this booking session. Determines whether the API returns a single best-rate option per transport speed or multiple carrier options for comparison
+          enum:
+          - best_rate
+          - compare_carriers
+          example: best_rate
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        shipping_notes:
+          description: This field can be used to pass through any notes to Arta that a customer might want to provide about the request
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        shortcode:
+          description: A brief and unique string identifier for the resource
+          example: DEMO-B8FIRV
+          type: string
+          x-struct: null
+          x-validate: null
+        status:
+          example: quoted
+          type: string
+          x-struct: null
+          x-validate: null
+        success_url:
+          description: The URL the user will be redirected to after an Arta Booking session is completed
+          type: string
+          x-struct: null
+          x-validate: null
+        tags:
+          description: A list of tags associated with this hosted session
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+          x-struct: null
+          x-validate: null
+        type:
+          description: The type of the hosted session
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          type: string
+          x-struct: null
+          x-validate: null
+        url:
+          description: The Arta Booking web URL for this Hosted Session
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+      title: HostedSession
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.HostedSession
+      x-validate: null
+    NullableLocation:
+      nullable: true
+      properties:
+        access_restrictions:
+          items:
+            description: Id of location restriction type
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        address_line_1:
+          description: First line of address
+          type: string
+          x-struct: null
+          x-validate: null
+        address_line_2:
+          description: Second line of address
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        address_line_3:
+          description: Third line of address
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        city:
+          description: City
+          type: string
+          x-struct: null
+          x-validate: null
+        contacts:
+          description: An list of contacts at the location
+          items:
+            properties:
+              email_address:
+                type: string
+                x-struct: null
+                x-validate: null
+              name:
+                type: string
+                x-struct: null
+                x-validate: null
+              phone_number:
+                type: string
+                x-struct: null
+                x-validate: null
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        country:
+          description: The ISO 3166-1 alpha-2 country code of the current or last known location if available
+          maxLength: 2
+          minLength: 2
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The location id
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        postal_code:
+          description: The postal code
+          type: string
+          x-struct: null
+          x-validate: null
+        region:
+          description: Political region name, for US states and Canada provinces, use 2 letter abbreviations
+          type: string
+          x-struct: null
+          x-validate: null
+        title:
+          description: The title or name of the location
+          type: string
+          x-struct: null
+          x-validate: null
+      title: NullableLocation
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.NullableLocation
+      x-validate: null
+    Object:
+      properties:
+        components:
+          description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
+
+
+            When components are present, the object value must equal the sum of component values.'
+          items:
+            properties:
+              customs:
+                properties:
+                  country_of_origin:
+                    description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+                    example: US
+                    maxLength: 2
+                    minLength: 2
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  hs_code:
+                    description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+                    example: '123456'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  medium:
+                    description: The medium of the object. This is a description of the material or materials used to create the object
+                    example: oil on canvas
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  temporary_admission:
+                    description: Select true if the goods are currently in the country under a temporary admission declaration
+                    example: true
+                    type: boolean
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              details:
+                properties:
+                  creation_date:
+                    description: Details about the timing in which an object was created
+                    example: '1980'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  creator:
+                    description: The creator of the object
+                    example: Bob Smithson
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  notes:
+                    description: Any notes about the item
+                    example: Artist signature in the lower left corner
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  title:
+                    description: The object title
+                    example: Black Rectangle
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              id:
+                description: The id of the component in UUID format
+                format: uuid
+                type: string
+                x-struct: null
+                x-validate: null
+              internal_reference:
+                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                example: 'Accession ID: 823'
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              public_reference:
+                description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+                example: Round Smithson work
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              type:
+                description: The object component type ID. Options are defined in the Object Component types metadata endpoint
+                example: painting_framed
+                pattern: ^[0-9a-z_]{1,56}$
+                type: string
+                x-struct: null
+                x-validate: null
+              value:
+                $ref: '#/components/schemas/MonetaryAmount'
+              value_currency:
+                $ref: '#/components/schemas/Currency'
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        current_packing:
+          description: A list of packing subtype IDs describing how the item is currently packed
+          items:
+            example: no_packing
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        customs:
+          properties:
+            country_of_origin:
+              description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+              example: US
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-struct: null
+              x-validate: null
+            hs_code:
+              description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+              example: '123456'
+              type: string
+              x-struct: null
+              x-validate: null
+            medium:
+              description: The medium of the object. This is a description of the material or materials used to create the object
+              example: oil on canvas
+              type: string
+              x-struct: null
+              x-validate: null
+            temporary_admission:
+              description: Select true if the goods are currently in the country under a temporary admission declaration
+              example: true
+              type: boolean
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        depth:
+          description: The depth of the object
+          example: '3'
+          type: string
+          x-struct: null
+          x-validate: null
+        details:
+          properties:
+            creation_date:
+              description: Details about the timing in which an object was created
+              example: '1980'
+              type: string
+              x-struct: null
+              x-validate: null
+            creator:
+              description: The creator of the object
+              example: Bob Smithson
+              type: string
+              x-struct: null
+              x-validate: null
+            is_cites:
+              default: false
+              description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
+              type: boolean
+              x-struct: null
+              x-validate: null
+            is_fragile:
+              default: false
+              description: Set this flag to true is the item is fragile. This may effect packing and handling costs
+              type: boolean
+              x-struct: null
+              x-validate: null
+            materials:
+              deprecated: true
+              description: A list of IDs describing the types of materials used
+              items:
+                example: canvas
+                type: string
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+            notes:
+              description: Any notes about the item
+              example: Artist signature in the lower left corner
+              type: string
+              x-struct: null
+              x-validate: null
+            title:
+              description: The object title
+              example: Black Rectangle
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        height:
+          description: The height of the object
+          example: '32'
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        images:
+          description: A list image urls of the object
+          items:
+            example: http://example.com/image.jpg
+            format: uri
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+          example: 'Accession ID: 823'
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+          example: Round Smithson work
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        subtype:
+          description: The object subtype ID. Options are defined in the Object types metadata endpoint
+          example: painting_unframed
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        type:
+          description: The object type id
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        unit_of_measurement:
+          enum:
+          - in
+          - cm
+          example: in
+          type: string
+          x-struct: null
+          x-validate: null
+        value:
+          $ref: '#/components/schemas/MonetaryAmount'
+        value_currency:
+          $ref: '#/components/schemas/Currency'
+        weight:
+          description: The weight of the object
+          example: '3.0'
+          type: string
+          x-struct: null
+          x-validate: null
+        weight_unit:
+          description: The unit of the object
+          enum:
+          - lb
+          - kg
+          example: lb
+          type: string
+          x-struct: null
+          x-validate: null
+        width:
+          description: The width of the object
+          example: '15'
+          type: string
+          x-struct: null
+          x-validate: null
+      title: Object
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Object
+      x-validate: null
+    MonetaryAmount:
+      example: '2500.00'
+      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
+      title: MonetaryAmount
+      type: string
+      x-struct: null
+      x-validate: null
+x-topics:
+- content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.
+
+
+    Using your API key to authenticate an API call is straightforward. Simply include your API Key token in the Authorization header of every call made to the system. This is the only place that it is accepted.'
+  example: "```shell\n\n$ curl \\ \n\n -X GET https://api.arta.io/shipments \\ \n\n -H \"Authorization: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y\""
+  title: Authentication
+- content: "Arta imposes rate limits on API requests to maintain system stability and ensure fair usage. If you exceed these limits, the API will return a `429 Too Many Requests` error. Below are the rate limits for both Live and Test modes.\n\n**Live Mode:**\n\n*\tConcurrent requests: 15 API calls at the same time (any type)\n* Instant quote requests: 20 calls per minute\n* Overall requests: 1000 API calls per minute (any type)\n\n**Test Mode:**\n\n* Concurrent requests: 10 API calls at the same time (any type)\n* Instant quote requests: 10 calls per minute\n* Overall requests: 500 API calls per minute (any type)\n\nWhen a rate limit is exceeded, we recommend implementing retry logic with exponential backoff to handle 429 errors effectively."
+  title: Rate Limits
+- content: 'The Arta API supports flexible search functionality across multiple resources, including Shipments, Requests, Hosted Sessions, Tags, and others. Using the search query parameter, you can construct structured queries to filter results based on specific criteria.
+
+
+    Key features of the search functionality include:
+
+
+    * Support for negation, wildcards, numeric filters, and date comparisons.
+
+    * Each search query consists of one or more clauses, where each clause contains a `field`, an operator, and a `value`.
+
+    * Clauses operating on the same field are combined using OR logic, while clauses across different fields are combined using AND logic.
+
+
+    * Use quotation marks to keep multi-word search terms together.
+
+
+    This allows for powerful and precise filtering to retrieve the exact data you need from the API.
+
+
+    **Syntax and operators**
+
+
+    The following table lists the operators and syntax that you can use to construct a search query clause.
+
+
+    | Operator     | Usage                          | Description                                                                 | Examples                                                            |
+
+    |------------|--------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------|
+
+    | `:`        | `field:value`                  | Exact match operator (case insensitive)                                     | `status:pending` returns records where the status is `pending` |
+
+    | `*`        | `value*`                       | Use an asterisk (wildcard operator) at the end of a term to match fields that start with the fragment                                    | `art*` returns records that match "arta" and "artist" but not "smart" |
+
+    | `*`        | `*value`                       | Use an asterisk at the start of a term to match fields that end with the fragment                                    | `*art` returns "smart" but not "martian" |
+
+    | `-`        | `-field:value`                 | Returns records that don’t match the clause                                 | `-status:pending` returns records that do not have a status of pending                 |
+
+    | `>, <, =`  | `field:<value`, `field:>value`, `field:>=value`, `field:<=value` | Greater than/less than operators              | `created-at:<=2021-01-01` returns records from the beginning of time through January 1, 2021   |
+
+    | `..`       | `field:value1..value2`                 | Filters for values within a given range where the first number is the lowest value and the second is the highest                                 | `created-at:2021-05-01..2021-05-15` returns records where the `created_at` field is between May 1, 2021 and May 15, 2021                 |
+
+
+
+
+    **Hosted Session search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `insurance` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `type` | string |
+
+    | `tags` | string |
+
+
+    **Request search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `bookable` | string |
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+
+    **Shipment search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `eei-form-status` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `request-shortcode` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+    | `total` | numeric |
+
+    | `total-currency` | string |
+
+    | `tracking-numbers` | string |
+
+
+    **Tag search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `color` | string |
+
+    | `description` | string |
+
+    | `is_active` | string |
+
+    | `name` | string |
+
+
+    '
+  title: Search

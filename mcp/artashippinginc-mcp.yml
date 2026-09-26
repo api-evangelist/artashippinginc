@@ -1,0 +1,213 @@
+generated: '2026-09-26'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/arta-openapi.json
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: probed
+note: No MCP server was found. The pre-flight posted tools/list to /mcp on the known hosts; verdict None. Candidate tools below are derived from
+  the 103 operation(s) in the provider's own OpenAPI (40 listed); they describe what a server WOULD expose, not one that exists.
+tools:
+- name: address_verifications/list
+  operationId: addressVerifications/list
+  method: GET
+  path: /address_verifications
+  description: List Address Verifications
+- name: address_verifications/create
+  operationId: addressVerifications/create
+  method: POST
+  path: /address_verifications
+  description: Create an Address Verification
+- name: address_verifications/get
+  operationId: addressVerifications/get
+  method: GET
+  path: /address_verifications/{address_verification_id}
+  description: Get an Address Verification
+- name: api_keys/list
+  operationId: apiKeys/list
+  method: GET
+  path: /api_keys
+  description: List API Keys
+- name: api_keys/create
+  operationId: apiKeys/create
+  method: POST
+  path: /api_keys
+  description: Create an API Key
+- name: api_keys/get
+  operationId: apiKeys/get
+  method: GET
+  path: /api_keys/{api_key_id}
+  description: Get an API Key
+- name: api_keys/delete
+  operationId: apiKeys/delete
+  method: DELETE
+  path: /api_keys/{api_key_id}
+  description: Delete an API Key
+- name: attachments/list
+  operationId: attachments/list
+  method: GET
+  path: /attachments
+  description: List Attachments
+- name: attachments/create
+  operationId: attachments/create
+  method: POST
+  path: /attachments
+  description: Create an Attachment
+- name: attachments/get
+  operationId: attachments/get
+  method: GET
+  path: /attachments/{attachment_id}
+  description: Retrieve an Attachment
+- name: attachments/delete
+  operationId: attachments/delete
+  method: DELETE
+  path: /attachments/{attachment_id}
+  description: Delete an Attachment
+- name: collection_tag_rules/list
+  operationId: collectionTagRules/list
+  method: GET
+  path: /collection_tag_rules
+  description: List Collection Tag Rules
+- name: collection_tag_rules/create
+  operationId: collectionTagRules/create
+  method: POST
+  path: /collection_tag_rules
+  description: Create a Collection Tag Rule
+- name: collection_tag_rules/get
+  operationId: collectionTagRules/get
+  method: GET
+  path: /collection_tag_rules/{collection_tag_rule_id}
+  description: Get a Collection Tag Rule
+- name: collection_tag_rules/delete
+  operationId: collectionTagRules/delete
+  method: DELETE
+  path: /collection_tag_rules/{collection_tag_rule_id}
+  description: Delete a Collection Tag Rule
+- name: email_rules/list
+  operationId: emailRules/list
+  method: GET
+  path: /email_rules
+  description: List Email Rules
+- name: email_rules/create
+  operationId: emailRules/create
+  method: POST
+  path: /email_rules
+  description: Create an Email Rule
+- name: email_rules/get
+  operationId: emailRules/get
+  method: GET
+  path: /email_rules/{email_rule_id}
+  description: Get an Email Rule
+- name: email_rules/update
+  operationId: emailRules/update
+  method: PATCH
+  path: /email_rules/{email_rule_id}
+  description: Update an Email Rule
+- name: email_rules/delete
+  operationId: emailRules/delete
+  method: DELETE
+  path: /email_rules/{email_rule_id}
+  description: Delete an Email Rule
+- name: email_subscriptions/list
+  operationId: emailSubscriptions/list
+  method: GET
+  path: /email_subscriptions
+  description: List Email Subscriptions
+- name: email_subscriptions/create
+  operationId: emailSubscriptions/create
+  method: POST
+  path: /email_subscriptions
+  description: Create an Email Subscription
+- name: email_subscriptions/get
+  operationId: emailSubscriptions/get
+  method: GET
+  path: /email_subscriptions/{email_subscription_id}
+  description: Get an Email Subscription
+- name: email_subscriptions/update
+  operationId: emailSubscriptions/update
+  method: PATCH
+  path: /email_subscriptions/{email_subscription_id}
+  description: Update an Email Subscription
+- name: email_subscriptions/delete
+  operationId: emailSubscriptions/delete
+  method: DELETE
+  path: /email_subscriptions/{email_subscription_id}
+  description: Delete an Email Subscription
+- name: hosted_sessions/list
+  operationId: hostedSessions/list
+  method: GET
+  path: /hosted_sessions
+  description: List Hosted Sessions
+- name: hosted_sessions/create
+  operationId: hostedSessions/create
+  method: POST
+  path: /hosted_sessions
+  description: Create a Hosted Session
+- name: hosted_sessions/get
+  operationId: hostedSessions/get
+  method: GET
+  path: /hosted_sessions/{hosted_session_id}
+  description: Get a Hosted Session
+- name: hosted_sessions/cancel
+  operationId: hostedSessions/cancel
+  method: PATCH
+  path: /hosted_sessions/{hosted_session_id}/cancel
+  description: Cancel a Hosted Session
+- name: import_cost_estimates/list
+  operationId: importCostEstimates/list
+  method: GET
+  path: /import_cost_estimates
+  description: List Import Cost Estimates
+- name: import_cost_estimates/create
+  operationId: importCostEstimates/create
+  method: POST
+  path: /import_cost_estimates
+  description: Create an Import Cost Estimate
+- name: import_cost_estimates/get
+  operationId: importCostEstimates/get
+  method: GET
+  path: /import_cost_estimates/{import_cost_estimate_id}
+  description: Get an Import Cost Estimate
+- name: invoice_payments/list
+  operationId: invoicePayments/list
+  method: GET
+  path: /invoice_payments
+  description: List Invoice Payment
+- name: invoice_payments/get
+  operationId: invoicePayments/get
+  method: GET
+  path: /invoice_payments/{invoice_payment_id}
+  description: Get an Invoice Payment
+- name: invoices/list
+  operationId: invoices/list
+  method: GET
+  path: /invoices
+  description: List Invoices
+- name: invoices/get
+  operationId: invoices/get
+  method: GET
+  path: /invoices/{invoice_id}
+  description: Get an Invoice
+- name: logs/list
+  operationId: logs/list
+  method: GET
+  path: /logs
+  description: List Logs
+- name: logs/get
+  operationId: logs/get
+  method: GET
+  path: /logs/{log_id}
+  description: Get a Log
+- name: metadata/api_versions
+  operationId: metadata/apiVersions
+  method: GET
+  path: /metadata/api_versions
+  description: API Versions
+- name: metadata/commercial_carriers
+  operationId: metadata/commercialCarriers
+  method: GET
+  path: /metadata/commercial_carriers
+  description: Commercial Carriers

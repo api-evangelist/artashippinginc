@@ -1,0 +1,405 @@
+generated: '2026-09-26'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/arta-openapi.json
+vocabulary:
+  name: Artashippinginc Domain Vocabulary
+  description: 'Terms declared by Artashippinginc''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-09-26'
+  terms:
+  - term: WebhookCreate
+    definition: 'Object declared by the contract with fields: webhook.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/WebhookCreate
+  - term: SelfShipCollectionFieldErrors
+    definition: 'Object declared by the contract with fields: errors.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/SelfShipCollectionFieldErrors
+  - term: EmailSubscription
+    definition: 'Object declared by the contract with fields: created_at, email_address, email_notification_ids, id, name, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/EmailSubscription
+  - term: WebhookUpdate
+    definition: 'Object declared by the contract with fields: webhook.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/WebhookUpdate
+  - term: Webhook
+    definition: 'Object declared by the contract with fields: created_at, id, name, updated_at, url.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Webhook
+  - term: ApiKeyCreate
+    definition: 'Object declared by the contract with fields: api_key.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/ApiKeyCreate
+  - term: APIKey
+    definition: 'Object declared by the contract with fields: created_at, id, is_testing, token, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/APIKey
+  - term: WebhookDeliveryListItem
+    definition: 'Object declared by the contract with fields: created_at, id, next_retry, resource_id, resource_type, response_status_code, status,
+      type, webhook_id, webhook_url.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/WebhookDeliveryListItem
+  - term: SelfShipCollectionAvailabilityCheckCreate
+    definition: 'Object declared by the contract with fields: self_ship_collection_availability_check.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/SelfShipCollectionAvailabilityCheckCreate
+  - term: SelfShipCollectionErrorList
+    definition: 'Object declared by the contract with fields: errors.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/SelfShipCollectionErrorList
+  - term: CollectionTagRule
+    definition: 'Object declared by the contract with fields: created_at, id, pattern, tag_id, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/CollectionTagRule
+  - term: Request
+    definition: 'Object declared by the contract with fields: additional_services, bookable, created_at, currency, customs_end_use, customs_process,
+      destination, disqualifications, hosted_session_id, id, insurance, internal_reference. (16 more)'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Request
+  - term: BookingSession
+    definition: Create hosted booking session
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/BookingSession
+  - term: ArtaShipmentPayload
+    definition: Create a standard Arta shipment
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/ArtaShipmentPayload
+  - term: Location
+    definition: 'Object declared by the contract with fields: access_restrictions, address_line_1, address_line_2, address_line_3, city, contacts,
+      country, postal_code, region, title.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Location
+  - term: Service
+    definition: 'Object declared by the contract with fields: amount, amount_currency, included_services, is_requested, is_required, metadata,
+      name, sub_subtype, subtype, type.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Service
+  - term: EmailRuleCreate
+    definition: 'Object declared by the contract with fields: email_rule.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/EmailRuleCreate
+  - term: EmailSubscriptionCreate
+    definition: 'Object declared by the contract with fields: email_subscription.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/EmailSubscriptionCreate
+  - term: NullableLocation
+    definition: 'Object declared by the contract with fields: access_restrictions, address_line_1, address_line_2, address_line_3, city, contacts,
+      country, id, postal_code, region, title.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/NullableLocation
+  - term: Tracking
+    definition: 'Object declared by the contract with fields: carrier, events, status, tracking_number.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Tracking
+  - term: AddressVerification
+    definition: 'Object declared by the contract with fields: created_at, id, input, match_level, recommendation, reference, shortcode, status,
+      updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/AddressVerification
+  - term: BadRequest
+    definition: 'Object declared by the contract with fields: errors.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/BadRequest
+  - term: Error
+    definition: 'Object declared by the contract with fields: errors.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Error
+  - term: Tag
+    definition: 'Object declared by the contract with fields: color, created_at, created_by, description, id, is_active, name, updated_at, updated_by.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Tag
+  - term: TagUpdate
+    definition: 'Object declared by the contract with fields: tag.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/TagUpdate
+  - term: Attachment
+    definition: 'Object declared by the contract with fields: created_at, id, request_id, shipment_id, updated_at, upload_id.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Attachment
+  - term: HostedSession
+    definition: 'Object declared by the contract with fields: additional_services, can_user_confirm_object_dimensions, cancel_url, created_at,
+      customs_end_use, customs_process, destination, id, insurance, internal_reference, objects, origin. (19 more)'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/HostedSession
+  - term: AddressVerificationCreate
+    definition: 'Object declared by the contract with fields: address_verification.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/AddressVerificationCreate
+  - term: Currency
+    definition: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Currency
+  - term: Payment
+    definition: 'Object declared by the contract with fields: amount, amount_currency, context, created_at, id, paid_on, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Payment
+  - term: ShipmentExceptionCreate
+    definition: 'Object declared by the contract with fields: shipment_exception.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/ShipmentExceptionCreate
+  - term: TrackShipmentPayload
+    definition: Create a track shipment
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/TrackShipmentPayload
+  - term: AttachmentCreate
+    definition: 'Object declared by the contract with fields: attachment.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/AttachmentCreate
+  - term: ShipmentExceptionUpdate
+    definition: 'Object declared by the contract with fields: shipment_exception.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/ShipmentExceptionUpdate
+  - term: Object
+    definition: 'Object declared by the contract with fields: components, current_packing, customs, depth, details, height, id, images, internal_reference,
+      public_reference, subtype, type. (6 more)'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Object
+  - term: NotFound
+    definition: 'Object declared by the contract with fields: errors.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/NotFound
+  - term: FedexSelfShipCollectionPayload
+    definition: Schedule a FedEx collection
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/FedexSelfShipCollectionPayload
+  - term: DhlSelfShipCollectionPayload
+    definition: Schedule a DHL collection
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/DhlSelfShipCollectionPayload
+  - term: ShipmentList
+    definition: 'Object declared by the contract with fields: created_at, destination, hosted_session_id, id, internal_reference, object_count,
+      origin, package_count, public_reference, quote_type, shortcode, status. (4 more)'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/ShipmentList
+  - term: EmailRule
+    definition: 'Object declared by the contract with fields: created_at, email_notification_id, id, recipients, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/EmailRule
+  - term: RequestCreate
+    definition: Create a new request
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/RequestCreate
+  - term: ShipmentException
+    definition: 'Object declared by the contract with fields: created_at, exception_type_label, hold_until, id, package_id, resolution, shipment_id,
+      source, status, type, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/ShipmentException
+  - term: RequestUpdateContacts
+    definition: 'Object declared by the contract with fields: destination, origin.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/RequestUpdateContacts
+  - term: OrganizationUpdate
+    definition: 'Object declared by the contract with fields: organization.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/OrganizationUpdate
+  - term: CollectionTagRuleCreate
+    definition: 'Object declared by the contract with fields: collection_tag_rule.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/CollectionTagRuleCreate
+  - term: WebhookDelivery
+    definition: 'Object declared by the contract with fields: created_at, id, next_retry, request_body, resource_id, resource_type, response_body,
+      response_status_code, status, type, webhook_id, webhook_url.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/WebhookDelivery
+  - term: SelfShipCollection
+    definition: 'Object declared by the contract with fields: closed_at, collection_date, collection_time, created_at, id, location, service,
+      shortcode, status, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/SelfShipCollection
+  - term: UploadWithPresignedURL
+    definition: 'Object declared by the contract with fields: created_at, document_type, document_type_label, download_url, file_name, id, mime_type,
+      presigned_url, size, status.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/UploadWithPresignedURL
+  - term: Invoice
+    definition: 'Object declared by the contract with fields: amount_owed, amount_owed_currency, amount_paid, amount_paid_currency, created_at,
+      id, invoice_url, issued_on, shipment_id, status, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Invoice
+  - term: SelfShipCollectionAvailabilityCheck
+    definition: 'Object declared by the contract with fields: availabilities, collection_date, location, service.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/SelfShipCollectionAvailabilityCheck
+  - term: TagCreate
+    definition: 'Object declared by the contract with fields: tag.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/TagCreate
+  - term: Organization
+    definition: 'Object declared by the contract with fields: api_version, billing_terms, company_name, created_at, display_name, id, name, shortcode,
+      status, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Organization
+  - term: WebhookSecretToken
+    definition: 'Object declared by the contract with fields: secret_token.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/WebhookSecretToken
+  - term: EmailRuleUpdate
+    definition: 'Object declared by the contract with fields: email_rule.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/EmailRuleUpdate
+  - term: HostedSessionListItem
+    definition: 'Object declared by the contract with fields: additional_services, can_user_confirm_object_dimensions, cancel_url, created_at,
+      destination, id, insurance, internal_reference, objects, origin, payment_process, preferred_parcel_transport_services. (12 more)'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/HostedSessionListItem
+  - term: UploadCreate
+    definition: 'Object declared by the contract with fields: upload.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/UploadCreate
+  - term: RequestListItem
+    definition: 'Object declared by the contract with fields: bookable, created_at, destination, hosted_session_id, id, insurance, internal_reference,
+      log_request_id, object_count, origin, public_reference, quote_types. (5 more)'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/RequestListItem
+  - term: DhlPackage
+    definition: 'Object declared by the contract with fields: depth, height, unit_of_measurement, weight, weight_unit, width.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/DhlPackage
+  - term: RequestUpdateCustom
+    definition: 'Object declared by the contract with fields: note.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/RequestUpdateCustom
+  - term: ImportCostEstimateFromQuotePayload
+    definition: Create an import cost estimate from an existing quote. The quote provides transport, origin/destination, and object data. Objects
+      on the quote's request must include hs_code for the estimate to be created.
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/ImportCostEstimateFromQuotePayload
+  - term: ImportCostEstimate
+    definition: 'Object declared by the contract with fields: currency, destination, end_use, estimate, id, objects, origin, quote_id, reference,
+      shortcode, status, transport.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/ImportCostEstimate
+  - term: EmailSubscriptionUpdate
+    definition: 'Object declared by the contract with fields: email_subscription.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/EmailSubscriptionUpdate
+  - term: Upload
+    definition: 'Object declared by the contract with fields: created_at, document_type, document_type_label, download_url, file_name, id, mime_type,
+      size, status.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Upload
+  - term: FedexPackageDetails
+    definition: An optional summary of the packages to be collected, used for `express` collections. Provide `package_count`, `total_weight`,
+      and `total_weight_unit` together; a partial summary, or one whose values cannot be parsed, is ignored rather than rejected.
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/FedexPackageDetails
+  - term: DhlPackageDetails
+    definition: The packages to be collected, one entry per package. All packages must share the same units, and the unit pair must be either
+      `in` + `lb` or `cm` + `kg`.
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/DhlPackageDetails
+  - term: ShareRequest
+    definition: Create hosted booking session from an existing quote request
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/ShareRequest
+  - term: MinimalLocation
+    definition: A minimal representation of the destination address for the shipment
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/MinimalLocation
+  - term: Shipment
+    definition: 'Object declared by the contract with fields: schedule, insurance_policy, customs_end_use, origin, in_transit_at, eei_form_url,
+      quote_type, eei_form_status, payment_process, internal_reference, packages, status. (25 more)'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Shipment
+  - term: Log
+    definition: 'Object declared by the contract with fields: api_key_id, arta_version, created_at, end_at, id, method, path, query_params, request_body,
+      request_id, response_body, start_at. (2 more)'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Log
+  - term: Package
+    definition: 'Object declared by the contract with fields: depth, eta, handle_with_care, height, id, is_sufficiently_packed, objects, packing_materials,
+      status, unit_of_measurement, weight, weight_unit. (1 more)'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/Package
+  - term: InboundBookingSession
+    definition: Create hosted inbound booking session
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/InboundBookingSession
+  - term: SelfShipCollectionCreate
+    definition: The payload for scheduling a self-ship collection. The expected shape depends on `service.carrier`.
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/SelfShipCollectionCreate
+  - term: InvoicePayment
+    definition: 'Object declared by the contract with fields: amount, amount_currency, created_at, id, invoice_id, payment_id, shipment_id, updated_at.'
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/InvoicePayment
+  - term: DirectImportCostEstimatePayload
+    definition: Create an import cost estimate by providing origin, destination, objects, and transport details directly
+    tags:
+    - Object
+    source: openapi/arta-openapi.json#/components/schemas/DirectImportCostEstimatePayload

@@ -1,0 +1,814 @@
+{
+  "@context": {
+    "@vocab": "https://equityzen.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "artashippinginc": "https://equityzen.com/schema#",
+    "WebhookCreate": "artashippinginc:WebhookCreate",
+    "webhook": {
+      "@id": "artashippinginc:webhook"
+    },
+    "SelfShipCollectionFieldErrors": "artashippinginc:SelfShipCollectionFieldErrors",
+    "errors": {
+      "@id": "artashippinginc:errors"
+    },
+    "EmailSubscription": "artashippinginc:EmailSubscription",
+    "created_at": {
+      "@id": "artashippinginc:created_at",
+      "@type": "xsd:string"
+    },
+    "email_address": {
+      "@id": "artashippinginc:email_address",
+      "@type": "xsd:string"
+    },
+    "email_notification_ids": {
+      "@id": "artashippinginc:email_notification_ids",
+      "@container": "@list"
+    },
+    "id": {
+      "@id": "artashippinginc:id",
+      "@type": "xsd:integer"
+    },
+    "name": {
+      "@id": "artashippinginc:name",
+      "@type": "xsd:string"
+    },
+    "updated_at": {
+      "@id": "artashippinginc:updated_at",
+      "@type": "xsd:string"
+    },
+    "WebhookUpdate": "artashippinginc:WebhookUpdate",
+    "Webhook": "artashippinginc:Webhook",
+    "url": {
+      "@id": "artashippinginc:url",
+      "@type": "xsd:string"
+    },
+    "ApiKeyCreate": "artashippinginc:ApiKeyCreate",
+    "api_key": {
+      "@id": "artashippinginc:api_key"
+    },
+    "APIKey": "artashippinginc:APIKey",
+    "is_testing": {
+      "@id": "artashippinginc:is_testing",
+      "@type": "xsd:boolean"
+    },
+    "token": {
+      "@id": "artashippinginc:token",
+      "@type": "xsd:string"
+    },
+    "WebhookDeliveryListItem": "artashippinginc:WebhookDeliveryListItem",
+    "next_retry": {
+      "@id": "artashippinginc:next_retry",
+      "@type": "xsd:string"
+    },
+    "resource_id": {
+      "@id": "artashippinginc:resource_id",
+      "@type": "xsd:string"
+    },
+    "resource_type": {
+      "@id": "artashippinginc:resource_type",
+      "@type": "xsd:string"
+    },
+    "response_status_code": {
+      "@id": "artashippinginc:response_status_code",
+      "@type": "xsd:decimal"
+    },
+    "status": {
+      "@id": "artashippinginc:status",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "artashippinginc:type",
+      "@type": "xsd:string"
+    },
+    "webhook_id": {
+      "@id": "artashippinginc:webhook_id",
+      "@type": "xsd:integer"
+    },
+    "webhook_url": {
+      "@id": "artashippinginc:webhook_url",
+      "@type": "xsd:string"
+    },
+    "SelfShipCollectionAvailabilityCheckCreate": "artashippinginc:SelfShipCollectionAvailabilityCheckCreate",
+    "self_ship_collection_availability_check": {
+      "@id": "artashippinginc:self_ship_collection_availability_check"
+    },
+    "SelfShipCollectionErrorList": "artashippinginc:SelfShipCollectionErrorList",
+    "CollectionTagRule": "artashippinginc:CollectionTagRule",
+    "pattern": {
+      "@id": "artashippinginc:pattern",
+      "@type": "xsd:string"
+    },
+    "tag_id": {
+      "@id": "artashippinginc:tag_id"
+    },
+    "Request": "artashippinginc:Request",
+    "additional_services": {
+      "@id": "artashippinginc:additional_services",
+      "@container": "@list"
+    },
+    "bookable": {
+      "@id": "artashippinginc:bookable"
+    },
+    "currency": {
+      "@id": "artashippinginc:currency",
+      "@type": "xsd:string"
+    },
+    "customs_end_use": {
+      "@id": "artashippinginc:customs_end_use",
+      "@type": "xsd:string"
+    },
+    "customs_process": {
+      "@id": "artashippinginc:customs_process",
+      "@type": "xsd:string"
+    },
+    "destination": {
+      "@id": "artashippinginc:destination"
+    },
+    "disqualifications": {
+      "@id": "artashippinginc:disqualifications",
+      "@container": "@list"
+    },
+    "hosted_session_id": {
+      "@id": "artashippinginc:hosted_session_id",
+      "@type": "xsd:integer"
+    },
+    "insurance": {
+      "@id": "artashippinginc:insurance",
+      "@type": "xsd:string"
+    },
+    "internal_reference": {
+      "@id": "artashippinginc:internal_reference",
+      "@type": "xsd:string"
+    },
+    "log_request_id": {
+      "@id": "artashippinginc:log_request_id",
+      "@type": "xsd:string"
+    },
+    "object_count": {
+      "@id": "artashippinginc:object_count",
+      "@type": "xsd:decimal"
+    },
+    "objects": {
+      "@id": "artashippinginc:objects",
+      "@container": "@list"
+    },
+    "origin": {
+      "@id": "artashippinginc:origin"
+    },
+    "payment_process": {
+      "@id": "artashippinginc:payment_process",
+      "@type": "xsd:string"
+    },
+    "preferred_parcel_transport_services": {
+      "@id": "artashippinginc:preferred_parcel_transport_services",
+      "@container": "@list"
+    },
+    "preferred_quote_types": {
+      "@id": "artashippinginc:preferred_quote_types",
+      "@container": "@list"
+    },
+    "public_reference": {
+      "@id": "artashippinginc:public_reference",
+      "@type": "xsd:string"
+    },
+    "quote_types": {
+      "@id": "artashippinginc:quote_types",
+      "@container": "@list"
+    },
+    "quotes": {
+      "@id": "artashippinginc:quotes",
+      "@container": "@list"
+    },
+    "quoting_strategy": {
+      "@id": "artashippinginc:quoting_strategy",
+      "@type": "xsd:string"
+    },
+    "shipping_notes": {
+      "@id": "artashippinginc:shipping_notes",
+      "@type": "xsd:string"
+    },
+    "shortcode": {
+      "@id": "artashippinginc:shortcode",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "artashippinginc:tags",
+      "@container": "@list"
+    },
+    "BookingSession": "artashippinginc:BookingSession",
+    "hosted_session": {
+      "@id": "artashippinginc:hosted_session"
+    },
+    "ArtaShipmentPayload": "artashippinginc:ArtaShipmentPayload",
+    "shipment": {
+      "@id": "artashippinginc:shipment"
+    },
+    "Location": "artashippinginc:Location",
+    "access_restrictions": {
+      "@id": "artashippinginc:access_restrictions",
+      "@container": "@list"
+    },
+    "address_line_1": {
+      "@id": "artashippinginc:address_line_1",
+      "@type": "xsd:string"
+    },
+    "address_line_2": {
+      "@id": "artashippinginc:address_line_2",
+      "@type": "xsd:string"
+    },
+    "address_line_3": {
+      "@id": "artashippinginc:address_line_3",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "artashippinginc:city",
+      "@type": "xsd:string"
+    },
+    "contacts": {
+      "@id": "artashippinginc:contacts",
+      "@container": "@list"
+    },
+    "country": {
+      "@id": "artashippinginc:country",
+      "@type": "xsd:string"
+    },
+    "postal_code": {
+      "@id": "artashippinginc:postal_code",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "artashippinginc:region",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "artashippinginc:title",
+      "@type": "xsd:string"
+    },
+    "Service": "artashippinginc:Service",
+    "amount": {
+      "@id": "artashippinginc:amount",
+      "@type": "@id"
+    },
+    "amount_currency": {
+      "@id": "artashippinginc:amount_currency",
+      "@type": "@id"
+    },
+    "included_services": {
+      "@id": "artashippinginc:included_services",
+      "@container": "@list"
+    },
+    "is_requested": {
+      "@id": "artashippinginc:is_requested",
+      "@type": "xsd:boolean"
+    },
+    "is_required": {
+      "@id": "artashippinginc:is_required",
+      "@type": "xsd:boolean"
+    },
+    "metadata": {
+      "@id": "artashippinginc:metadata"
+    },
+    "sub_subtype": {
+      "@id": "artashippinginc:sub_subtype",
+      "@type": "xsd:string"
+    },
+    "subtype": {
+      "@id": "artashippinginc:subtype",
+      "@type": "xsd:string"
+    },
+    "EmailRuleCreate": "artashippinginc:EmailRuleCreate",
+    "email_rule": {
+      "@id": "artashippinginc:email_rule"
+    },
+    "EmailSubscriptionCreate": "artashippinginc:EmailSubscriptionCreate",
+    "email_subscription": {
+      "@id": "artashippinginc:email_subscription"
+    },
+    "NullableLocation": "artashippinginc:NullableLocation",
+    "Tracking": "artashippinginc:Tracking",
+    "carrier": {
+      "@id": "artashippinginc:carrier"
+    },
+    "events": {
+      "@id": "artashippinginc:events",
+      "@container": "@list"
+    },
+    "tracking_number": {
+      "@id": "artashippinginc:tracking_number",
+      "@type": "xsd:string"
+    },
+    "AddressVerification": "artashippinginc:AddressVerification",
+    "input": {
+      "@id": "artashippinginc:input"
+    },
+    "match_level": {
+      "@id": "artashippinginc:match_level",
+      "@type": "xsd:string"
+    },
+    "recommendation": {
+      "@id": "artashippinginc:recommendation"
+    },
+    "reference": {
+      "@id": "artashippinginc:reference",
+      "@type": "xsd:string"
+    },
+    "BadRequest": "artashippinginc:BadRequest",
+    "Error": "artashippinginc:Error",
+    "Tag": "artashippinginc:Tag",
+    "color": {
+      "@id": "artashippinginc:color",
+      "@type": "xsd:string"
+    },
+    "created_by": {
+      "@id": "artashippinginc:created_by",
+      "@type": "xsd:integer"
+    },
+    "description": {
+      "@id": "artashippinginc:description",
+      "@type": "xsd:string"
+    },
+    "is_active": {
+      "@id": "artashippinginc:is_active",
+      "@type": "xsd:boolean"
+    },
+    "updated_by": {
+      "@id": "artashippinginc:updated_by",
+      "@type": "xsd:integer"
+    },
+    "TagUpdate": "artashippinginc:TagUpdate",
+    "tag": {
+      "@id": "artashippinginc:tag"
+    },
+    "Attachment": "artashippinginc:Attachment",
+    "request_id": {
+      "@id": "artashippinginc:request_id",
+      "@type": "xsd:string"
+    },
+    "shipment_id": {
+      "@id": "artashippinginc:shipment_id",
+      "@type": "xsd:string"
+    },
+    "upload_id": {
+      "@id": "artashippinginc:upload_id",
+      "@type": "xsd:integer"
+    },
+    "HostedSession": "artashippinginc:HostedSession",
+    "can_user_confirm_object_dimensions": {
+      "@id": "artashippinginc:can_user_confirm_object_dimensions",
+      "@type": "xsd:boolean"
+    },
+    "cancel_url": {
+      "@id": "artashippinginc:cancel_url",
+      "@type": "xsd:string"
+    },
+    "private_token": {
+      "@id": "artashippinginc:private_token",
+      "@type": "xsd:string"
+    },
+    "public_instructions_booking_review": {
+      "@id": "artashippinginc:public_instructions_booking_review",
+      "@type": "xsd:string"
+    },
+    "public_instructions_confirmation": {
+      "@id": "artashippinginc:public_instructions_confirmation",
+      "@type": "xsd:string"
+    },
+    "public_instructions_location_quotes": {
+      "@id": "artashippinginc:public_instructions_location_quotes",
+      "@type": "xsd:string"
+    },
+    "public_instructions_object_details": {
+      "@id": "artashippinginc:public_instructions_object_details",
+      "@type": "xsd:string"
+    },
+    "public_instructions_payment": {
+      "@id": "artashippinginc:public_instructions_payment",
+      "@type": "xsd:string"
+    },
+    "success_url": {
+      "@id": "artashippinginc:success_url",
+      "@type": "xsd:string"
+    },
+    "AddressVerificationCreate": "artashippinginc:AddressVerificationCreate",
+    "address_verification": {
+      "@id": "artashippinginc:address_verification"
+    },
+    "Payment": "artashippinginc:Payment",
+    "context": {
+      "@id": "artashippinginc:context",
+      "@type": "xsd:string"
+    },
+    "paid_on": {
+      "@id": "artashippinginc:paid_on",
+      "@type": "xsd:string"
+    },
+    "ShipmentExceptionCreate": "artashippinginc:ShipmentExceptionCreate",
+    "shipment_exception": {
+      "@id": "artashippinginc:shipment_exception"
+    },
+    "TrackShipmentPayload": "artashippinginc:TrackShipmentPayload",
+    "AttachmentCreate": "artashippinginc:AttachmentCreate",
+    "attachment": {
+      "@id": "artashippinginc:attachment"
+    },
+    "ShipmentExceptionUpdate": "artashippinginc:ShipmentExceptionUpdate",
+    "Object": "artashippinginc:Object",
+    "components": {
+      "@id": "artashippinginc:components",
+      "@container": "@list"
+    },
+    "current_packing": {
+      "@id": "artashippinginc:current_packing",
+      "@container": "@list"
+    },
+    "customs": {
+      "@id": "artashippinginc:customs"
+    },
+    "depth": {
+      "@id": "artashippinginc:depth",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "artashippinginc:details"
+    },
+    "height": {
+      "@id": "artashippinginc:height",
+      "@type": "xsd:string"
+    },
+    "images": {
+      "@id": "artashippinginc:images",
+      "@container": "@list"
+    },
+    "unit_of_measurement": {
+      "@id": "artashippinginc:unit_of_measurement",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "artashippinginc:value",
+      "@type": "@id"
+    },
+    "value_currency": {
+      "@id": "artashippinginc:value_currency",
+      "@type": "@id"
+    },
+    "weight": {
+      "@id": "artashippinginc:weight",
+      "@type": "xsd:string"
+    },
+    "weight_unit": {
+      "@id": "artashippinginc:weight_unit",
+      "@type": "xsd:string"
+    },
+    "width": {
+      "@id": "artashippinginc:width",
+      "@type": "xsd:string"
+    },
+    "NotFound": "artashippinginc:NotFound",
+    "FedexSelfShipCollectionPayload": "artashippinginc:FedexSelfShipCollectionPayload",
+    "self_ship_collection": {
+      "@id": "artashippinginc:self_ship_collection"
+    },
+    "DhlSelfShipCollectionPayload": "artashippinginc:DhlSelfShipCollectionPayload",
+    "ShipmentList": "artashippinginc:ShipmentList",
+    "package_count": {
+      "@id": "artashippinginc:package_count",
+      "@type": "xsd:integer"
+    },
+    "quote_type": {
+      "@id": "artashippinginc:quote_type",
+      "@type": "xsd:string"
+    },
+    "total": {
+      "@id": "artashippinginc:total",
+      "@type": "@id"
+    },
+    "total_currency": {
+      "@id": "artashippinginc:total_currency",
+      "@type": "@id"
+    },
+    "EmailRule": "artashippinginc:EmailRule",
+    "email_notification_id": {
+      "@id": "artashippinginc:email_notification_id",
+      "@type": "xsd:string"
+    },
+    "recipients": {
+      "@id": "artashippinginc:recipients",
+      "@container": "@list"
+    },
+    "RequestCreate": "artashippinginc:RequestCreate",
+    "request": {
+      "@id": "artashippinginc:request"
+    },
+    "ShipmentException": "artashippinginc:ShipmentException",
+    "exception_type_label": {
+      "@id": "artashippinginc:exception_type_label",
+      "@type": "xsd:string"
+    },
+    "hold_until": {
+      "@id": "artashippinginc:hold_until",
+      "@type": "xsd:string"
+    },
+    "package_id": {
+      "@id": "artashippinginc:package_id",
+      "@type": "xsd:integer"
+    },
+    "resolution": {
+      "@id": "artashippinginc:resolution",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "artashippinginc:source",
+      "@type": "xsd:string"
+    },
+    "RequestUpdateContacts": "artashippinginc:RequestUpdateContacts",
+    "OrganizationUpdate": "artashippinginc:OrganizationUpdate",
+    "organization": {
+      "@id": "artashippinginc:organization"
+    },
+    "CollectionTagRuleCreate": "artashippinginc:CollectionTagRuleCreate",
+    "collection_tag_rule": {
+      "@id": "artashippinginc:collection_tag_rule"
+    },
+    "WebhookDelivery": "artashippinginc:WebhookDelivery",
+    "request_body": {
+      "@id": "artashippinginc:request_body",
+      "@type": "xsd:string"
+    },
+    "response_body": {
+      "@id": "artashippinginc:response_body",
+      "@type": "xsd:string"
+    },
+    "SelfShipCollection": "artashippinginc:SelfShipCollection",
+    "closed_at": {
+      "@id": "artashippinginc:closed_at",
+      "@type": "xsd:string"
+    },
+    "collection_date": {
+      "@id": "artashippinginc:collection_date",
+      "@type": "xsd:date"
+    },
+    "collection_time": {
+      "@id": "artashippinginc:collection_time",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "artashippinginc:location"
+    },
+    "service": {
+      "@id": "artashippinginc:service"
+    },
+    "UploadWithPresignedURL": "artashippinginc:UploadWithPresignedURL",
+    "document_type": {
+      "@id": "artashippinginc:document_type",
+      "@type": "xsd:string"
+    },
+    "document_type_label": {
+      "@id": "artashippinginc:document_type_label",
+      "@type": "xsd:string"
+    },
+    "download_url": {
+      "@id": "artashippinginc:download_url",
+      "@type": "xsd:string"
+    },
+    "file_name": {
+      "@id": "artashippinginc:file_name",
+      "@type": "xsd:string"
+    },
+    "mime_type": {
+      "@id": "artashippinginc:mime_type",
+      "@type": "xsd:string"
+    },
+    "presigned_url": {
+      "@id": "artashippinginc:presigned_url",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "artashippinginc:size",
+      "@type": "xsd:integer"
+    },
+    "Invoice": "artashippinginc:Invoice",
+    "amount_owed": {
+      "@id": "artashippinginc:amount_owed",
+      "@type": "xsd:string"
+    },
+    "amount_owed_currency": {
+      "@id": "artashippinginc:amount_owed_currency",
+      "@type": "xsd:string"
+    },
+    "amount_paid": {
+      "@id": "artashippinginc:amount_paid",
+      "@type": "xsd:string"
+    },
+    "amount_paid_currency": {
+      "@id": "artashippinginc:amount_paid_currency",
+      "@type": "xsd:string"
+    },
+    "invoice_url": {
+      "@id": "artashippinginc:invoice_url",
+      "@type": "xsd:string"
+    },
+    "issued_on": {
+      "@id": "artashippinginc:issued_on",
+      "@type": "xsd:string"
+    },
+    "SelfShipCollectionAvailabilityCheck": "artashippinginc:SelfShipCollectionAvailabilityCheck",
+    "availabilities": {
+      "@id": "artashippinginc:availabilities",
+      "@container": "@list"
+    },
+    "TagCreate": "artashippinginc:TagCreate",
+    "Organization": "artashippinginc:Organization",
+    "api_version": {
+      "@id": "artashippinginc:api_version",
+      "@type": "xsd:string"
+    },
+    "billing_terms": {
+      "@id": "artashippinginc:billing_terms",
+      "@type": "xsd:string"
+    },
+    "company_name": {
+      "@id": "artashippinginc:company_name",
+      "@type": "xsd:string"
+    },
+    "display_name": {
+      "@id": "artashippinginc:display_name",
+      "@type": "xsd:string"
+    },
+    "WebhookSecretToken": "artashippinginc:WebhookSecretToken",
+    "secret_token": {
+      "@id": "artashippinginc:secret_token",
+      "@type": "xsd:string"
+    },
+    "EmailRuleUpdate": "artashippinginc:EmailRuleUpdate",
+    "HostedSessionListItem": "artashippinginc:HostedSessionListItem",
+    "UploadCreate": "artashippinginc:UploadCreate",
+    "upload": {
+      "@id": "artashippinginc:upload"
+    },
+    "RequestListItem": "artashippinginc:RequestListItem",
+    "DhlPackage": "artashippinginc:DhlPackage",
+    "RequestUpdateCustom": "artashippinginc:RequestUpdateCustom",
+    "note": {
+      "@id": "artashippinginc:note",
+      "@type": "xsd:string"
+    },
+    "ImportCostEstimateFromQuotePayload": "artashippinginc:ImportCostEstimateFromQuotePayload",
+    "import_cost_estimate": {
+      "@id": "artashippinginc:import_cost_estimate"
+    },
+    "ImportCostEstimate": "artashippinginc:ImportCostEstimate",
+    "end_use": {
+      "@id": "artashippinginc:end_use",
+      "@type": "xsd:string"
+    },
+    "estimate": {
+      "@id": "artashippinginc:estimate"
+    },
+    "quote_id": {
+      "@id": "artashippinginc:quote_id",
+      "@type": "xsd:integer"
+    },
+    "transport": {
+      "@id": "artashippinginc:transport"
+    },
+    "EmailSubscriptionUpdate": "artashippinginc:EmailSubscriptionUpdate",
+    "Upload": "artashippinginc:Upload",
+    "FedexPackageDetails": "artashippinginc:FedexPackageDetails",
+    "total_weight": {
+      "@id": "artashippinginc:total_weight",
+      "@type": "xsd:string"
+    },
+    "total_weight_unit": {
+      "@id": "artashippinginc:total_weight_unit",
+      "@type": "xsd:string"
+    },
+    "DhlPackageDetails": "artashippinginc:DhlPackageDetails",
+    "packages": {
+      "@id": "artashippinginc:packages",
+      "@container": "@list"
+    },
+    "ShareRequest": "artashippinginc:ShareRequest",
+    "MinimalLocation": "artashippinginc:MinimalLocation",
+    "Shipment": "artashippinginc:Shipment",
+    "schedule": {
+      "@id": "artashippinginc:schedule"
+    },
+    "insurance_policy": {
+      "@id": "artashippinginc:insurance_policy"
+    },
+    "in_transit_at": {
+      "@id": "artashippinginc:in_transit_at",
+      "@type": "xsd:dateTime"
+    },
+    "eei_form_url": {
+      "@id": "artashippinginc:eei_form_url",
+      "@type": "xsd:string"
+    },
+    "eei_form_status": {
+      "@id": "artashippinginc:eei_form_status",
+      "@type": "xsd:string"
+    },
+    "tracking": {
+      "@id": "artashippinginc:tracking",
+      "@container": "@list"
+    },
+    "collected_at": {
+      "@id": "artashippinginc:collected_at",
+      "@type": "xsd:dateTime"
+    },
+    "emissions_unit": {
+      "@id": "artashippinginc:emissions_unit",
+      "@type": "xsd:string"
+    },
+    "exceptions": {
+      "@id": "artashippinginc:exceptions",
+      "@container": "@list"
+    },
+    "confirmed_at": {
+      "@id": "artashippinginc:confirmed_at",
+      "@type": "xsd:dateTime"
+    },
+    "emissions": {
+      "@id": "artashippinginc:emissions",
+      "@type": "xsd:string"
+    },
+    "cancelled_at": {
+      "@id": "artashippinginc:cancelled_at",
+      "@type": "xsd:dateTime"
+    },
+    "completed_at": {
+      "@id": "artashippinginc:completed_at",
+      "@type": "xsd:dateTime"
+    },
+    "services": {
+      "@id": "artashippinginc:services",
+      "@container": "@list"
+    },
+    "Log": "artashippinginc:Log",
+    "api_key_id": {
+      "@id": "artashippinginc:api_key_id",
+      "@type": "xsd:integer"
+    },
+    "arta_version": {
+      "@id": "artashippinginc:arta_version",
+      "@type": "xsd:string"
+    },
+    "end_at": {
+      "@id": "artashippinginc:end_at",
+      "@type": "xsd:string"
+    },
+    "method": {
+      "@id": "artashippinginc:method",
+      "@type": "xsd:string"
+    },
+    "path": {
+      "@id": "artashippinginc:path",
+      "@type": "xsd:string"
+    },
+    "query_params": {
+      "@id": "artashippinginc:query_params",
+      "@type": "xsd:string"
+    },
+    "start_at": {
+      "@id": "artashippinginc:start_at",
+      "@type": "xsd:string"
+    },
+    "Package": "artashippinginc:Package",
+    "eta": {
+      "@id": "artashippinginc:eta",
+      "@type": "xsd:string"
+    },
+    "handle_with_care": {
+      "@id": "artashippinginc:handle_with_care",
+      "@type": "xsd:boolean"
+    },
+    "is_sufficiently_packed": {
+      "@id": "artashippinginc:is_sufficiently_packed",
+      "@type": "xsd:boolean"
+    },
+    "packing_materials": {
+      "@id": "artashippinginc:packing_materials",
+      "@container": "@list"
+    },
+    "InboundBookingSession": "artashippinginc:InboundBookingSession",
+    "InvoicePayment": "artashippinginc:InvoicePayment",
+    "invoice_id": {
+      "@id": "artashippinginc:invoice_id",
+      "@type": "xsd:integer"
+    },
+    "payment_id": {
+      "@id": "artashippinginc:payment_id",
+      "@type": "xsd:integer"
+    },
+    "DirectImportCostEstimatePayload": "artashippinginc:DirectImportCostEstimatePayload"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Artashippinginc API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Artashippinginc's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-09-26) from openapi/arta-openapi.json.",
+  "dcterms:created": "2026-09-26",
+  "dcterms:source": [
+    "openapi/arta-openapi.json"
+  ]
+}

@@ -1,0 +1,1092 @@
+openapi: 3.2.0
+info:
+  contact:
+    email: hello@arta.io
+    name: Arta
+    url: https://manual.arta.io/
+  description: The Arta Public API provides quote generation, transport booking, and tracking capabilities. Additionally the API enables Arta partner organizations to configure email and webhook notifications for their accounts.
+  termsOfService: https://www.arta.io/legal/terms
+  title: Arta Public Import Cost Estimates API
+  version: '2021-01-01'
+servers:
+- url: https://api.arta.io
+  variables: {}
+security: []
+tags:
+- name: import_cost_estimates
+paths:
+  /import_cost_estimates:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: '**Availability: Public Preview**
+
+
+        _This endpoint is currently in public preview and available only to approved accounts._ _Please contact Arta to request access for your organization._
+
+
+        Retrieve a paginated collection of import cost estimates belonging to your organization.'
+      operationId: importCostEstimates/list
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: Page number of the results to fetch.
+        in: query
+        name: page
+        schema:
+          default: 1
+          type: integer
+          x-struct: null
+          x-validate: null
+      - description: Results per page (max 50)
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          type: integer
+          x-struct: null
+          x-validate: null
+      - description: An optional sort order for the returned collection.
+        in: query
+        name: sort
+        required: false
+        schema:
+          enum:
+          - created_at_asc
+          - created_at_desc
+          - updated_at_asc
+          - updated_at_desc
+          type: string
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  items:
+                    items:
+                      $ref: '#/components/schemas/ImportCostEstimate'
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  metadata:
+                    properties:
+                      page:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      page_size:
+                        example: 20
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      total_count:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+          description: A collection of Import Cost Estimate records
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: List Import Cost Estimates
+      tags:
+      - import_cost_estimates
+    post:
+      callbacks: {}
+      deprecated: false
+      description: '**Availability: Public Preview**
+
+
+        _This endpoint is currently in public preview and available only to approved accounts._ _Please contact Arta to request access for your organization._
+
+
+        Create an import cost estimate to calculate cross-border duties, fees, and taxes for your international shipments.'
+      operationId: importCostEstimates/create
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportCostEstimateCreate'
+        required: false
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportCostEstimate'
+          description: The created Import Cost Estimate
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: BadRequest
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Bad Request
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Create an Import Cost Estimate
+      tags:
+      - import_cost_estimates
+  /import_cost_estimates/{import_cost_estimate_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: '**Availability: Public Preview**
+
+
+        _This endpoint is currently in public preview and available only to approved accounts._ _Please contact Arta to request access for your organization._
+
+
+        Retrieve an existing import cost estimate record by its unique identifier.'
+      operationId: importCostEstimates/get
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: import_cost_estimate_id parameter
+        in: path
+        name: import_cost_estimate_id
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportCostEstimate'
+          description: Successful Import Cost Estimate response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Get an Import Cost Estimate
+      tags:
+      - import_cost_estimates
+components:
+  schemas:
+    ImportCostEstimateCreate:
+      oneOf:
+      - additionalProperties: false
+        description: Create an import cost estimate by providing origin, destination, objects, and transport details directly
+        example:
+          import_cost_estimate:
+            currency: USD
+            destination:
+              country: CA
+              region: 'ON'
+            objects:
+            - hs_code: '691390'
+              reference: ceramic-vase-maria-lundqvist
+              value: '10869.45'
+            origin:
+              country: US
+            transport:
+              amount: '20000'
+              service_level: ups_expedited
+        properties:
+          import_cost_estimate:
+            properties:
+              currency:
+                default: USD
+                description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+                example: USD
+                maxLength: 3
+                minLength: 3
+                pattern: ^[A-Z]{3}$
+                title: Currency
+                type: string
+                x-struct: null
+                x-validate: null
+              destination:
+                description: Details about the destination where it will be imported to
+                properties:
+                  city:
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  country:
+                    description: ISO 3166-1 alpha-2 country code of the destination
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  postal_code:
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  region:
+                    description: State, province, or region of the destination. May be required depending on the destination country.
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - country
+                type: object
+                x-struct: null
+                x-validate: null
+              end_use:
+                description: Optional field specifying the end use of the goods
+                enum:
+                - for_resale
+                - not_for_resale
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              objects:
+                description: List of objects/items being imported
+                items:
+                  properties:
+                    country_of_origin:
+                      nullable: true
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    hs_code:
+                      description: Harmonized System (HS) tariff code for the object
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    quantity:
+                      description: Quantity of the object
+                      nullable: true
+                      type: number
+                      x-struct: null
+                      x-validate: null
+                    reference:
+                      description: Reference identifier for the object
+                      nullable: true
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    value:
+                      description: Declared value of the object
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    value_currency:
+                      description: Currency code (ISO 4217) used for the object's declared value
+                      nullable: true
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                  required:
+                  - hs_code
+                  - value
+                  - value_currency
+                  type: object
+                  x-struct: null
+                  x-validate: null
+                type: array
+                x-struct: null
+                x-validate: null
+              origin:
+                properties:
+                  country:
+                    description: ISO 3166-1 alpha-2 country code of the origin
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - country
+                type: object
+                x-struct: null
+                x-validate: null
+              reference:
+                description: Optional reference string for identifying the estimate in your systems
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              transport:
+                description: Information about the transport method and cost
+                properties:
+                  amount:
+                    description: Total transport cost
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  amount_currency:
+                    description: Currency code (ISO 4217) for the transport amount (optional)
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  service_level:
+                    description: Service level for transport (e.g., ups_expedited, fedex_international_first etc). Options are listed in the reference rate service levels metadata endpoint
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - amount
+                - amount_currency
+                - service_level
+                type: object
+                x-struct: null
+                x-validate: null
+            required:
+            - destination
+            - origin
+            - objects
+            - transport
+            type: object
+            x-struct: null
+            x-validate: null
+        required:
+        - import_cost_estimate
+        title: DirectImportCostEstimatePayload
+        type: object
+        x-struct: null
+        x-validate: null
+      - additionalProperties: false
+        description: Create an import cost estimate from an existing quote. The quote provides transport, origin/destination, and object data. Objects on the quote's request must include hs_code for the estimate to be created.
+        example:
+          import_cost_estimate:
+            quote_id: 1234
+        properties:
+          import_cost_estimate:
+            properties:
+              currency:
+                default: USD
+                description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+                example: USD
+                maxLength: 3
+                minLength: 3
+                pattern: ^[A-Z]{3}$
+                title: Currency
+                type: string
+                x-struct: null
+                x-validate: null
+              end_use:
+                description: Optional field specifying the end use of the goods
+                enum:
+                - for_resale
+                - not_for_resale
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              quote_id:
+                description: The ID of an existing quote to derive the import cost estimate from
+                format: int64
+                type: integer
+                x-struct: null
+                x-validate: null
+              reference:
+                description: Optional reference string for identifying the estimate in your systems
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+            required:
+            - quote_id
+            type: object
+            x-struct: null
+            x-validate: null
+        required:
+        - import_cost_estimate
+        title: ImportCostEstimateFromQuotePayload
+        type: object
+        x-struct: null
+        x-validate: null
+      title: ImportCostEstimateCreate
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.ImportCostEstimateCreate
+      x-validate: null
+    ImportCostEstimate:
+      example:
+        currency: USD
+        destination:
+          city: null
+          country: CA
+          postal_code: null
+          region: 'ON'
+        end_use: for_resale
+        estimate:
+          line_items:
+          - amount: '706.51'
+            description: duty
+            subtype: item
+            type: duty
+          summary:
+            ddp_service_fees: '0.00'
+            duties: '2119.53'
+            fees: '147.13'
+            taxes: '1754.97'
+        id: 30e1d8e7-f175-46c7-afee-8aa16c9d988b
+        objects:
+        - country_of_origin: null
+          hs_code: '691390'
+          quantity: 1
+          reference: ceramic-vase-maria-lundqvist
+          value: '10869.45'
+          value_currency: USD
+        origin:
+          country: BR
+        quote_id: null
+        reference: null
+        shortcode: JANANI-I5Y6SR
+        status: success
+        transport:
+          amount: '20000.00'
+          amount_currency: USD
+          service_level: ups_expedited
+      properties:
+        currency:
+          default: USD
+          description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+          example: USD
+          maxLength: 3
+          minLength: 3
+          pattern: ^[A-Z]{3}$
+          title: Currency
+          type: string
+          x-struct: null
+          x-validate: null
+        destination:
+          description: Details about the destination where it will be imported to
+          properties:
+            city:
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            country:
+              description: ISO 3166-1 alpha-2 country code of the destination
+              type: string
+              x-struct: null
+              x-validate: null
+            postal_code:
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            region:
+              description: State, province, or region of the destination.
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        end_use:
+          description: The end use of the goods
+          enum:
+          - for_resale
+          - not_for_resale
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        estimate:
+          description: Breakdown of the estimated import costs
+          properties:
+            line_items:
+              description: Detailed breakdown of individual charges
+              items:
+                properties:
+                  amount:
+                    description: Amount of the charge in the estimate currency
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  description:
+                    description: Description of the charge
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  subtype:
+                    description: Subtype classification of the charge
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  type:
+                    description: Type of charge (e.g., duty, tax, fee)
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+            summary:
+              description: Summary totals of the import cost estimate
+              properties:
+                ddp_service_fees:
+                  description: Total DDP service fees amount
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                duties:
+                  description: Total duties amount
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                fees:
+                  description: Total fees amount
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                taxes:
+                  description: Total taxes amount
+                  type: string
+                  x-struct: null
+                  x-validate: null
+              type: object
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        id:
+          description: Unique identifier for the import cost estimate
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        objects:
+          description: List of objects/items being imported
+          items:
+            properties:
+              country_of_origin:
+                description: ISO 3166-1 alpha-2 country code where the object originated
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              hs_code:
+                description: Harmonized System (HS) tariff code for the object
+                type: string
+                x-struct: null
+                x-validate: null
+              quantity:
+                description: Quantity of the object
+                nullable: true
+                type: number
+                x-struct: null
+                x-validate: null
+              reference:
+                description: Reference identifier for the object
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              value:
+                description: Declared value of the object
+                type: string
+                x-struct: null
+                x-validate: null
+              value_currency:
+                description: Currency code (ISO 4217) used for the object's declared value
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        origin:
+          description: Details about the origin location
+          properties:
+            country:
+              description: ISO 3166-1 alpha-2 country code of the origin
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        quote_id:
+          description: The ID of the quote used to create this import cost estimate, if it was created from a quote
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        reference:
+          description: Reference string for identifying the estimate in your systems
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        shortcode:
+          description: Short automatically generated reference code for the identifying import cost estimate in Arta's system
+          type: string
+          x-struct: null
+          x-validate: null
+        status:
+          description: Status of the import cost estimate calculation
+          enum:
+          - failed
+          - success
+          type: string
+          x-struct: null
+          x-validate: null
+        transport:
+          description: Information about the transport method and cost
+          properties:
+            amount:
+              description: Total transport cost
+              type: string
+              x-struct: null
+              x-validate: null
+            amount_currency:
+              description: Currency code (ISO 4217) for the transport amount
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            service_level:
+              description: Service level for transport (e.g., ups_expedited, fedex_international_first etc). Options are listed in the reference rate service levels metadata endpoint
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      title: ImportCostEstimate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.ImportCostEstimate
+      x-validate: null
+x-topics:
+- content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.
+
+
+    Using your API key to authenticate an API call is straightforward. Simply include your API Key token in the Authorization header of every call made to the system. This is the only place that it is accepted.'
+  example: "```shell\n\n$ curl \\ \n\n -X GET https://api.arta.io/shipments \\ \n\n -H \"Authorization: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y\""
+  title: Authentication
+- content: "Arta imposes rate limits on API requests to maintain system stability and ensure fair usage. If you exceed these limits, the API will return a `429 Too Many Requests` error. Below are the rate limits for both Live and Test modes.\n\n**Live Mode:**\n\n*\tConcurrent requests: 15 API calls at the same time (any type)\n* Instant quote requests: 20 calls per minute\n* Overall requests: 1000 API calls per minute (any type)\n\n**Test Mode:**\n\n* Concurrent requests: 10 API calls at the same time (any type)\n* Instant quote requests: 10 calls per minute\n* Overall requests: 500 API calls per minute (any type)\n\nWhen a rate limit is exceeded, we recommend implementing retry logic with exponential backoff to handle 429 errors effectively."
+  title: Rate Limits
+- content: 'The Arta API supports flexible search functionality across multiple resources, including Shipments, Requests, Hosted Sessions, Tags, and others. Using the search query parameter, you can construct structured queries to filter results based on specific criteria.
+
+
+    Key features of the search functionality include:
+
+
+    * Support for negation, wildcards, numeric filters, and date comparisons.
+
+    * Each search query consists of one or more clauses, where each clause contains a `field`, an operator, and a `value`.
+
+    * Clauses operating on the same field are combined using OR logic, while clauses across different fields are combined using AND logic.
+
+
+    * Use quotation marks to keep multi-word search terms together.
+
+
+    This allows for powerful and precise filtering to retrieve the exact data you need from the API.
+
+
+    **Syntax and operators**
+
+
+    The following table lists the operators and syntax that you can use to construct a search query clause.
+
+
+    | Operator     | Usage                          | Description                                                                 | Examples                                                            |
+
+    |------------|--------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------|
+
+    | `:`        | `field:value`                  | Exact match operator (case insensitive)                                     | `status:pending` returns records where the status is `pending` |
+
+    | `*`        | `value*`                       | Use an asterisk (wildcard operator) at the end of a term to match fields that start with the fragment                                    | `art*` returns records that match "arta" and "artist" but not "smart" |
+
+    | `*`        | `*value`                       | Use an asterisk at the start of a term to match fields that end with the fragment                                    | `*art` returns "smart" but not "martian" |
+
+    | `-`        | `-field:value`                 | Returns records that don’t match the clause                                 | `-status:pending` returns records that do not have a status of pending                 |
+
+    | `>, <, =`  | `field:<value`, `field:>value`, `field:>=value`, `field:<=value` | Greater than/less than operators              | `created-at:<=2021-01-01` returns records from the beginning of time through January 1, 2021   |
+
+    | `..`       | `field:value1..value2`                 | Filters for values within a given range where the first number is the lowest value and the second is the highest                                 | `created-at:2021-05-01..2021-05-15` returns records where the `created_at` field is between May 1, 2021 and May 15, 2021                 |
+
+
+
+
+    **Hosted Session search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `insurance` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `type` | string |
+
+    | `tags` | string |
+
+
+    **Request search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `bookable` | string |
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+
+    **Shipment search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `eei-form-status` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `request-shortcode` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+    | `total` | numeric |
+
+    | `total-currency` | string |
+
+    | `tracking-numbers` | string |
+
+
+    **Tag search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `color` | string |
+
+    | `description` | string |
+
+    | `is_active` | string |
+
+    | `name` | string |
+
+
+    '
+  title: Search

@@ -1,0 +1,710 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/artashippinginc/main/json-schema/artashippinginc-request-create-schema.json",
+  "title": "RequestCreate",
+  "description": "Create a new request",
+  "x-generated": "2026-09-26",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/arta-openapi.json#/components/schemas/RequestCreate",
+  "properties": {
+    "request": {
+      "properties": {
+        "additional_services": {
+          "description": "Any desired services, such as unpacking, installation, etc. can be sent through in the request and will be treated as if that requested service is required, meaning this may disqualify certain segments of shipping services we offer.",
+          "items": {
+            "description": "The id of a service.",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "currency": {
+          "default": "USD",
+          "description": "The currency that the quote should be returned in. Formatted as ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint",
+          "maxLength": 3,
+          "minLength": 3,
+          "pattern": "^[A-Z]{3}$",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "customs_end_use": {
+          "default": "not_for_resale",
+          "description": "The intended end use of the items being shipped for customs purposes",
+          "enum": [
+            "for_resale",
+            "not_for_resale"
+          ],
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "customs_process": {
+          "default": "ddu",
+          "description": "The customs process for the shipment. \"ddu\" (Delivery Duties Unpaid) means the receiver is responsible for paying duties and taxes. \"ddp\" (Delivery Duties Paid) means the sender prepays duties and taxes. \"ddp_optional\" means the receiver will decide whether to pay estimated duties, fees, and taxes prior to fulfillment",
+          "enum": [
+            "ddu",
+            "ddp",
+            "ddp_optional"
+          ],
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "destination": {
+          "description": "The destination location for the quote request",
+          "properties": {
+            "access_restrictions": {
+              "deprecated": true,
+              "description": "A list of access restricition IDs describing physical properties for the location. Options are defined in the Location Access Restrictions metadata endpoint",
+              "items": {
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "address_line_1": {
+              "description": "The first line of the location's street address",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "address_line_2": {
+              "description": "The second line of the location's street address",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "address_line_3": {
+              "description": "The third line of the location's street address",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "city": {
+              "description": "The name of the city for the location",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "contacts": {
+              "description": "The contact details for the location",
+              "items": {
+                "properties": {
+                  "email_address": {
+                    "description": "The email address for this contact",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "name": {
+                    "description": "The contact's name",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "phone_number": {
+                    "description": "The phone_number for this contact",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "country": {
+              "description": "The ISO 3166-1 alpha-2 country code of the location",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "postal_code": {
+              "description": "The postal code for the location",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "region": {
+              "description": "Political region name, for US states and Canada provinces, use 2 letter abbreviations",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "title": {
+              "description": "The name for the location",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          "required": [
+            "postal_code",
+            "country"
+          ],
+          "type": "object",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "insurance": {
+          "description": "The ID of the requested Arta insurance type. Options are defined in the Insurances metadata endpoint",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "internal_reference": {
+          "description": "This field can be used to pass through any data that you may want returned unaltered for your own later usage",
+          "maxLength": 255,
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "objects": {
+          "items": {
+            "properties": {
+              "components": {
+                "description": "A list of components in the object. Should be used only with a `prepacked_box` object subtype.\n\nWhen components are present, the object value must equal the sum of component values.",
+                "items": {
+                  "properties": {
+                    "customs": {
+                      "properties": {
+                        "country_of_origin": {
+                          "description": "The ISO 3166-1 alpha-2 country code where the object was made or manufactured",
+                          "maxLength": 2,
+                          "minLength": 2,
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "hs_code": {
+                          "description": "The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "medium": {
+                          "description": "The medium of the object. This is a description of the material or materials used to create the object",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "temporary_admission": {
+                          "description": "Select true if the goods are currently in the country under a temporary admission declaration",
+                          "type": "boolean",
+                          "x-struct": null,
+                          "x-validate": null
+                        }
+                      },
+                      "type": "object",
+                      "x-struct": null,
+                      "x-validate": null
+                    },
+                    "details": {
+                      "properties": {
+                        "creation_date": {
+                          "description": "Details about the timing in which an object was created",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "creator": {
+                          "description": "The creator of the object",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "notes": {
+                          "description": "Any notes about the item",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        },
+                        "title": {
+                          "description": "The object title",
+                          "type": "string",
+                          "x-struct": null,
+                          "x-validate": null
+                        }
+                      },
+                      "type": "object",
+                      "x-struct": null,
+                      "x-validate": null
+                    },
+                    "internal_reference": {
+                      "description": "This field can be used to pass through any data that you may want returned unaltered for your own later usage",
+                      "maxLength": 255,
+                      "type": "string",
+                      "x-struct": null,
+                      "x-validate": null
+                    },
+                    "public_reference": {
+                      "description": "A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages",
+                      "maxLength": 255,
+                      "type": "string",
+                      "x-struct": null,
+                      "x-validate": null
+                    },
+                    "type": {
+                      "description": "The object component type ID. Options are defined in the Object Component types metadata endpoint",
+                      "pattern": "^[0-9a-z_]{1,56}$",
+                      "type": "string",
+                      "x-struct": null,
+                      "x-validate": null
+                    },
+                    "value": {
+                      "$ref": "#/$defs/MonetaryAmount"
+                    },
+                    "value_currency": {
+                      "$ref": "#/$defs/Currency"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ],
+                  "type": "object",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "current_packing": {
+                "description": "A list of packing subtype IDs describing how the item is currently packed",
+                "items": {
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "customs": {
+                "properties": {
+                  "country_of_origin": {
+                    "description": "The ISO 3166-1 alpha-2 country code where the object was made or manufactured",
+                    "maxLength": 2,
+                    "minLength": 2,
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "hs_code": {
+                    "description": "The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "medium": {
+                    "description": "The medium of the object. This is a description of the material or materials used to create the object",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "temporary_admission": {
+                    "description": "Select true if the goods are currently in the country under a temporary admission declaration",
+                    "type": "boolean",
+                    "x-struct": null,
+                    "x-validate": null
+                  }
+                },
+                "type": "object",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "depth": {
+                "description": "The depth of the object",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "details": {
+                "properties": {
+                  "creation_date": {
+                    "description": "Details about the timing in which an object was created",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "creator": {
+                    "description": "The creator of the object",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "is_cites": {
+                    "default": false,
+                    "description": "Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora",
+                    "type": "boolean",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "is_fragile": {
+                    "default": false,
+                    "description": "Set this flag to true is the item is fragile. This may effect packing and handling costs",
+                    "type": "boolean",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "materials": {
+                    "deprecated": true,
+                    "description": "A list of IDs describing the types of materials used",
+                    "items": {
+                      "type": "string",
+                      "x-struct": null,
+                      "x-validate": null
+                    },
+                    "type": "array",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "notes": {
+                    "description": "Any notes about the item",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "title": {
+                    "description": "The object title",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  }
+                },
+                "type": "object",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "height": {
+                "description": "The height of the object",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "images": {
+                "description": "A list image urls of the object",
+                "items": {
+                  "format": "uri",
+                  "type": "string",
+                  "x-struct": null,
+                  "x-validate": null
+                },
+                "type": "array",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "internal_reference": {
+                "description": "This field can be used to pass through any data that you may want returned unaltered for your own later usage",
+                "maxLength": 255,
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "public_reference": {
+                "description": "A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages",
+                "maxLength": 255,
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "subtype": {
+                "description": "The object subtype ID. Options are defined in the Object types metadata endpoint",
+                "pattern": "^[0-9a-z_]{1,56}$",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "unit_of_measurement": {
+                "enum": [
+                  "in",
+                  "cm"
+                ],
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "value": {
+                "$ref": "#/$defs/MonetaryAmount"
+              },
+              "value_currency": {
+                "$ref": "#/$defs/Currency"
+              },
+              "weight": {
+                "description": "The weight of the object",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "weight_unit": {
+                "description": "The unit of the object",
+                "enum": [
+                  "lb",
+                  "kg"
+                ],
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "width": {
+                "description": "The width of the object",
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              }
+            },
+            "required": [
+              "depth",
+              "height",
+              "subtype",
+              "width",
+              "unit_of_measurement",
+              "weight_unit",
+              "value",
+              "value_currency"
+            ],
+            "type": "object",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "origin": {
+          "description": "The originating location for the quote request",
+          "properties": {
+            "access_restrictions": {
+              "deprecated": true,
+              "description": "A list of access restricition ids describing physical properties of the location. Options are defined in the Location Access Restrictions metadata endpoint ",
+              "items": {
+                "type": "string",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "address_line_1": {
+              "description": "The first line of the location's street address",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "address_line_2": {
+              "description": "The second line of the location's street address",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "address_line_3": {
+              "description": "The third line of the location's street address",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "city": {
+              "description": "The name of the city for the location",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "contacts": {
+              "description": "The contact details for the location",
+              "items": {
+                "properties": {
+                  "email_address": {
+                    "description": "The main email address for this contact",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "name": {
+                    "description": "The contact's name",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  },
+                  "phone_number": {
+                    "description": "The main phone_number for this contact",
+                    "type": "string",
+                    "x-struct": null,
+                    "x-validate": null
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object",
+                "x-struct": null,
+                "x-validate": null
+              },
+              "type": "array",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "country": {
+              "description": "The ISO 3166-1 alpha-2 country code of the location",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "postal_code": {
+              "description": "The postal code for the location",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "region": {
+              "description": "Political region name, for US states and Canada provinces, use 2 letter abbreviations",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            },
+            "title": {
+              "description": "The name for the location",
+              "maxLength": 255,
+              "type": "string",
+              "x-struct": null,
+              "x-validate": null
+            }
+          },
+          "required": [
+            "postal_code",
+            "country"
+          ],
+          "type": "object",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "preferred_parcel_transport_services": {
+          "description": "Optionally instruct the Arta API to filter Parcel and Self Ship quotes for specific transport services. For example, if you would prefer to only return `ground` quotes, you can set this field to `[\"ground\"]` The list of valid transport service IDs is available at the /metadata/parcel_transport_services endpoint.",
+          "items": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": [
+            "array",
+            "null"
+          ],
+          "x-struct": null,
+          "x-validate": null
+        },
+        "preferred_quote_types": {
+          "description": "Optionally instruct the Arta API to return a subset of quote types for this request. For example if you would prefer to only return Select quotes for a particular request, you can set this field to `[\"select\"]` You can find all available quote type IDs at the /metadata/quotes endpoint.",
+          "items": {
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "public_reference": {
+          "description": "A client defined name for the request. The value provided for the public_reference field may appear in notification emails and shipment detail pages",
+          "maxLength": 255,
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "quoting_strategy": {
+          "description": "The quoting strategy used when creating quotes for this request. Determines whether the API returns a single best-rate option per transport speed or multiple carrier options for comparison. If not specified, the default strategy (“best_rate”) will be applied.",
+          "enum": [
+            "best_rate",
+            "compare_carriers"
+          ],
+          "maxLength": 255,
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "shipping_notes": {
+          "description": "This field can be used to pass through any notes to Arta that a customer might want to provide about the request",
+          "type": "string",
+          "x-struct": null,
+          "x-validate": null
+        },
+        "tags": {
+          "description": "A list of tags to associate with this request",
+          "items": {
+            "description": "The name of an active tag belonging to your organization.",
+            "type": "string",
+            "x-struct": null,
+            "x-validate": null
+          },
+          "type": "array",
+          "x-struct": null,
+          "x-validate": null
+        }
+      },
+      "required": [
+        "destination",
+        "objects",
+        "origin"
+      ],
+      "type": "object",
+      "x-struct": null,
+      "x-validate": null
+    }
+  },
+  "required": [
+    "request"
+  ],
+  "type": "object",
+  "x-struct": "Elixir.DocsWeb.Schemas.RequestBody.RequestCreate",
+  "x-validate": null,
+  "$defs": {
+    "Currency": {
+      "default": "USD",
+      "description": "ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint",
+      "maxLength": 3,
+      "minLength": 3,
+      "pattern": "^[A-Z]{3}$",
+      "title": "Currency",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    },
+    "MonetaryAmount": {
+      "pattern": "^(0|([1-9]+[0-9]*))(\\.[0-9]{1,2})?$",
+      "title": "MonetaryAmount",
+      "type": "string",
+      "x-struct": null,
+      "x-validate": null
+    }
+  }
+}

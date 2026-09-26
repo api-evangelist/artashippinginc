@@ -1,0 +1,892 @@
+openapi: 3.2.0
+info:
+  contact:
+    email: hello@arta.io
+    name: Arta
+    url: https://manual.arta.io/
+  description: The Arta Public API provides quote generation, transport booking, and tracking capabilities. Additionally the API enables Arta partner organizations to configure email and webhook notifications for their accounts.
+  termsOfService: https://www.arta.io/legal/terms
+  title: Arta Public Address Verifications API
+  version: '2021-01-01'
+servers:
+- url: https://api.arta.io
+  variables: {}
+security: []
+tags:
+- name: address_verifications
+paths:
+  /address_verifications:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: '**Availability: Public Preview**
+
+
+        _This endpoint is currently in public preview and available only to approved accounts._ _Please contact Arta to request access for your organization._
+
+
+        Retrieve a paginated collection of address verifications belonging to your organization, sorted by creation date descending'
+      operationId: addressVerifications/list
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: Page number of the results to fetch.
+        in: query
+        name: page
+        schema:
+          default: 1
+          type: integer
+          x-struct: null
+          x-validate: null
+      - description: Results per page (max 50)
+        in: query
+        name: page_size
+        schema:
+          default: 20
+          type: integer
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  items:
+                    items:
+                      $ref: '#/components/schemas/AddressVerification'
+                    type: array
+                    x-struct: null
+                    x-validate: null
+                  metadata:
+                    properties:
+                      page:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      page_size:
+                        example: 20
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                      total_count:
+                        example: 1
+                        format: int64
+                        readOnly: true
+                        type: integer
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+          description: A collection of Address Verification records
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: List Address Verifications
+      tags:
+      - address_verifications
+    post:
+      callbacks: {}
+      deprecated: false
+      description: '**Availability: Public Preview**
+
+
+        _This endpoint is currently in public preview and available only to approved accounts._ _Please contact Arta to request access for your organization._
+
+
+        Verify an address and receive a corrected recommendation.'
+      operationId: addressVerifications/create
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressVerificationCreate'
+        required: false
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressVerification'
+          description: The created address verification
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '400':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: BadRequest
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Bad Request
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '403':
+          content:
+            application/json: {}
+          description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unprocessible entity
+      summary: Create an Address Verification
+      tags:
+      - address_verifications
+  /address_verifications/{address_verification_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: '**Availability: Public Preview**
+
+
+        _This endpoint is currently in public preview and available only to approved accounts._ _Please contact Arta to request access for your organization._
+
+
+        Retrieve an existing address verification by its ID'
+      operationId: addressVerifications/get
+      parameters:
+      - description: Authorize your API calls with an Arta API token
+        example: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      - description: address_verification_id parameter
+        in: path
+        name: address_verification_id
+        required: true
+        schema:
+          type: string
+          x-struct: null
+          x-validate: null
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressVerification'
+          description: Successful Address Verification response
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+        '404':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    properties:
+                      detail:
+                        example: string
+                        type: string
+                        x-struct: null
+                        x-validate: null
+                    type: object
+                    x-struct: null
+                    x-validate: null
+                title: NotFound
+                type: object
+                x-struct: null
+                x-validate: null
+          description: Not Found
+          headers:
+            content-type:
+              example: application/json
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+            x-arta-request-id:
+              description: A unique identifier for the Arta API call
+              example: FkBjuxbwLLTx4RoAARkx
+              schema:
+                type: string
+                x-struct: null
+                x-validate: null
+              style: simple
+      summary: Get an Address Verification
+      tags:
+      - address_verifications
+components:
+  schemas:
+    Error:
+      properties:
+        errors:
+          properties:
+            detail:
+              description: A human-readable explanation specific to this occurrence of the problem
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      title: Error
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Error
+      x-validate: null
+    AddressVerificationCreate:
+      additionalProperties: false
+      properties:
+        address_verification:
+          properties:
+            input:
+              properties:
+                address_line_1:
+                  description: Primary street address
+                  example: 123 Main St
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                address_line_2:
+                  description: Secondary address (apartment, suite, etc.)
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                address_line_3:
+                  description: Tertiary address line
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                city:
+                  description: City or locality
+                  example: New York
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                country:
+                  description: ISO 3166-1 alpha-2 country code
+                  example: US
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                postal_code:
+                  description: Postal or ZIP code
+                  example: '10001'
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                region:
+                  description: State, province, or region
+                  example: NY
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+              required:
+              - address_line_1
+              - country
+              type: object
+              x-struct: null
+              x-validate: null
+            reference:
+              description: Your own reference ID for correlation
+              example: order-12345
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+          required:
+          - input
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - address_verification
+      title: AddressVerificationCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.AddressVerificationCreate
+      x-validate: null
+    AddressVerification:
+      example:
+        created_at: '2025-06-15T12:00:00.000000'
+        id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        input:
+          address_line_1: 123 Main St
+          address_line_2: Apt 4B
+          address_line_3: null
+          city: New York
+          country: US
+          postal_code: '10001'
+          region: NY
+        match_level: delivery_point
+        recommendation:
+          address_line_1: 123 Main Street
+          address_line_2: Apt 4B
+          address_line_3: null
+          city: New York
+          country: US
+          is_residential: true
+          latitude: 40.7128
+          longitude: -74.006
+          postal_code: 10001-1234
+          region: NY
+        reference: order-12345
+        shortcode: ACME-V1A2B3
+        status: success
+        updated_at: '2025-06-15T12:00:00.000000'
+      properties:
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2025-06-15T12:00:00.000000'
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the address verification in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        input:
+          description: The original address as submitted
+          properties:
+            address_line_1:
+              description: Primary street address line
+              type: string
+              x-struct: null
+              x-validate: null
+            address_line_2:
+              description: Secondary address line (apartment, suite, unit, etc.)
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            address_line_3:
+              description: Tertiary address line. Used for some international formats
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            city:
+              description: City or locality name
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            country:
+              description: ISO 3166-1 alpha-2 country code
+              example: US
+              type: string
+              x-struct: null
+              x-validate: null
+            postal_code:
+              description: Postal or ZIP code
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            region:
+              description: State, province, or region code
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        match_level:
+          description: The granularity of the address match, from most to least precise
+          enum:
+          - delivery_point
+          - premise
+          - thoroughfare
+          - locality
+          - administrative_area
+          - none
+          example: delivery_point
+          type: string
+          x-struct: null
+          x-validate: null
+        recommendation:
+          description: The verified and corrected address with geocoding data. Fields may be null if verification failed
+          properties:
+            address_line_1:
+              description: Corrected primary street address
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            address_line_2:
+              description: Corrected secondary address line
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            address_line_3:
+              description: Corrected tertiary address line
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            city:
+              description: Corrected city or locality
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            country:
+              description: ISO 3166-1 alpha-2 country code
+              example: US
+              type: string
+              x-struct: null
+              x-validate: null
+            is_residential:
+              description: Whether the address is classified as residential. US addresses only; null for international or when unknown
+              nullable: true
+              type: boolean
+              x-struct: null
+              x-validate: null
+            latitude:
+              description: Latitude coordinate of the verified address
+              format: float
+              nullable: true
+              type: number
+              x-struct: null
+              x-validate: null
+            longitude:
+              description: Longitude coordinate of the verified address
+              format: float
+              nullable: true
+              type: number
+              x-struct: null
+              x-validate: null
+            postal_code:
+              description: Corrected postal code. For US addresses, may include the +4 extension (e.g., `10001-1234`)
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            region:
+              description: Corrected state, province, or region
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        reference:
+          description: An optional client-provided reference string for correlating with your own records
+          example: order-12345
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        shortcode:
+          description: A human-readable identifier for the address verification prefixed with the organization's shortcode
+          example: ACME-V1A2B3
+          type: string
+          x-struct: null
+          x-validate: null
+        status:
+          description: The verification outcome
+          enum:
+          - success
+          - partial
+          - failed
+          example: success
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2025-06-15T12:00:00.000000'
+          type: string
+          x-struct: null
+          x-validate: null
+      title: AddressVerification
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.AddressVerification
+      x-validate: null
+x-topics:
+- content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.
+
+
+    Using your API key to authenticate an API call is straightforward. Simply include your API Key token in the Authorization header of every call made to the system. This is the only place that it is accepted.'
+  example: "```shell\n\n$ curl \\ \n\n -X GET https://api.arta.io/shipments \\ \n\n -H \"Authorization: ARTA_APIKey s0e1t2e3c4a5s6t7r8o9n10o11m12y\""
+  title: Authentication
+- content: "Arta imposes rate limits on API requests to maintain system stability and ensure fair usage. If you exceed these limits, the API will return a `429 Too Many Requests` error. Below are the rate limits for both Live and Test modes.\n\n**Live Mode:**\n\n*\tConcurrent requests: 15 API calls at the same time (any type)\n* Instant quote requests: 20 calls per minute\n* Overall requests: 1000 API calls per minute (any type)\n\n**Test Mode:**\n\n* Concurrent requests: 10 API calls at the same time (any type)\n* Instant quote requests: 10 calls per minute\n* Overall requests: 500 API calls per minute (any type)\n\nWhen a rate limit is exceeded, we recommend implementing retry logic with exponential backoff to handle 429 errors effectively."
+  title: Rate Limits
+- content: 'The Arta API supports flexible search functionality across multiple resources, including Shipments, Requests, Hosted Sessions, Tags, and others. Using the search query parameter, you can construct structured queries to filter results based on specific criteria.
+
+
+    Key features of the search functionality include:
+
+
+    * Support for negation, wildcards, numeric filters, and date comparisons.
+
+    * Each search query consists of one or more clauses, where each clause contains a `field`, an operator, and a `value`.
+
+    * Clauses operating on the same field are combined using OR logic, while clauses across different fields are combined using AND logic.
+
+
+    * Use quotation marks to keep multi-word search terms together.
+
+
+    This allows for powerful and precise filtering to retrieve the exact data you need from the API.
+
+
+    **Syntax and operators**
+
+
+    The following table lists the operators and syntax that you can use to construct a search query clause.
+
+
+    | Operator     | Usage                          | Description                                                                 | Examples                                                            |
+
+    |------------|--------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------|
+
+    | `:`        | `field:value`                  | Exact match operator (case insensitive)                                     | `status:pending` returns records where the status is `pending` |
+
+    | `*`        | `value*`                       | Use an asterisk (wildcard operator) at the end of a term to match fields that start with the fragment                                    | `art*` returns records that match "arta" and "artist" but not "smart" |
+
+    | `*`        | `*value`                       | Use an asterisk at the start of a term to match fields that end with the fragment                                    | `*art` returns "smart" but not "martian" |
+
+    | `-`        | `-field:value`                 | Returns records that don’t match the clause                                 | `-status:pending` returns records that do not have a status of pending                 |
+
+    | `>, <, =`  | `field:<value`, `field:>value`, `field:>=value`, `field:<=value` | Greater than/less than operators              | `created-at:<=2021-01-01` returns records from the beginning of time through January 1, 2021   |
+
+    | `..`       | `field:value1..value2`                 | Filters for values within a given range where the first number is the lowest value and the second is the highest                                 | `created-at:2021-05-01..2021-05-15` returns records where the `created_at` field is between May 1, 2021 and May 15, 2021                 |
+
+
+
+
+    **Hosted Session search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `insurance` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `type` | string |
+
+    | `tags` | string |
+
+
+    **Request search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `bookable` | string |
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+
+    **Shipment search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `created-at` | date |
+
+    | `destination-address-line-1` | string |
+
+    | `destination-city` | string |
+
+    | `destination-contacts-emails` | string |
+
+    | `destination-contacts-names` | string |
+
+    | `destination-contacts-phone-numbers` | string |
+
+    | `destination-country` | string |
+
+    | `destination-postal-code` | string |
+
+    | `destination-region` | string |
+
+    | `eei-form-status` | string |
+
+    | `hosted-session` | string |
+
+    | `internal-reference` | string |
+
+    | `object-creators` | string |
+
+    | `object-descriptions` | string |
+
+    | `object-internal-references` | string |
+
+    | `object-public-references` | string |
+
+    | `object-titles` | string |
+
+    | `origin-address-line-1` | string |
+
+    | `origin-city` | string |
+
+    | `origin-contacts-emails` | string |
+
+    | `origin-contacts-names` | string |
+
+    | `origin-contacts-phone-numbers` | string |
+
+    | `origin-country` | string |
+
+    | `origin-postal-code` | string |
+
+    | `origin-region` | string |
+
+    | `public-reference` | string |
+
+    | `quote-type` | string |
+
+    | `request-shortcode` | string |
+
+    | `shipping-notes` | string |
+
+    | `shortcode` | string |
+
+    | `status` | string |
+
+    | `tags` | string |
+
+    | `total` | numeric |
+
+    | `total-currency` | string |
+
+    | `tracking-numbers` | string |
+
+
+    **Tag search fields**
+
+
+    | Field | Type |
+
+    |------------|--------------|
+
+    | `color` | string |
+
+    | `description` | string |
+
+    | `is_active` | string |
+
+    | `name` | string |
+
+
+    '
+  title: Search
