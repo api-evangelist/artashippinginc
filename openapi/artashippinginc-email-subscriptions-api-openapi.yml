@@ -510,6 +510,34 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.EmailSubscription
       x-validate: null
+    EmailSubscriptionUpdate:
+      additionalProperties: false
+      properties:
+        email_subscription:
+          properties:
+            recipients:
+              description: The list of recipients for this Email Subscription.
+              example:
+              - destination
+              - origin
+              items:
+                type: string
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+          required:
+          - recipients
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - email_subscription
+      title: EmailSubscriptionUpdate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.EmailSubscriptionUpdate
+      x-validate: null
     EmailSubscriptionCreate:
       additionalProperties: false
       properties:
@@ -547,34 +575,6 @@ components:
       title: EmailSubscriptionCreate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.EmailSubscriptionCreate
-      x-validate: null
-    EmailSubscriptionUpdate:
-      additionalProperties: false
-      properties:
-        email_subscription:
-          properties:
-            recipients:
-              description: The list of recipients for this Email Subscription.
-              example:
-              - destination
-              - origin
-              items:
-                type: string
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-          required:
-          - recipients
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - email_subscription
-      title: EmailSubscriptionUpdate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.EmailSubscriptionUpdate
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

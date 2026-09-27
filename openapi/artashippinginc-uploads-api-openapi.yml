@@ -380,6 +380,81 @@ paths:
       - Uploads
 components:
   schemas:
+    UploadCreate:
+      additionalProperties: false
+      properties:
+        upload:
+          properties:
+            document_type:
+              description: The document type of the file being uploaded
+              enum:
+              - bill_of_lading
+              - certificate_of_insurance
+              - certificate_of_insurance_template
+              - condition_report
+              - condition_check
+              - image
+              - instructions
+              - airway_bill
+              - commercial_invoice
+              - power_of_attorney
+              - proof_of_export
+              - proof_of_delivery
+              - quote
+              - shipping_label
+              - other
+              type: string
+              x-struct: null
+              x-validate: null
+            document_type_label:
+              description: A brief label providing additional context about the document_type. Required when "other" is the "document_type"
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            file_name:
+              description: The name of the file being uploaded
+              example: my-file.csv
+              type: string
+              x-struct: null
+              x-validate: null
+            mime_type:
+              description: The mime-type for the file being uploaded
+              enum:
+              - application/pdf
+              - application/vnd.ms-excel
+              - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+              - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+              - image/jpeg
+              - image/png
+              - text/csv
+              - video/mp4
+              - video/quicktime
+              - application/msword
+              example: text/csv
+              type: string
+              x-struct: null
+              x-validate: null
+            size:
+              description: The size of the file being uploaded in bytes
+              example: 22
+              type: integer
+              x-struct: null
+              x-validate: null
+          required:
+          - document_type
+          - file_name
+          - mime_type
+          - size
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - upload
+      title: UploadCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.UploadCreate
+      x-validate: null
     UploadWithPresignedURL:
       properties:
         created_at:
@@ -484,81 +559,6 @@ components:
       title: UploadWithPresignedURL
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.UploadWithPresignedURL
-      x-validate: null
-    UploadCreate:
-      additionalProperties: false
-      properties:
-        upload:
-          properties:
-            document_type:
-              description: The document type of the file being uploaded
-              enum:
-              - bill_of_lading
-              - certificate_of_insurance
-              - certificate_of_insurance_template
-              - condition_report
-              - condition_check
-              - image
-              - instructions
-              - airway_bill
-              - commercial_invoice
-              - power_of_attorney
-              - proof_of_export
-              - proof_of_delivery
-              - quote
-              - shipping_label
-              - other
-              type: string
-              x-struct: null
-              x-validate: null
-            document_type_label:
-              description: A brief label providing additional context about the document_type. Required when "other" is the "document_type"
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            file_name:
-              description: The name of the file being uploaded
-              example: my-file.csv
-              type: string
-              x-struct: null
-              x-validate: null
-            mime_type:
-              description: The mime-type for the file being uploaded
-              enum:
-              - application/pdf
-              - application/vnd.ms-excel
-              - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-              - application/vnd.openxmlformats-officedocument.wordprocessingml.document
-              - image/jpeg
-              - image/png
-              - text/csv
-              - video/mp4
-              - video/quicktime
-              - application/msword
-              example: text/csv
-              type: string
-              x-struct: null
-              x-validate: null
-            size:
-              description: The size of the file being uploaded in bytes
-              example: 22
-              type: integer
-              x-struct: null
-              x-validate: null
-          required:
-          - document_type
-          - file_name
-          - mime_type
-          - size
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - upload
-      title: UploadCreate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.UploadCreate
       x-validate: null
     Upload:
       properties:

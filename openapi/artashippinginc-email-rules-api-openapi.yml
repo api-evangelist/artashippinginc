@@ -465,34 +465,6 @@ paths:
       - email_rules
 components:
   schemas:
-    EmailRuleUpdate:
-      additionalProperties: false
-      properties:
-        email_rule:
-          properties:
-            recipients:
-              description: The list of recipients for this Email Rule.
-              example:
-              - destination
-              - origin
-              items:
-                type: string
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-          required:
-          - recipients
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - email_rule
-      title: EmailRuleUpdate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.EmailRuleUpdate
-      x-validate: null
     EmailRuleCreate:
       additionalProperties: false
       properties:
@@ -527,6 +499,34 @@ components:
       title: EmailRuleCreate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.EmailRuleCreate
+      x-validate: null
+    EmailRuleUpdate:
+      additionalProperties: false
+      properties:
+        email_rule:
+          properties:
+            recipients:
+              description: The list of recipients for this Email Rule.
+              example:
+              - destination
+              - origin
+              items:
+                type: string
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+          required:
+          - recipients
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - email_rule
+      title: EmailRuleUpdate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.EmailRuleUpdate
       x-validate: null
     EmailRule:
       properties:

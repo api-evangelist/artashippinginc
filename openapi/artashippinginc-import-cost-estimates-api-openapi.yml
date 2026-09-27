@@ -310,236 +310,6 @@ paths:
       - import_cost_estimates
 components:
   schemas:
-    ImportCostEstimateCreate:
-      oneOf:
-      - additionalProperties: false
-        description: Create an import cost estimate by providing origin, destination, objects, and transport details directly
-        example:
-          import_cost_estimate:
-            currency: USD
-            destination:
-              country: CA
-              region: 'ON'
-            objects:
-            - hs_code: '691390'
-              reference: ceramic-vase-maria-lundqvist
-              value: '10869.45'
-            origin:
-              country: US
-            transport:
-              amount: '20000'
-              service_level: ups_expedited
-        properties:
-          import_cost_estimate:
-            properties:
-              currency:
-                default: USD
-                description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
-                example: USD
-                maxLength: 3
-                minLength: 3
-                pattern: ^[A-Z]{3}$
-                title: Currency
-                type: string
-                x-struct: null
-                x-validate: null
-              destination:
-                description: Details about the destination where it will be imported to
-                properties:
-                  city:
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  country:
-                    description: ISO 3166-1 alpha-2 country code of the destination
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  postal_code:
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  region:
-                    description: State, province, or region of the destination. May be required depending on the destination country.
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                required:
-                - country
-                type: object
-                x-struct: null
-                x-validate: null
-              end_use:
-                description: Optional field specifying the end use of the goods
-                enum:
-                - for_resale
-                - not_for_resale
-                nullable: true
-                type: string
-                x-struct: null
-                x-validate: null
-              objects:
-                description: List of objects/items being imported
-                items:
-                  properties:
-                    country_of_origin:
-                      nullable: true
-                      type: string
-                      x-struct: null
-                      x-validate: null
-                    hs_code:
-                      description: Harmonized System (HS) tariff code for the object
-                      type: string
-                      x-struct: null
-                      x-validate: null
-                    quantity:
-                      description: Quantity of the object
-                      nullable: true
-                      type: number
-                      x-struct: null
-                      x-validate: null
-                    reference:
-                      description: Reference identifier for the object
-                      nullable: true
-                      type: string
-                      x-struct: null
-                      x-validate: null
-                    value:
-                      description: Declared value of the object
-                      type: string
-                      x-struct: null
-                      x-validate: null
-                    value_currency:
-                      description: Currency code (ISO 4217) used for the object's declared value
-                      nullable: true
-                      type: string
-                      x-struct: null
-                      x-validate: null
-                  required:
-                  - hs_code
-                  - value
-                  - value_currency
-                  type: object
-                  x-struct: null
-                  x-validate: null
-                type: array
-                x-struct: null
-                x-validate: null
-              origin:
-                properties:
-                  country:
-                    description: ISO 3166-1 alpha-2 country code of the origin
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                required:
-                - country
-                type: object
-                x-struct: null
-                x-validate: null
-              reference:
-                description: Optional reference string for identifying the estimate in your systems
-                nullable: true
-                type: string
-                x-struct: null
-                x-validate: null
-              transport:
-                description: Information about the transport method and cost
-                properties:
-                  amount:
-                    description: Total transport cost
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  amount_currency:
-                    description: Currency code (ISO 4217) for the transport amount (optional)
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  service_level:
-                    description: Service level for transport (e.g., ups_expedited, fedex_international_first etc). Options are listed in the reference rate service levels metadata endpoint
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                required:
-                - amount
-                - amount_currency
-                - service_level
-                type: object
-                x-struct: null
-                x-validate: null
-            required:
-            - destination
-            - origin
-            - objects
-            - transport
-            type: object
-            x-struct: null
-            x-validate: null
-        required:
-        - import_cost_estimate
-        title: DirectImportCostEstimatePayload
-        type: object
-        x-struct: null
-        x-validate: null
-      - additionalProperties: false
-        description: Create an import cost estimate from an existing quote. The quote provides transport, origin/destination, and object data. Objects on the quote's request must include hs_code for the estimate to be created.
-        example:
-          import_cost_estimate:
-            quote_id: 1234
-        properties:
-          import_cost_estimate:
-            properties:
-              currency:
-                default: USD
-                description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
-                example: USD
-                maxLength: 3
-                minLength: 3
-                pattern: ^[A-Z]{3}$
-                title: Currency
-                type: string
-                x-struct: null
-                x-validate: null
-              end_use:
-                description: Optional field specifying the end use of the goods
-                enum:
-                - for_resale
-                - not_for_resale
-                nullable: true
-                type: string
-                x-struct: null
-                x-validate: null
-              quote_id:
-                description: The ID of an existing quote to derive the import cost estimate from
-                format: int64
-                type: integer
-                x-struct: null
-                x-validate: null
-              reference:
-                description: Optional reference string for identifying the estimate in your systems
-                nullable: true
-                type: string
-                x-struct: null
-                x-validate: null
-            required:
-            - quote_id
-            type: object
-            x-struct: null
-            x-validate: null
-        required:
-        - import_cost_estimate
-        title: ImportCostEstimateFromQuotePayload
-        type: object
-        x-struct: null
-        x-validate: null
-      title: ImportCostEstimateCreate
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.ImportCostEstimateCreate
-      x-validate: null
     ImportCostEstimate:
       example:
         currency: USD
@@ -800,6 +570,236 @@ components:
       title: ImportCostEstimate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.ImportCostEstimate
+      x-validate: null
+    ImportCostEstimateCreate:
+      oneOf:
+      - additionalProperties: false
+        description: Create an import cost estimate by providing origin, destination, objects, and transport details directly
+        example:
+          import_cost_estimate:
+            currency: USD
+            destination:
+              country: CA
+              region: 'ON'
+            objects:
+            - hs_code: '691390'
+              reference: ceramic-vase-maria-lundqvist
+              value: '10869.45'
+            origin:
+              country: US
+            transport:
+              amount: '20000'
+              service_level: ups_expedited
+        properties:
+          import_cost_estimate:
+            properties:
+              currency:
+                default: USD
+                description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+                example: USD
+                maxLength: 3
+                minLength: 3
+                pattern: ^[A-Z]{3}$
+                title: Currency
+                type: string
+                x-struct: null
+                x-validate: null
+              destination:
+                description: Details about the destination where it will be imported to
+                properties:
+                  city:
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  country:
+                    description: ISO 3166-1 alpha-2 country code of the destination
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  postal_code:
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  region:
+                    description: State, province, or region of the destination. May be required depending on the destination country.
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - country
+                type: object
+                x-struct: null
+                x-validate: null
+              end_use:
+                description: Optional field specifying the end use of the goods
+                enum:
+                - for_resale
+                - not_for_resale
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              objects:
+                description: List of objects/items being imported
+                items:
+                  properties:
+                    country_of_origin:
+                      nullable: true
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    hs_code:
+                      description: Harmonized System (HS) tariff code for the object
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    quantity:
+                      description: Quantity of the object
+                      nullable: true
+                      type: number
+                      x-struct: null
+                      x-validate: null
+                    reference:
+                      description: Reference identifier for the object
+                      nullable: true
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    value:
+                      description: Declared value of the object
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    value_currency:
+                      description: Currency code (ISO 4217) used for the object's declared value
+                      nullable: true
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                  required:
+                  - hs_code
+                  - value
+                  - value_currency
+                  type: object
+                  x-struct: null
+                  x-validate: null
+                type: array
+                x-struct: null
+                x-validate: null
+              origin:
+                properties:
+                  country:
+                    description: ISO 3166-1 alpha-2 country code of the origin
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - country
+                type: object
+                x-struct: null
+                x-validate: null
+              reference:
+                description: Optional reference string for identifying the estimate in your systems
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              transport:
+                description: Information about the transport method and cost
+                properties:
+                  amount:
+                    description: Total transport cost
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  amount_currency:
+                    description: Currency code (ISO 4217) for the transport amount (optional)
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  service_level:
+                    description: Service level for transport (e.g., ups_expedited, fedex_international_first etc). Options are listed in the reference rate service levels metadata endpoint
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - amount
+                - amount_currency
+                - service_level
+                type: object
+                x-struct: null
+                x-validate: null
+            required:
+            - destination
+            - origin
+            - objects
+            - transport
+            type: object
+            x-struct: null
+            x-validate: null
+        required:
+        - import_cost_estimate
+        title: DirectImportCostEstimatePayload
+        type: object
+        x-struct: null
+        x-validate: null
+      - additionalProperties: false
+        description: Create an import cost estimate from an existing quote. The quote provides transport, origin/destination, and object data. Objects on the quote's request must include hs_code for the estimate to be created.
+        example:
+          import_cost_estimate:
+            quote_id: 1234
+        properties:
+          import_cost_estimate:
+            properties:
+              currency:
+                default: USD
+                description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+                example: USD
+                maxLength: 3
+                minLength: 3
+                pattern: ^[A-Z]{3}$
+                title: Currency
+                type: string
+                x-struct: null
+                x-validate: null
+              end_use:
+                description: Optional field specifying the end use of the goods
+                enum:
+                - for_resale
+                - not_for_resale
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              quote_id:
+                description: The ID of an existing quote to derive the import cost estimate from
+                format: int64
+                type: integer
+                x-struct: null
+                x-validate: null
+              reference:
+                description: Optional reference string for identifying the estimate in your systems
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+            required:
+            - quote_id
+            type: object
+            x-struct: null
+            x-validate: null
+        required:
+        - import_cost_estimate
+        title: ImportCostEstimateFromQuotePayload
+        type: object
+        x-struct: null
+        x-validate: null
+      title: ImportCostEstimateCreate
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.ImportCostEstimateCreate
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

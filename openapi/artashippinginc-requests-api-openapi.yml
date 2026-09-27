@@ -598,6 +598,304 @@ paths:
       - Requests
 components:
   schemas:
+    Object:
+      properties:
+        components:
+          description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
+
+
+            When components are present, the object value must equal the sum of component values.'
+          items:
+            properties:
+              customs:
+                properties:
+                  country_of_origin:
+                    description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+                    example: US
+                    maxLength: 2
+                    minLength: 2
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  hs_code:
+                    description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+                    example: '123456'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  medium:
+                    description: The medium of the object. This is a description of the material or materials used to create the object
+                    example: oil on canvas
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  temporary_admission:
+                    description: Select true if the goods are currently in the country under a temporary admission declaration
+                    example: true
+                    type: boolean
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              details:
+                properties:
+                  creation_date:
+                    description: Details about the timing in which an object was created
+                    example: '1980'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  creator:
+                    description: The creator of the object
+                    example: Bob Smithson
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  notes:
+                    description: Any notes about the item
+                    example: Artist signature in the lower left corner
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  title:
+                    description: The object title
+                    example: Black Rectangle
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              id:
+                description: The id of the component in UUID format
+                format: uuid
+                type: string
+                x-struct: null
+                x-validate: null
+              internal_reference:
+                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                example: 'Accession ID: 823'
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              public_reference:
+                description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+                example: Round Smithson work
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              type:
+                description: The object component type ID. Options are defined in the Object Component types metadata endpoint
+                example: painting_framed
+                pattern: ^[0-9a-z_]{1,56}$
+                type: string
+                x-struct: null
+                x-validate: null
+              value:
+                $ref: '#/components/schemas/MonetaryAmount'
+              value_currency:
+                $ref: '#/components/schemas/Currency'
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        current_packing:
+          description: A list of packing subtype IDs describing how the item is currently packed
+          items:
+            example: no_packing
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        customs:
+          properties:
+            country_of_origin:
+              description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+              example: US
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-struct: null
+              x-validate: null
+            hs_code:
+              description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+              example: '123456'
+              type: string
+              x-struct: null
+              x-validate: null
+            medium:
+              description: The medium of the object. This is a description of the material or materials used to create the object
+              example: oil on canvas
+              type: string
+              x-struct: null
+              x-validate: null
+            temporary_admission:
+              description: Select true if the goods are currently in the country under a temporary admission declaration
+              example: true
+              type: boolean
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        depth:
+          description: The depth of the object
+          example: '3'
+          type: string
+          x-struct: null
+          x-validate: null
+        details:
+          properties:
+            creation_date:
+              description: Details about the timing in which an object was created
+              example: '1980'
+              type: string
+              x-struct: null
+              x-validate: null
+            creator:
+              description: The creator of the object
+              example: Bob Smithson
+              type: string
+              x-struct: null
+              x-validate: null
+            is_cites:
+              default: false
+              description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
+              type: boolean
+              x-struct: null
+              x-validate: null
+            is_fragile:
+              default: false
+              description: Set this flag to true is the item is fragile. This may effect packing and handling costs
+              type: boolean
+              x-struct: null
+              x-validate: null
+            materials:
+              deprecated: true
+              description: A list of IDs describing the types of materials used
+              items:
+                example: canvas
+                type: string
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+            notes:
+              description: Any notes about the item
+              example: Artist signature in the lower left corner
+              type: string
+              x-struct: null
+              x-validate: null
+            title:
+              description: The object title
+              example: Black Rectangle
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        height:
+          description: The height of the object
+          example: '32'
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        images:
+          description: A list image urls of the object
+          items:
+            example: http://example.com/image.jpg
+            format: uri
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+          example: 'Accession ID: 823'
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+          example: Round Smithson work
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        subtype:
+          description: The object subtype ID. Options are defined in the Object types metadata endpoint
+          example: painting_unframed
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        type:
+          description: The object type id
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        unit_of_measurement:
+          enum:
+          - in
+          - cm
+          example: in
+          type: string
+          x-struct: null
+          x-validate: null
+        value:
+          $ref: '#/components/schemas/MonetaryAmount'
+        value_currency:
+          $ref: '#/components/schemas/Currency'
+        weight:
+          description: The weight of the object
+          example: '3.0'
+          type: string
+          x-struct: null
+          x-validate: null
+        weight_unit:
+          description: The unit of the object
+          enum:
+          - lb
+          - kg
+          example: lb
+          type: string
+          x-struct: null
+          x-validate: null
+        width:
+          description: The width of the object
+          example: '15'
+          type: string
+          x-struct: null
+          x-validate: null
+      title: Object
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Object
+      x-validate: null
+    MonetaryAmount:
+      example: '2500.00'
+      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
+      title: MonetaryAmount
+      type: string
+      x-struct: null
+      x-validate: null
     Tag:
       example:
         color: 008000
@@ -761,6 +1059,17 @@ components:
       title: RequestUpdateContacts
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestUpdateContacts
+      x-validate: null
+    RequestUpdateCustom:
+      properties:
+        note:
+          description: An optional note providing additional context for the Arta team about your custom quote request.
+          type: string
+          x-struct: null
+          x-validate: null
+      title: RequestUpdateCustom
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestUpdateCustom
       x-validate: null
     RequestCreate:
       description: Create a new request
@@ -1388,297 +1697,6 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestCreate
       x-validate: null
-    Object:
-      properties:
-        components:
-          description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
-
-
-            When components are present, the object value must equal the sum of component values.'
-          items:
-            properties:
-              customs:
-                properties:
-                  country_of_origin:
-                    description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
-                    example: US
-                    maxLength: 2
-                    minLength: 2
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  hs_code:
-                    description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
-                    example: '123456'
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  medium:
-                    description: The medium of the object. This is a description of the material or materials used to create the object
-                    example: oil on canvas
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  temporary_admission:
-                    description: Select true if the goods are currently in the country under a temporary admission declaration
-                    example: true
-                    type: boolean
-                    x-struct: null
-                    x-validate: null
-                type: object
-                x-struct: null
-                x-validate: null
-              details:
-                properties:
-                  creation_date:
-                    description: Details about the timing in which an object was created
-                    example: '1980'
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  creator:
-                    description: The creator of the object
-                    example: Bob Smithson
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  notes:
-                    description: Any notes about the item
-                    example: Artist signature in the lower left corner
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  title:
-                    description: The object title
-                    example: Black Rectangle
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                type: object
-                x-struct: null
-                x-validate: null
-              id:
-                description: The id of the component in UUID format
-                format: uuid
-                type: string
-                x-struct: null
-                x-validate: null
-              internal_reference:
-                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
-                example: 'Accession ID: 823'
-                maxLength: 255
-                type: string
-                x-struct: null
-                x-validate: null
-              public_reference:
-                description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
-                example: Round Smithson work
-                maxLength: 255
-                type: string
-                x-struct: null
-                x-validate: null
-              type:
-                description: The object component type ID. Options are defined in the Object Component types metadata endpoint
-                example: painting_framed
-                pattern: ^[0-9a-z_]{1,56}$
-                type: string
-                x-struct: null
-                x-validate: null
-              value:
-                $ref: '#/components/schemas/MonetaryAmount'
-              value_currency:
-                $ref: '#/components/schemas/Currency'
-            type: object
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        current_packing:
-          description: A list of packing subtype IDs describing how the item is currently packed
-          items:
-            example: no_packing
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        customs:
-          properties:
-            country_of_origin:
-              description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
-              example: US
-              maxLength: 2
-              minLength: 2
-              type: string
-              x-struct: null
-              x-validate: null
-            hs_code:
-              description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
-              example: '123456'
-              type: string
-              x-struct: null
-              x-validate: null
-            medium:
-              description: The medium of the object. This is a description of the material or materials used to create the object
-              example: oil on canvas
-              type: string
-              x-struct: null
-              x-validate: null
-            temporary_admission:
-              description: Select true if the goods are currently in the country under a temporary admission declaration
-              example: true
-              type: boolean
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        depth:
-          description: The depth of the object
-          example: '3'
-          type: string
-          x-struct: null
-          x-validate: null
-        details:
-          properties:
-            creation_date:
-              description: Details about the timing in which an object was created
-              example: '1980'
-              type: string
-              x-struct: null
-              x-validate: null
-            creator:
-              description: The creator of the object
-              example: Bob Smithson
-              type: string
-              x-struct: null
-              x-validate: null
-            is_cites:
-              default: false
-              description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
-              type: boolean
-              x-struct: null
-              x-validate: null
-            is_fragile:
-              default: false
-              description: Set this flag to true is the item is fragile. This may effect packing and handling costs
-              type: boolean
-              x-struct: null
-              x-validate: null
-            materials:
-              deprecated: true
-              description: A list of IDs describing the types of materials used
-              items:
-                example: canvas
-                type: string
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-            notes:
-              description: Any notes about the item
-              example: Artist signature in the lower left corner
-              type: string
-              x-struct: null
-              x-validate: null
-            title:
-              description: The object title
-              example: Black Rectangle
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        height:
-          description: The height of the object
-          example: '32'
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        images:
-          description: A list image urls of the object
-          items:
-            example: http://example.com/image.jpg
-            format: uri
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        internal_reference:
-          description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
-          example: 'Accession ID: 823'
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        public_reference:
-          description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
-          example: Round Smithson work
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        subtype:
-          description: The object subtype ID. Options are defined in the Object types metadata endpoint
-          example: painting_unframed
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-        type:
-          description: The object type id
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-        unit_of_measurement:
-          enum:
-          - in
-          - cm
-          example: in
-          type: string
-          x-struct: null
-          x-validate: null
-        value:
-          $ref: '#/components/schemas/MonetaryAmount'
-        value_currency:
-          $ref: '#/components/schemas/Currency'
-        weight:
-          description: The weight of the object
-          example: '3.0'
-          type: string
-          x-struct: null
-          x-validate: null
-        weight_unit:
-          description: The unit of the object
-          enum:
-          - lb
-          - kg
-          example: lb
-          type: string
-          x-struct: null
-          x-validate: null
-        width:
-          description: The width of the object
-          example: '15'
-          type: string
-          x-struct: null
-          x-validate: null
-      title: Object
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Object
-      x-validate: null
     RequestListItem:
       example:
         bookable:
@@ -1929,17 +1947,6 @@ components:
       title: Currency
       type: string
       x-struct: null
-      x-validate: null
-    RequestUpdateCustom:
-      properties:
-        note:
-          description: An optional note providing additional context for the Arta team about your custom quote request.
-          type: string
-          x-struct: null
-          x-validate: null
-      title: RequestUpdateCustom
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestUpdateCustom
       x-validate: null
     Request:
       example:
@@ -3100,13 +3107,6 @@ components:
       title: Request
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Request
-      x-validate: null
-    MonetaryAmount:
-      example: '2500.00'
-      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
-      title: MonetaryAmount
-      type: string
-      x-struct: null
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

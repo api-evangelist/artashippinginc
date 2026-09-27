@@ -411,66 +411,6 @@ paths:
       - Tags
 components:
   schemas:
-    TagUpdate:
-      additionalProperties: false
-      properties:
-        tag:
-          properties:
-            color:
-              description: The hexadecimal color code for the tag, without the leading `#`.
-              example: 0000FF
-              maxLength: 6
-              minLength: 6
-              pattern: ^[0-9A-F]{6}$
-              type: string
-              x-struct: null
-              x-validate: null
-            description:
-              description: An optional, brief description for this tag.
-              maxLength: 255
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            is_active:
-              description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
-              nullable: true
-              type: boolean
-              x-struct: null
-              x-validate: null
-            name:
-              description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
-              example: la-warehouse
-              maxLength: 50
-              pattern: ^[a-z0-9-]{1,50}$
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - tag
-      title: TagUpdate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.TagUpdate
-      x-validate: null
-    Error:
-      properties:
-        errors:
-          properties:
-            detail:
-              description: A human-readable explanation specific to this occurrence of the problem
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      title: Error
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Error
-      x-validate: null
     Tag:
       example:
         color: 008000
@@ -549,6 +489,66 @@ components:
       title: Tag
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Tag
+      x-validate: null
+    Error:
+      properties:
+        errors:
+          properties:
+            detail:
+              description: A human-readable explanation specific to this occurrence of the problem
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      title: Error
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Error
+      x-validate: null
+    TagUpdate:
+      additionalProperties: false
+      properties:
+        tag:
+          properties:
+            color:
+              description: The hexadecimal color code for the tag, without the leading `#`.
+              example: 0000FF
+              maxLength: 6
+              minLength: 6
+              pattern: ^[0-9A-F]{6}$
+              type: string
+              x-struct: null
+              x-validate: null
+            description:
+              description: An optional, brief description for this tag.
+              maxLength: 255
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            is_active:
+              description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
+              nullable: true
+              type: boolean
+              x-struct: null
+              x-validate: null
+            name:
+              description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
+              example: la-warehouse
+              maxLength: 50
+              pattern: ^[a-z0-9-]{1,50}$
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - tag
+      title: TagUpdate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.TagUpdate
       x-validate: null
     TagCreate:
       additionalProperties: false

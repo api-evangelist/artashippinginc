@@ -731,6 +731,263 @@ paths:
       - self_ship_collections
 components:
   schemas:
+    SelfShipCollectionCreate:
+      description: The payload for scheduling a self-ship collection. The expected shape depends on `service.carrier`.
+      oneOf:
+      - $ref: '#/components/schemas/FedexSelfShipCollectionPayload'
+      - $ref: '#/components/schemas/DhlSelfShipCollectionPayload'
+      title: SelfShipCollectionCreate
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionCreate
+      x-validate: null
+    DhlSelfShipCollectionPayload:
+      additionalProperties: false
+      description: Schedule a DHL collection
+      properties:
+        self_ship_collection:
+          properties:
+            collection_date:
+              description: Pickup date in ISO 8601 format (`YYYY-MM-DD`). Must be in the future.
+              example: '2026-03-06'
+              format: date
+              type: string
+              x-struct: null
+              x-validate: null
+            collection_time:
+              description: Pickup time in ISO 8601 format (`HH:MM:SS`). Must be before `location.close_time`.
+              example: '10:00:00'
+              type: string
+              x-struct: null
+              x-validate: null
+            location:
+              description: Pickup location details
+              properties:
+                address_line_1:
+                  description: Street address
+                  example: 123 Main St
+                  minLength: 1
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                address_line_2:
+                  description: Additional address info
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                city:
+                  description: City
+                  example: New York
+                  minLength: 1
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                close_time:
+                  description: Location closing time in ISO 8601 format (`HH:MM:SS`). Must be at least 3 hours after `collection_time`.
+                  example: '17:00:00'
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                contact:
+                  description: Contact at the pickup location
+                  properties:
+                    email_address:
+                      description: Contact email address
+                      example: john@example.com
+                      nullable: true
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    name:
+                      description: Contact name
+                      example: John Doe
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                    phone_number:
+                      description: Contact phone number
+                      example: +1-555-123-4567
+                      type: string
+                      x-struct: null
+                      x-validate: null
+                  required:
+                  - name
+                  - phone_number
+                  type: object
+                  x-struct: null
+                  x-validate: null
+                country:
+                  description: Two-letter country code. Currently `US` and `GB` are supported.
+                  example: US
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                postal_code:
+                  description: Postal code
+                  example: '10001'
+                  minLength: 1
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                region:
+                  description: State or territory code. Required for `US` addresses and must be a valid US state or territory code; may be an empty string for `GB` addresses.
+                  example: NY
+                  type: string
+                  x-struct: null
+                  x-validate: null
+              required:
+              - address_line_1
+              - city
+              - country
+              - region
+              - postal_code
+              - close_time
+              - contact
+              type: object
+              x-struct: null
+              x-validate: null
+            service:
+              description: Carrier service details
+              properties:
+                carrier:
+                  description: Carrier identifier
+                  enum:
+                  - dhl
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                code:
+                  description: Service level code. Must be `express`.
+                  enum:
+                  - express
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                declared_value:
+                  description: Declared value of the collected packages, as a decimal string. Required when `route` is `international`; optional for `domestic` collections. Must be provided together with `declared_value_currency`.
+                  example: '500.00'
+                  pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
+                  title: MonetaryAmount
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                declared_value_currency:
+                  description: ISO 4217 three-letter currency code for `declared_value`. Options are defined in the [Currencies metadata endpoint](https://api-reference.arta.io/operation/operation-metadata-currencies). Required whenever `declared_value` is provided.
+                  example: USD
+                  maxLength: 3
+                  minLength: 3
+                  pattern: ^[A-Z]{3}$
+                  title: Currency
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                package_details:
+                  description: The packages to be collected, one entry per package. All packages must share the same units, and the unit pair must be either `in` + `lb` or `cm` + `kg`.
+                  example:
+                    packages:
+                    - depth: '12'
+                      height: '8'
+                      unit_of_measurement: in
+                      weight: '5.5'
+                      weight_unit: lb
+                      width: '10'
+                  properties:
+                    packages:
+                      description: The packages included in the collection. Must contain at least one package. Dimensions and weight are numeric strings (for example `"12"` or `"12.5"`), following the same convention as `request.objects`; a value that cannot be parsed as a number is rejected with a `422`.
+                      items:
+                        properties:
+                          depth:
+                            description: Package depth
+                            example: '12'
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          height:
+                            description: Package height
+                            example: '8'
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          unit_of_measurement:
+                            description: Unit for `depth`, `height`, and `width`. Must be `in` when `weight_unit` is `lb`, or `cm` when `weight_unit` is `kg`.
+                            enum:
+                            - in
+                            - cm
+                            example: in
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          weight:
+                            description: Package weight
+                            example: '5.5'
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          weight_unit:
+                            description: Unit for `weight`. Must be `lb` when `unit_of_measurement` is `in`, or `kg` when it is `cm`.
+                            enum:
+                            - lb
+                            - kg
+                            example: lb
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                          width:
+                            description: Package width
+                            example: '10'
+                            type: string
+                            x-struct: null
+                            x-validate: null
+                        required:
+                        - depth
+                        - height
+                        - width
+                        - unit_of_measurement
+                        - weight
+                        - weight_unit
+                        title: DhlPackage
+                        type: object
+                        x-struct: null
+                        x-validate: null
+                      minItems: 1
+                      type: array
+                      x-struct: null
+                      x-validate: null
+                  required:
+                  - packages
+                  title: DhlPackageDetails
+                  type: object
+                  x-struct: null
+                  x-validate: null
+                route:
+                  description: Route type. `international` for cross-border collections, `domestic` otherwise. An `international` collection is subject to customs and requires `declared_value` and `declared_value_currency`.
+                  enum:
+                  - domestic
+                  - international
+                  type: string
+                  x-struct: null
+                  x-validate: null
+              required:
+              - carrier
+              - code
+              - route
+              - package_details
+              type: object
+              x-struct: null
+              x-validate: null
+          required:
+          - location
+          - service
+          - collection_date
+          - collection_time
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - self_ship_collection
+      title: DhlSelfShipCollectionPayload
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionCreateDhl
+      x-validate: null
     SelfShipCollectionAvailabilityCheck:
       example:
         availabilities:
@@ -870,124 +1127,6 @@ components:
       title: SelfShipCollectionAvailabilityCheck
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.SelfShipCollectionAvailabilityCheck
-      x-validate: null
-    SelfShipCollectionAvailabilityCheckCreate:
-      additionalProperties: false
-      properties:
-        self_ship_collection_availability_check:
-          properties:
-            collection_date:
-              description: Date to check availability for in ISO 8601 format (`YYYY-MM-DD`)
-              example: '2026-03-06'
-              format: date
-              type: string
-              x-struct: null
-              x-validate: null
-            location:
-              description: Pickup location to check availability for
-              properties:
-                address_line_1:
-                  description: Street address
-                  example: 123 Main St
-                  minLength: 1
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                address_line_2:
-                  description: Additional address info
-                  nullable: true
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                city:
-                  description: City
-                  example: New York
-                  minLength: 1
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                close_time:
-                  description: Location closing time in ISO 8601 format (`HH:MM:SS`)
-                  example: '17:00:00'
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                country:
-                  description: Two-letter country code. Currently `US` and `GB` are supported.
-                  example: US
-                  maxLength: 2
-                  minLength: 2
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                postal_code:
-                  description: Postal code
-                  example: '10001'
-                  minLength: 1
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                region:
-                  description: State or territory code. Required for `US` addresses and must be a valid US state or territory code; may be omitted for `GB` addresses.
-                  example: NY
-                  type: string
-                  x-struct: null
-                  x-validate: null
-              required:
-              - address_line_1
-              - city
-              - country
-              - postal_code
-              - close_time
-              type: object
-              x-struct: null
-              x-validate: null
-            service:
-              description: Carrier service to check availability for
-              properties:
-                carrier:
-                  description: Carrier identifier. `fedex` and `dhl` are supported.
-                  enum:
-                  - fedex
-                  - dhl
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                code:
-                  description: Service level code
-                  enum:
-                  - ground
-                  - express
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                route:
-                  description: Route type.
-                  enum:
-                  - domestic
-                  - international
-                  type: string
-                  x-struct: null
-                  x-validate: null
-              required:
-              - carrier
-              - code
-              - route
-              type: object
-              x-struct: null
-              x-validate: null
-          required:
-          - location
-          - service
-          - collection_date
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - self_ship_collection_availability_check
-      title: SelfShipCollectionAvailabilityCheckCreate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionAvailabilityCheckCreate
       x-validate: null
     FedexSelfShipCollectionPayload:
       additionalProperties: false
@@ -1186,13 +1325,123 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionCreateFedex
       x-validate: null
-    SelfShipCollectionCreate:
-      description: The payload for scheduling a self-ship collection. The expected shape depends on `service.carrier`.
-      oneOf:
-      - $ref: '#/components/schemas/FedexSelfShipCollectionPayload'
-      - $ref: '#/components/schemas/DhlSelfShipCollectionPayload'
-      title: SelfShipCollectionCreate
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionCreate
+    SelfShipCollectionAvailabilityCheckCreate:
+      additionalProperties: false
+      properties:
+        self_ship_collection_availability_check:
+          properties:
+            collection_date:
+              description: Date to check availability for in ISO 8601 format (`YYYY-MM-DD`)
+              example: '2026-03-06'
+              format: date
+              type: string
+              x-struct: null
+              x-validate: null
+            location:
+              description: Pickup location to check availability for
+              properties:
+                address_line_1:
+                  description: Street address
+                  example: 123 Main St
+                  minLength: 1
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                address_line_2:
+                  description: Additional address info
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                city:
+                  description: City
+                  example: New York
+                  minLength: 1
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                close_time:
+                  description: Location closing time in ISO 8601 format (`HH:MM:SS`)
+                  example: '17:00:00'
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                country:
+                  description: Two-letter country code. Currently `US` and `GB` are supported.
+                  example: US
+                  maxLength: 2
+                  minLength: 2
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                postal_code:
+                  description: Postal code
+                  example: '10001'
+                  minLength: 1
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                region:
+                  description: State or territory code. Required for `US` addresses and must be a valid US state or territory code; may be omitted for `GB` addresses.
+                  example: NY
+                  type: string
+                  x-struct: null
+                  x-validate: null
+              required:
+              - address_line_1
+              - city
+              - country
+              - postal_code
+              - close_time
+              type: object
+              x-struct: null
+              x-validate: null
+            service:
+              description: Carrier service to check availability for
+              properties:
+                carrier:
+                  description: Carrier identifier. `fedex` and `dhl` are supported.
+                  enum:
+                  - fedex
+                  - dhl
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                code:
+                  description: Service level code
+                  enum:
+                  - ground
+                  - express
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                route:
+                  description: Route type.
+                  enum:
+                  - domestic
+                  - international
+                  type: string
+                  x-struct: null
+                  x-validate: null
+              required:
+              - carrier
+              - code
+              - route
+              type: object
+              x-struct: null
+              x-validate: null
+          required:
+          - location
+          - service
+          - collection_date
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - self_ship_collection_availability_check
+      title: SelfShipCollectionAvailabilityCheckCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionAvailabilityCheckCreate
       x-validate: null
     SelfShipCollection:
       example:
@@ -1468,255 +1717,6 @@ components:
       title: SelfShipCollection
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.SelfShipCollection
-      x-validate: null
-    DhlSelfShipCollectionPayload:
-      additionalProperties: false
-      description: Schedule a DHL collection
-      properties:
-        self_ship_collection:
-          properties:
-            collection_date:
-              description: Pickup date in ISO 8601 format (`YYYY-MM-DD`). Must be in the future.
-              example: '2026-03-06'
-              format: date
-              type: string
-              x-struct: null
-              x-validate: null
-            collection_time:
-              description: Pickup time in ISO 8601 format (`HH:MM:SS`). Must be before `location.close_time`.
-              example: '10:00:00'
-              type: string
-              x-struct: null
-              x-validate: null
-            location:
-              description: Pickup location details
-              properties:
-                address_line_1:
-                  description: Street address
-                  example: 123 Main St
-                  minLength: 1
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                address_line_2:
-                  description: Additional address info
-                  nullable: true
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                city:
-                  description: City
-                  example: New York
-                  minLength: 1
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                close_time:
-                  description: Location closing time in ISO 8601 format (`HH:MM:SS`). Must be at least 3 hours after `collection_time`.
-                  example: '17:00:00'
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                contact:
-                  description: Contact at the pickup location
-                  properties:
-                    email_address:
-                      description: Contact email address
-                      example: john@example.com
-                      nullable: true
-                      type: string
-                      x-struct: null
-                      x-validate: null
-                    name:
-                      description: Contact name
-                      example: John Doe
-                      type: string
-                      x-struct: null
-                      x-validate: null
-                    phone_number:
-                      description: Contact phone number
-                      example: +1-555-123-4567
-                      type: string
-                      x-struct: null
-                      x-validate: null
-                  required:
-                  - name
-                  - phone_number
-                  type: object
-                  x-struct: null
-                  x-validate: null
-                country:
-                  description: Two-letter country code. Currently `US` and `GB` are supported.
-                  example: US
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                postal_code:
-                  description: Postal code
-                  example: '10001'
-                  minLength: 1
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                region:
-                  description: State or territory code. Required for `US` addresses and must be a valid US state or territory code; may be an empty string for `GB` addresses.
-                  example: NY
-                  type: string
-                  x-struct: null
-                  x-validate: null
-              required:
-              - address_line_1
-              - city
-              - country
-              - region
-              - postal_code
-              - close_time
-              - contact
-              type: object
-              x-struct: null
-              x-validate: null
-            service:
-              description: Carrier service details
-              properties:
-                carrier:
-                  description: Carrier identifier
-                  enum:
-                  - dhl
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                code:
-                  description: Service level code. Must be `express`.
-                  enum:
-                  - express
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                declared_value:
-                  description: Declared value of the collected packages, as a decimal string. Required when `route` is `international`; optional for `domestic` collections. Must be provided together with `declared_value_currency`.
-                  example: '500.00'
-                  pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
-                  title: MonetaryAmount
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                declared_value_currency:
-                  description: ISO 4217 three-letter currency code for `declared_value`. Options are defined in the [Currencies metadata endpoint](https://api-reference.arta.io/operation/operation-metadata-currencies). Required whenever `declared_value` is provided.
-                  example: USD
-                  maxLength: 3
-                  minLength: 3
-                  pattern: ^[A-Z]{3}$
-                  title: Currency
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                package_details:
-                  description: The packages to be collected, one entry per package. All packages must share the same units, and the unit pair must be either `in` + `lb` or `cm` + `kg`.
-                  example:
-                    packages:
-                    - depth: '12'
-                      height: '8'
-                      unit_of_measurement: in
-                      weight: '5.5'
-                      weight_unit: lb
-                      width: '10'
-                  properties:
-                    packages:
-                      description: The packages included in the collection. Must contain at least one package. Dimensions and weight are numeric strings (for example `"12"` or `"12.5"`), following the same convention as `request.objects`; a value that cannot be parsed as a number is rejected with a `422`.
-                      items:
-                        properties:
-                          depth:
-                            description: Package depth
-                            example: '12'
-                            type: string
-                            x-struct: null
-                            x-validate: null
-                          height:
-                            description: Package height
-                            example: '8'
-                            type: string
-                            x-struct: null
-                            x-validate: null
-                          unit_of_measurement:
-                            description: Unit for `depth`, `height`, and `width`. Must be `in` when `weight_unit` is `lb`, or `cm` when `weight_unit` is `kg`.
-                            enum:
-                            - in
-                            - cm
-                            example: in
-                            type: string
-                            x-struct: null
-                            x-validate: null
-                          weight:
-                            description: Package weight
-                            example: '5.5'
-                            type: string
-                            x-struct: null
-                            x-validate: null
-                          weight_unit:
-                            description: Unit for `weight`. Must be `lb` when `unit_of_measurement` is `in`, or `kg` when it is `cm`.
-                            enum:
-                            - lb
-                            - kg
-                            example: lb
-                            type: string
-                            x-struct: null
-                            x-validate: null
-                          width:
-                            description: Package width
-                            example: '10'
-                            type: string
-                            x-struct: null
-                            x-validate: null
-                        required:
-                        - depth
-                        - height
-                        - width
-                        - unit_of_measurement
-                        - weight
-                        - weight_unit
-                        title: DhlPackage
-                        type: object
-                        x-struct: null
-                        x-validate: null
-                      minItems: 1
-                      type: array
-                      x-struct: null
-                      x-validate: null
-                  required:
-                  - packages
-                  title: DhlPackageDetails
-                  type: object
-                  x-struct: null
-                  x-validate: null
-                route:
-                  description: Route type. `international` for cross-border collections, `domestic` otherwise. An `international` collection is subject to customs and requires `declared_value` and `declared_value_currency`.
-                  enum:
-                  - domestic
-                  - international
-                  type: string
-                  x-struct: null
-                  x-validate: null
-              required:
-              - carrier
-              - code
-              - route
-              - package_details
-              type: object
-              x-struct: null
-              x-validate: null
-          required:
-          - location
-          - service
-          - collection_date
-          - collection_time
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - self_ship_collection
-      title: DhlSelfShipCollectionPayload
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionCreateDhl
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

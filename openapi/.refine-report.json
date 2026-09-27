@@ -1,7 +1,7 @@
 {
   "provider": "artashippinginc",
   "sources": [
-    "arta-openapi.json"
+    "_original/arta-openapi.json"
   ],
   "outputs": [
     "artashippinginc-address-verifications-api-openapi.yml",
@@ -28,12 +28,11 @@
     "artashippinginc-webhook-deliveries-api-openapi.yml",
     "artashippinginc-webhooks-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/arta-openapi.json"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "arta-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "arta-openapi.json: declared missing tag: address_verifications",
     "arta-openapi.json: declared missing tag: api_keys",
@@ -58,7 +57,31 @@
     "arta-openapi.json: declared missing tag: uploads",
     "arta-openapi.json: declared missing tag: webhook_deliveries",
     "arta-openapi.json: declared missing tag: webhooks",
-    "apis.yml register: written (+23 apis, 23 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "artashippinginc-address-verifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-attachments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-collection-tag-rules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-email-rules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-email-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-hosted-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-import-cost-estimates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-invoice-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-organization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-self-ship-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-shipment-exceptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-shipments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-trackings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-uploads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-webhook-deliveries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "artashippinginc-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
