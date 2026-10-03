@@ -411,85 +411,6 @@ paths:
       - Tags
 components:
   schemas:
-    Tag:
-      example:
-        color: 008000
-        created_at: '2024-09-25T19:17:54.871490'
-        created_by: null
-        description: null
-        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
-        is_active: false
-        name: ct-warehouse
-        updated_at: '2024-09-25T19:19:01.648283'
-        updated_by: null
-      properties:
-        color:
-          description: The hexadecimal color code for the tag, without the leading `#`.
-          example: 0000FF
-          maxLength: 6
-          minLength: 6
-          pattern: ^[0-9A-F]{6}$
-          type: string
-          x-struct: null
-          x-validate: null
-        created_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        created_by:
-          description: The user ID associated with the user who created the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        description:
-          description: An optional, brief description for this tag.
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          description: The id of the tag in UUID format
-          format: uuid
-          type: string
-          x-struct: null
-          x-validate: null
-        is_active:
-          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
-          type: boolean
-          x-struct: null
-          x-validate: null
-        name:
-          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
-          example: la-warehouse
-          maxLength: 50
-          pattern: ^[a-z0-9-]{1,50}$
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_by:
-          description: The user ID associated with the last user to edit the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-      title: Tag
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
-      x-validate: null
     Error:
       properties:
         errors:
@@ -596,6 +517,85 @@ components:
       title: TagCreate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.TagCreate
+      x-validate: null
+    Tag:
+      example:
+        color: 008000
+        created_at: '2024-09-25T19:17:54.871490'
+        created_by: null
+        description: null
+        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
+        is_active: false
+        name: ct-warehouse
+        updated_at: '2024-09-25T19:19:01.648283'
+        updated_by: null
+      properties:
+        color:
+          description: The hexadecimal color code for the tag, without the leading `#`.
+          example: 0000FF
+          maxLength: 6
+          minLength: 6
+          pattern: ^[0-9A-F]{6}$
+          type: string
+          x-struct: null
+          x-validate: null
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        created_by:
+          description: The user ID associated with the user who created the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        description:
+          description: An optional, brief description for this tag.
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the tag in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        is_active:
+          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
+          type: boolean
+          x-struct: null
+          x-validate: null
+        name:
+          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
+          example: la-warehouse
+          maxLength: 50
+          pattern: ^[a-z0-9-]{1,50}$
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_by:
+          description: The user ID associated with the last user to edit the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+      title: Tag
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

@@ -598,468 +598,6 @@ paths:
       - Requests
 components:
   schemas:
-    Object:
-      properties:
-        components:
-          description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
-
-
-            When components are present, the object value must equal the sum of component values.'
-          items:
-            properties:
-              customs:
-                properties:
-                  country_of_origin:
-                    description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
-                    example: US
-                    maxLength: 2
-                    minLength: 2
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  hs_code:
-                    description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
-                    example: '123456'
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  medium:
-                    description: The medium of the object. This is a description of the material or materials used to create the object
-                    example: oil on canvas
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  temporary_admission:
-                    description: Select true if the goods are currently in the country under a temporary admission declaration
-                    example: true
-                    type: boolean
-                    x-struct: null
-                    x-validate: null
-                type: object
-                x-struct: null
-                x-validate: null
-              details:
-                properties:
-                  creation_date:
-                    description: Details about the timing in which an object was created
-                    example: '1980'
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  creator:
-                    description: The creator of the object
-                    example: Bob Smithson
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  notes:
-                    description: Any notes about the item
-                    example: Artist signature in the lower left corner
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  title:
-                    description: The object title
-                    example: Black Rectangle
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                type: object
-                x-struct: null
-                x-validate: null
-              id:
-                description: The id of the component in UUID format
-                format: uuid
-                type: string
-                x-struct: null
-                x-validate: null
-              internal_reference:
-                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
-                example: 'Accession ID: 823'
-                maxLength: 255
-                type: string
-                x-struct: null
-                x-validate: null
-              public_reference:
-                description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
-                example: Round Smithson work
-                maxLength: 255
-                type: string
-                x-struct: null
-                x-validate: null
-              type:
-                description: The object component type ID. Options are defined in the Object Component types metadata endpoint
-                example: painting_framed
-                pattern: ^[0-9a-z_]{1,56}$
-                type: string
-                x-struct: null
-                x-validate: null
-              value:
-                $ref: '#/components/schemas/MonetaryAmount'
-              value_currency:
-                $ref: '#/components/schemas/Currency'
-            type: object
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        current_packing:
-          description: A list of packing subtype IDs describing how the item is currently packed
-          items:
-            example: no_packing
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        customs:
-          properties:
-            country_of_origin:
-              description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
-              example: US
-              maxLength: 2
-              minLength: 2
-              type: string
-              x-struct: null
-              x-validate: null
-            hs_code:
-              description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
-              example: '123456'
-              type: string
-              x-struct: null
-              x-validate: null
-            medium:
-              description: The medium of the object. This is a description of the material or materials used to create the object
-              example: oil on canvas
-              type: string
-              x-struct: null
-              x-validate: null
-            temporary_admission:
-              description: Select true if the goods are currently in the country under a temporary admission declaration
-              example: true
-              type: boolean
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        depth:
-          description: The depth of the object
-          example: '3'
-          type: string
-          x-struct: null
-          x-validate: null
-        details:
-          properties:
-            creation_date:
-              description: Details about the timing in which an object was created
-              example: '1980'
-              type: string
-              x-struct: null
-              x-validate: null
-            creator:
-              description: The creator of the object
-              example: Bob Smithson
-              type: string
-              x-struct: null
-              x-validate: null
-            is_cites:
-              default: false
-              description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
-              type: boolean
-              x-struct: null
-              x-validate: null
-            is_fragile:
-              default: false
-              description: Set this flag to true is the item is fragile. This may effect packing and handling costs
-              type: boolean
-              x-struct: null
-              x-validate: null
-            materials:
-              deprecated: true
-              description: A list of IDs describing the types of materials used
-              items:
-                example: canvas
-                type: string
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-            notes:
-              description: Any notes about the item
-              example: Artist signature in the lower left corner
-              type: string
-              x-struct: null
-              x-validate: null
-            title:
-              description: The object title
-              example: Black Rectangle
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        height:
-          description: The height of the object
-          example: '32'
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        images:
-          description: A list image urls of the object
-          items:
-            example: http://example.com/image.jpg
-            format: uri
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        internal_reference:
-          description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
-          example: 'Accession ID: 823'
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        public_reference:
-          description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
-          example: Round Smithson work
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        subtype:
-          description: The object subtype ID. Options are defined in the Object types metadata endpoint
-          example: painting_unframed
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-        type:
-          description: The object type id
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-        unit_of_measurement:
-          enum:
-          - in
-          - cm
-          example: in
-          type: string
-          x-struct: null
-          x-validate: null
-        value:
-          $ref: '#/components/schemas/MonetaryAmount'
-        value_currency:
-          $ref: '#/components/schemas/Currency'
-        weight:
-          description: The weight of the object
-          example: '3.0'
-          type: string
-          x-struct: null
-          x-validate: null
-        weight_unit:
-          description: The unit of the object
-          enum:
-          - lb
-          - kg
-          example: lb
-          type: string
-          x-struct: null
-          x-validate: null
-        width:
-          description: The width of the object
-          example: '15'
-          type: string
-          x-struct: null
-          x-validate: null
-      title: Object
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Object
-      x-validate: null
-    MonetaryAmount:
-      example: '2500.00'
-      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
-      title: MonetaryAmount
-      type: string
-      x-struct: null
-      x-validate: null
-    Tag:
-      example:
-        color: 008000
-        created_at: '2024-09-25T19:17:54.871490'
-        created_by: null
-        description: null
-        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
-        is_active: false
-        name: ct-warehouse
-        updated_at: '2024-09-25T19:19:01.648283'
-        updated_by: null
-      properties:
-        color:
-          description: The hexadecimal color code for the tag, without the leading `#`.
-          example: 0000FF
-          maxLength: 6
-          minLength: 6
-          pattern: ^[0-9A-F]{6}$
-          type: string
-          x-struct: null
-          x-validate: null
-        created_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        created_by:
-          description: The user ID associated with the user who created the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        description:
-          description: An optional, brief description for this tag.
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          description: The id of the tag in UUID format
-          format: uuid
-          type: string
-          x-struct: null
-          x-validate: null
-        is_active:
-          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
-          type: boolean
-          x-struct: null
-          x-validate: null
-        name:
-          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
-          example: la-warehouse
-          maxLength: 50
-          pattern: ^[a-z0-9-]{1,50}$
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_by:
-          description: The user ID associated with the last user to edit the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-      title: Tag
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
-      x-validate: null
-    RequestUpdateContacts:
-      example:
-        destination:
-          contacts:
-          - email_address: destination@example.com
-            name: Destination Contact
-            phone_number: (310) 123-4567
-        origin:
-          contacts:
-          - email_address: origin@example.com
-            name: Origin Contact
-            phone_number: (310) 234-5678
-      properties:
-        destination:
-          properties:
-            contacts:
-              items:
-                properties:
-                  email_address:
-                    description: The email address for this contact
-                    example: destination@example.com
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  name:
-                    description: The contact's name
-                    example: Destination Contact
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  phone_number:
-                    description: The phone number for this contact
-                    example: (310) 123-4567
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                required:
-                - name
-                type: object
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        origin:
-          properties:
-            contacts:
-              items:
-                properties:
-                  email_address:
-                    description: The email address for this contact
-                    example: origin@example.com
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  name:
-                    description: The contact's name
-                    example: Origin Contact
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  phone_number:
-                    description: The phone number for this contact
-                    example: (310) 234-5678
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                required:
-                - name
-                type: object
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      title: RequestUpdateContacts
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestUpdateContacts
-      x-validate: null
     RequestUpdateCustom:
       properties:
         note:
@@ -1696,257 +1234,6 @@ components:
       title: RequestCreate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestCreate
-      x-validate: null
-    RequestListItem:
-      example:
-        bookable:
-          missing: []
-          ready: true
-        created_at: '2021-01-21T21:00:29.568665'
-        destination:
-          city: New York
-          country: US
-          postal_code: '11249'
-          region: NY
-        hosted_session_id: 724
-        id: 6b12c76a-5217-4cd6-82d8-7aa5265ebaad
-        insurance: null
-        internal_reference: null
-        object_count: 1
-        origin:
-          city: New York
-          country: US
-          postal_code: '10019'
-          region: NY
-        public_reference: null
-        quote_types:
-        - parcel
-        - select
-        - premium
-        quoting_strategy: best_rate
-        shortcode: DEMO-R29NAW
-        status: closed
-        tags: []
-        updated_at: '2021-01-21T21:00:58.484566'
-      properties:
-        bookable:
-          description: Communicates whether the quotes generated for this request may be booked into shipments
-          properties:
-            missing:
-              description: A list of fields required for the request to be bookable
-              items:
-                type: string
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-            ready:
-              default: true
-              description: Returns true if the quotes in this request may be booked
-              type: boolean
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        created_at:
-          description: 'A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision '
-          example: '2021-01-21T21:00:58.403150'
-          type: string
-          x-struct: null
-          x-validate: null
-        destination:
-          additionalProperties: false
-          description: A minimal representation of the destination address for the request
-          properties:
-            city:
-              description: The destination address city
-              example: Los Angeles
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            country:
-              description: The destination address country in 2-digit ISO 3166-1 alpha-2 format
-              example: US
-              type: string
-              x-struct: null
-              x-validate: null
-            postal_code:
-              description: The destination address postal code
-              example: '90024'
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            region:
-              description: The destination address region
-              example: CA
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        hosted_session_id:
-          description: 'The ID of the HostedSession through which this request was created
-
-
-            '
-          example: 4215
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        id:
-          description: The ID for this request
-          example: 748dd2cd-f299-446d-8e6e-19b33aa72a83
-          type: string
-          x-struct: null
-          x-validate: null
-        insurance:
-          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
-          enum:
-          - null
-          - arta_transit_insurance
-          example: arta_transit_insurance
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        internal_reference:
-          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
-          example: 'cart #425123; user #871'
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        log_request_id:
-          description: An identifier for the API call that created this resource
-          example: Fv9YnUGcBW9ozqgA2s_x
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        object_count:
-          description: The count of objects in this request
-          example: 1
-          type: integer
-          x-struct: null
-          x-validate: null
-        origin:
-          description: A minimal representation of the origin address for the request
-          properties:
-            city:
-              description: The origin address city
-              example: Brooklyn
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            country:
-              description: The origin address country in 2-digit ISO 3166-1 alpha-2 format
-              example: US
-              type: string
-              x-struct: null
-              x-validate: null
-            postal_code:
-              description: The origin address postal code
-              example: '11211'
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            region:
-              description: The origin address region
-              example: NY
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        public_reference:
-          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
-          example: 'Order #56812'
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        quote_types:
-          description: The IDs of the quote types generated for this request
-          items:
-            enum:
-            - parcel
-            - premium
-            - select
-            - self_ship
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        quoting_strategy:
-          description: TThe quoting strategy used when creating quotes for this request. Determines whether the API returns a single best-rate option per transport speed or multiple carrier options for comparison. If not specified, the default strategy (“best_rate”) will be applied.
-          enum:
-          - best_rate
-          - compare_carriers
-          example: best_rate
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        shortcode:
-          description: A brief string identifier for this shipment
-          example: DEMO-R723LA
-          type: string
-          x-struct: null
-          x-validate: null
-        status:
-          description: The status for this shipment
-          enum:
-          - quoted
-          - in_progress
-          - closed
-          - disqualified
-          - expired
-          - cancelled
-          - pending
-          example: quoted
-          type: string
-          x-struct: null
-          x-validate: null
-        tags:
-          description: A list of tags associated with this request
-          items:
-            $ref: '#/components/schemas/Tag'
-          type: array
-          x-struct: null
-          x-validate: null
-        updated_at:
-          description: 'A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision '
-          example: '2021-01-21T21:00:58.403150'
-          type: string
-          x-struct: null
-          x-validate: null
-      title: RequestListItem
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.RequestListItem
-      x-validate: null
-    Currency:
-      default: USD
-      description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
-      example: USD
-      maxLength: 3
-      minLength: 3
-      pattern: ^[A-Z]{3}$
-      title: Currency
-      type: string
-      x-struct: null
       x-validate: null
     Request:
       example:
@@ -3107,6 +2394,719 @@ components:
       title: Request
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Request
+      x-validate: null
+    MonetaryAmount:
+      example: '2500.00'
+      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
+      title: MonetaryAmount
+      type: string
+      x-struct: null
+      x-validate: null
+    Currency:
+      default: USD
+      description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+      example: USD
+      maxLength: 3
+      minLength: 3
+      pattern: ^[A-Z]{3}$
+      title: Currency
+      type: string
+      x-struct: null
+      x-validate: null
+    RequestUpdateContacts:
+      example:
+        destination:
+          contacts:
+          - email_address: destination@example.com
+            name: Destination Contact
+            phone_number: (310) 123-4567
+        origin:
+          contacts:
+          - email_address: origin@example.com
+            name: Origin Contact
+            phone_number: (310) 234-5678
+      properties:
+        destination:
+          properties:
+            contacts:
+              items:
+                properties:
+                  email_address:
+                    description: The email address for this contact
+                    example: destination@example.com
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  name:
+                    description: The contact's name
+                    example: Destination Contact
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  phone_number:
+                    description: The phone number for this contact
+                    example: (310) 123-4567
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - name
+                type: object
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        origin:
+          properties:
+            contacts:
+              items:
+                properties:
+                  email_address:
+                    description: The email address for this contact
+                    example: origin@example.com
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  name:
+                    description: The contact's name
+                    example: Origin Contact
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  phone_number:
+                    description: The phone number for this contact
+                    example: (310) 234-5678
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - name
+                type: object
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      title: RequestUpdateContacts
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestUpdateContacts
+      x-validate: null
+    Object:
+      properties:
+        components:
+          description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
+
+
+            When components are present, the object value must equal the sum of component values.'
+          items:
+            properties:
+              customs:
+                properties:
+                  country_of_origin:
+                    description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+                    example: US
+                    maxLength: 2
+                    minLength: 2
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  hs_code:
+                    description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+                    example: '123456'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  medium:
+                    description: The medium of the object. This is a description of the material or materials used to create the object
+                    example: oil on canvas
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  temporary_admission:
+                    description: Select true if the goods are currently in the country under a temporary admission declaration
+                    example: true
+                    type: boolean
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              details:
+                properties:
+                  creation_date:
+                    description: Details about the timing in which an object was created
+                    example: '1980'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  creator:
+                    description: The creator of the object
+                    example: Bob Smithson
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  notes:
+                    description: Any notes about the item
+                    example: Artist signature in the lower left corner
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  title:
+                    description: The object title
+                    example: Black Rectangle
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              id:
+                description: The id of the component in UUID format
+                format: uuid
+                type: string
+                x-struct: null
+                x-validate: null
+              internal_reference:
+                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                example: 'Accession ID: 823'
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              public_reference:
+                description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+                example: Round Smithson work
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              type:
+                description: The object component type ID. Options are defined in the Object Component types metadata endpoint
+                example: painting_framed
+                pattern: ^[0-9a-z_]{1,56}$
+                type: string
+                x-struct: null
+                x-validate: null
+              value:
+                $ref: '#/components/schemas/MonetaryAmount'
+              value_currency:
+                $ref: '#/components/schemas/Currency'
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        current_packing:
+          description: A list of packing subtype IDs describing how the item is currently packed
+          items:
+            example: no_packing
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        customs:
+          properties:
+            country_of_origin:
+              description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+              example: US
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-struct: null
+              x-validate: null
+            hs_code:
+              description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+              example: '123456'
+              type: string
+              x-struct: null
+              x-validate: null
+            medium:
+              description: The medium of the object. This is a description of the material or materials used to create the object
+              example: oil on canvas
+              type: string
+              x-struct: null
+              x-validate: null
+            temporary_admission:
+              description: Select true if the goods are currently in the country under a temporary admission declaration
+              example: true
+              type: boolean
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        depth:
+          description: The depth of the object
+          example: '3'
+          type: string
+          x-struct: null
+          x-validate: null
+        details:
+          properties:
+            creation_date:
+              description: Details about the timing in which an object was created
+              example: '1980'
+              type: string
+              x-struct: null
+              x-validate: null
+            creator:
+              description: The creator of the object
+              example: Bob Smithson
+              type: string
+              x-struct: null
+              x-validate: null
+            is_cites:
+              default: false
+              description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
+              type: boolean
+              x-struct: null
+              x-validate: null
+            is_fragile:
+              default: false
+              description: Set this flag to true is the item is fragile. This may effect packing and handling costs
+              type: boolean
+              x-struct: null
+              x-validate: null
+            materials:
+              deprecated: true
+              description: A list of IDs describing the types of materials used
+              items:
+                example: canvas
+                type: string
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+            notes:
+              description: Any notes about the item
+              example: Artist signature in the lower left corner
+              type: string
+              x-struct: null
+              x-validate: null
+            title:
+              description: The object title
+              example: Black Rectangle
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        height:
+          description: The height of the object
+          example: '32'
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        images:
+          description: A list image urls of the object
+          items:
+            example: http://example.com/image.jpg
+            format: uri
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+          example: 'Accession ID: 823'
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+          example: Round Smithson work
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        subtype:
+          description: The object subtype ID. Options are defined in the Object types metadata endpoint
+          example: painting_unframed
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        type:
+          description: The object type id
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        unit_of_measurement:
+          enum:
+          - in
+          - cm
+          example: in
+          type: string
+          x-struct: null
+          x-validate: null
+        value:
+          $ref: '#/components/schemas/MonetaryAmount'
+        value_currency:
+          $ref: '#/components/schemas/Currency'
+        weight:
+          description: The weight of the object
+          example: '3.0'
+          type: string
+          x-struct: null
+          x-validate: null
+        weight_unit:
+          description: The unit of the object
+          enum:
+          - lb
+          - kg
+          example: lb
+          type: string
+          x-struct: null
+          x-validate: null
+        width:
+          description: The width of the object
+          example: '15'
+          type: string
+          x-struct: null
+          x-validate: null
+      title: Object
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Object
+      x-validate: null
+    RequestListItem:
+      example:
+        bookable:
+          missing: []
+          ready: true
+        created_at: '2021-01-21T21:00:29.568665'
+        destination:
+          city: New York
+          country: US
+          postal_code: '11249'
+          region: NY
+        hosted_session_id: 724
+        id: 6b12c76a-5217-4cd6-82d8-7aa5265ebaad
+        insurance: null
+        internal_reference: null
+        object_count: 1
+        origin:
+          city: New York
+          country: US
+          postal_code: '10019'
+          region: NY
+        public_reference: null
+        quote_types:
+        - parcel
+        - select
+        - premium
+        quoting_strategy: best_rate
+        shortcode: DEMO-R29NAW
+        status: closed
+        tags: []
+        updated_at: '2021-01-21T21:00:58.484566'
+      properties:
+        bookable:
+          description: Communicates whether the quotes generated for this request may be booked into shipments
+          properties:
+            missing:
+              description: A list of fields required for the request to be bookable
+              items:
+                type: string
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+            ready:
+              default: true
+              description: Returns true if the quotes in this request may be booked
+              type: boolean
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        created_at:
+          description: 'A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision '
+          example: '2021-01-21T21:00:58.403150'
+          type: string
+          x-struct: null
+          x-validate: null
+        destination:
+          additionalProperties: false
+          description: A minimal representation of the destination address for the request
+          properties:
+            city:
+              description: The destination address city
+              example: Los Angeles
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            country:
+              description: The destination address country in 2-digit ISO 3166-1 alpha-2 format
+              example: US
+              type: string
+              x-struct: null
+              x-validate: null
+            postal_code:
+              description: The destination address postal code
+              example: '90024'
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            region:
+              description: The destination address region
+              example: CA
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        hosted_session_id:
+          description: 'The ID of the HostedSession through which this request was created
+
+
+            '
+          example: 4215
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        id:
+          description: The ID for this request
+          example: 748dd2cd-f299-446d-8e6e-19b33aa72a83
+          type: string
+          x-struct: null
+          x-validate: null
+        insurance:
+          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
+          enum:
+          - null
+          - arta_transit_insurance
+          example: arta_transit_insurance
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
+          example: 'cart #425123; user #871'
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        log_request_id:
+          description: An identifier for the API call that created this resource
+          example: Fv9YnUGcBW9ozqgA2s_x
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        object_count:
+          description: The count of objects in this request
+          example: 1
+          type: integer
+          x-struct: null
+          x-validate: null
+        origin:
+          description: A minimal representation of the origin address for the request
+          properties:
+            city:
+              description: The origin address city
+              example: Brooklyn
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            country:
+              description: The origin address country in 2-digit ISO 3166-1 alpha-2 format
+              example: US
+              type: string
+              x-struct: null
+              x-validate: null
+            postal_code:
+              description: The origin address postal code
+              example: '11211'
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            region:
+              description: The origin address region
+              example: NY
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
+          example: 'Order #56812'
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        quote_types:
+          description: The IDs of the quote types generated for this request
+          items:
+            enum:
+            - parcel
+            - premium
+            - select
+            - self_ship
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        quoting_strategy:
+          description: TThe quoting strategy used when creating quotes for this request. Determines whether the API returns a single best-rate option per transport speed or multiple carrier options for comparison. If not specified, the default strategy (“best_rate”) will be applied.
+          enum:
+          - best_rate
+          - compare_carriers
+          example: best_rate
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        shortcode:
+          description: A brief string identifier for this shipment
+          example: DEMO-R723LA
+          type: string
+          x-struct: null
+          x-validate: null
+        status:
+          description: The status for this shipment
+          enum:
+          - quoted
+          - in_progress
+          - closed
+          - disqualified
+          - expired
+          - cancelled
+          - pending
+          example: quoted
+          type: string
+          x-struct: null
+          x-validate: null
+        tags:
+          description: A list of tags associated with this request
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+          x-struct: null
+          x-validate: null
+        updated_at:
+          description: 'A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision '
+          example: '2021-01-21T21:00:58.403150'
+          type: string
+          x-struct: null
+          x-validate: null
+      title: RequestListItem
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.RequestListItem
+      x-validate: null
+    Tag:
+      example:
+        color: 008000
+        created_at: '2024-09-25T19:17:54.871490'
+        created_by: null
+        description: null
+        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
+        is_active: false
+        name: ct-warehouse
+        updated_at: '2024-09-25T19:19:01.648283'
+        updated_by: null
+      properties:
+        color:
+          description: The hexadecimal color code for the tag, without the leading `#`.
+          example: 0000FF
+          maxLength: 6
+          minLength: 6
+          pattern: ^[0-9A-F]{6}$
+          type: string
+          x-struct: null
+          x-validate: null
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        created_by:
+          description: The user ID associated with the user who created the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        description:
+          description: An optional, brief description for this tag.
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the tag in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        is_active:
+          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
+          type: boolean
+          x-struct: null
+          x-validate: null
+        name:
+          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
+          example: la-warehouse
+          maxLength: 50
+          pattern: ^[a-z0-9-]{1,50}$
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_by:
+          description: The user ID associated with the last user to edit the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+      title: Tag
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

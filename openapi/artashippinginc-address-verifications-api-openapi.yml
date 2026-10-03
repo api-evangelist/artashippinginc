@@ -323,82 +323,6 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Error
       x-validate: null
-    AddressVerificationCreate:
-      additionalProperties: false
-      properties:
-        address_verification:
-          properties:
-            input:
-              properties:
-                address_line_1:
-                  description: Primary street address
-                  example: 123 Main St
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                address_line_2:
-                  description: Secondary address (apartment, suite, etc.)
-                  nullable: true
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                address_line_3:
-                  description: Tertiary address line
-                  nullable: true
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                city:
-                  description: City or locality
-                  example: New York
-                  nullable: true
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                country:
-                  description: ISO 3166-1 alpha-2 country code
-                  example: US
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                postal_code:
-                  description: Postal or ZIP code
-                  example: '10001'
-                  nullable: true
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                region:
-                  description: State, province, or region
-                  example: NY
-                  nullable: true
-                  type: string
-                  x-struct: null
-                  x-validate: null
-              required:
-              - address_line_1
-              - country
-              type: object
-              x-struct: null
-              x-validate: null
-            reference:
-              description: Your own reference ID for correlation
-              example: order-12345
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-          required:
-          - input
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - address_verification
-      title: AddressVerificationCreate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.AddressVerificationCreate
-      x-validate: null
     AddressVerification:
       example:
         created_at: '2025-06-15T12:00:00.000000'
@@ -600,6 +524,82 @@ components:
       title: AddressVerification
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.AddressVerification
+      x-validate: null
+    AddressVerificationCreate:
+      additionalProperties: false
+      properties:
+        address_verification:
+          properties:
+            input:
+              properties:
+                address_line_1:
+                  description: Primary street address
+                  example: 123 Main St
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                address_line_2:
+                  description: Secondary address (apartment, suite, etc.)
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                address_line_3:
+                  description: Tertiary address line
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                city:
+                  description: City or locality
+                  example: New York
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                country:
+                  description: ISO 3166-1 alpha-2 country code
+                  example: US
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                postal_code:
+                  description: Postal or ZIP code
+                  example: '10001'
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                region:
+                  description: State, province, or region
+                  example: NY
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+              required:
+              - address_line_1
+              - country
+              type: object
+              x-struct: null
+              x-validate: null
+            reference:
+              description: Your own reference ID for correlation
+              example: order-12345
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+          required:
+          - input
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - address_verification
+      title: AddressVerificationCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.AddressVerificationCreate
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

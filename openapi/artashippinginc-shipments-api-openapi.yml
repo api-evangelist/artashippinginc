@@ -380,209 +380,24 @@ paths:
       - Shipments
 components:
   schemas:
-    Object:
+    Package:
       properties:
-        components:
-          description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
-
-
-            When components are present, the object value must equal the sum of component values.'
-          items:
-            properties:
-              customs:
-                properties:
-                  country_of_origin:
-                    description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
-                    example: US
-                    maxLength: 2
-                    minLength: 2
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  hs_code:
-                    description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
-                    example: '123456'
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  medium:
-                    description: The medium of the object. This is a description of the material or materials used to create the object
-                    example: oil on canvas
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  temporary_admission:
-                    description: Select true if the goods are currently in the country under a temporary admission declaration
-                    example: true
-                    type: boolean
-                    x-struct: null
-                    x-validate: null
-                type: object
-                x-struct: null
-                x-validate: null
-              details:
-                properties:
-                  creation_date:
-                    description: Details about the timing in which an object was created
-                    example: '1980'
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  creator:
-                    description: The creator of the object
-                    example: Bob Smithson
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  notes:
-                    description: Any notes about the item
-                    example: Artist signature in the lower left corner
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  title:
-                    description: The object title
-                    example: Black Rectangle
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                type: object
-                x-struct: null
-                x-validate: null
-              id:
-                description: The id of the component in UUID format
-                format: uuid
-                type: string
-                x-struct: null
-                x-validate: null
-              internal_reference:
-                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
-                example: 'Accession ID: 823'
-                maxLength: 255
-                type: string
-                x-struct: null
-                x-validate: null
-              public_reference:
-                description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
-                example: Round Smithson work
-                maxLength: 255
-                type: string
-                x-struct: null
-                x-validate: null
-              type:
-                description: The object component type ID. Options are defined in the Object Component types metadata endpoint
-                example: painting_framed
-                pattern: ^[0-9a-z_]{1,56}$
-                type: string
-                x-struct: null
-                x-validate: null
-              value:
-                $ref: '#/components/schemas/MonetaryAmount'
-              value_currency:
-                $ref: '#/components/schemas/Currency'
-            type: object
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        current_packing:
-          description: A list of packing subtype IDs describing how the item is currently packed
-          items:
-            example: no_packing
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        customs:
-          properties:
-            country_of_origin:
-              description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
-              example: US
-              maxLength: 2
-              minLength: 2
-              type: string
-              x-struct: null
-              x-validate: null
-            hs_code:
-              description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
-              example: '123456'
-              type: string
-              x-struct: null
-              x-validate: null
-            medium:
-              description: The medium of the object. This is a description of the material or materials used to create the object
-              example: oil on canvas
-              type: string
-              x-struct: null
-              x-validate: null
-            temporary_admission:
-              description: Select true if the goods are currently in the country under a temporary admission declaration
-              example: true
-              type: boolean
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
         depth:
           description: The depth of the object
           example: '3'
           type: string
           x-struct: null
           x-validate: null
-        details:
-          properties:
-            creation_date:
-              description: Details about the timing in which an object was created
-              example: '1980'
-              type: string
-              x-struct: null
-              x-validate: null
-            creator:
-              description: The creator of the object
-              example: Bob Smithson
-              type: string
-              x-struct: null
-              x-validate: null
-            is_cites:
-              default: false
-              description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
-              type: boolean
-              x-struct: null
-              x-validate: null
-            is_fragile:
-              default: false
-              description: Set this flag to true is the item is fragile. This may effect packing and handling costs
-              type: boolean
-              x-struct: null
-              x-validate: null
-            materials:
-              deprecated: true
-              description: A list of IDs describing the types of materials used
-              items:
-                example: canvas
-                type: string
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-            notes:
-              description: Any notes about the item
-              example: Artist signature in the lower left corner
-              type: string
-              x-struct: null
-              x-validate: null
-            title:
-              description: The object title
-              example: Black Rectangle
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
+        eta:
+          description: The expected delivery date for this package in the `MM/DD/YYYY` format
+          example: 01/01/2021
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        handle_with_care:
+          description: Set this flag to true if the package should be handled with care
+          type: boolean
           x-struct: null
           x-validate: null
         height:
@@ -592,45 +407,37 @@ components:
           x-struct: null
           x-validate: null
         id:
+          description: The id of the package
           format: int64
           type: integer
           x-struct: null
           x-validate: null
-        images:
-          description: A list image urls of the object
+        is_sufficiently_packed:
+          description: Set this flag to true if the package is sufficiently packed
+          type: boolean
+          x-struct: null
+          x-validate: null
+        objects:
+          description: A list of objects in the package
           items:
-            example: http://example.com/image.jpg
-            format: uri
+            $ref: '#/components/schemas/Object'
+          type: array
+          x-struct: null
+          x-validate: null
+        packing_materials:
+          description: The id of a material.
+          items:
+            example: cardboard
             type: string
             x-struct: null
             x-validate: null
           type: array
           x-struct: null
           x-validate: null
-        internal_reference:
-          description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
-          example: 'Accession ID: 823'
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        public_reference:
-          description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
-          example: Round Smithson work
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        subtype:
-          description: The object subtype ID. Options are defined in the Object types metadata endpoint
-          example: painting_unframed
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-        type:
-          description: The object type id
-          pattern: ^[0-9a-z_]{1,56}$
+        status:
+          description: The status of the package
+          example: pending
+          nullable: true
           type: string
           x-struct: null
           x-validate: null
@@ -642,10 +449,6 @@ components:
           type: string
           x-struct: null
           x-validate: null
-        value:
-          $ref: '#/components/schemas/MonetaryAmount'
-        value_currency:
-          $ref: '#/components/schemas/Currency'
         weight:
           description: The weight of the object
           example: '3.0'
@@ -667,140 +470,9 @@ components:
           type: string
           x-struct: null
           x-validate: null
-      title: Object
+      title: Package
       type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Object
-      x-validate: null
-    MonetaryAmount:
-      example: '2500.00'
-      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
-      title: MonetaryAmount
-      type: string
-      x-struct: null
-      x-validate: null
-    Service:
-      properties:
-        amount:
-          $ref: '#/components/schemas/MonetaryAmount'
-        amount_currency:
-          $ref: '#/components/schemas/Currency'
-        included_services:
-          description: A list of service IDs that are included in the service
-          items:
-            properties:
-              name:
-                description: The name of the service
-                example: Consolidated Trucking
-                type: string
-                x-struct: null
-                x-validate: null
-              sub_subtype:
-                description: The service subsubtype ID. Options are defined in the Service types metadata endpoint
-                example: road_groupage
-                pattern: ^[0-9a-z_]{1,56}$
-                type: string
-                x-struct: null
-                x-validate: null
-              subtype:
-                description: The service subtype ID. Options are defined in the Service types metadata endpoint
-                example: consolidated
-                pattern: ^[0-9a-z_]{1,56}$
-                type: string
-                x-struct: null
-                x-validate: null
-              type:
-                description: The service type ID. Options are defined in the Service types metadata endpoint
-                example: transport
-                pattern: ^[0-9a-z_]{1,56}$
-                type: string
-                x-struct: null
-                x-validate: null
-            type: object
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        is_requested:
-          description: Set this flag to true if the service is requested
-          type: boolean
-          x-struct: null
-          x-validate: null
-        is_required:
-          description: Set this flag to true if the service is required
-          type: boolean
-          x-struct: null
-          x-validate: null
-        metadata:
-          description: Additional data about the service. For services with a `type` value of `"transport"` generated through instant quoting, `metadata` may include `reference_rate.provider` and `reference_rate.service_level` fields that indicate the carrier and mode of transport used to price this service
-          example: {}
-          type: object
-          x-struct: null
-          x-validate: null
-        name:
-          description: The name of the service
-          example: Consolidated Trucking
-          type: string
-          x-struct: null
-          x-validate: null
-        sub_subtype:
-          description: The service subsubtype ID. Options are defined in the Service types metadata endpoint
-          example: road_groupage
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-        subtype:
-          description: The service subtype ID. Options are defined in the Service types metadata endpoint
-          example: consolidated
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-        type:
-          description: The service type ID. Options are defined in the Service types metadata endpoint
-          example: transport
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-      title: Service
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Service
-      x-validate: null
-    MinimalLocation:
-      description: A minimal representation of the destination address for the shipment
-      properties:
-        city:
-          description: The destination address city
-          example: Los Angeles
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        country:
-          description: The destination address country in 2-digit ISO 3166-1 alpha-2 format
-          example: US
-          type: string
-          x-struct: null
-          x-validate: null
-        postal_code:
-          description: The destination address postal code
-          example: '90024'
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        region:
-          description: The destination address region
-          example: CA
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-      title: MinimalLocation
-      type: object
-      x-struct: null
+      x-struct: Elixir.DocsWeb.Schemas.Response.Package
       x-validate: null
     ShipmentCreate:
       oneOf:
@@ -1503,101 +1175,6 @@ components:
       title: ShipmentCreate
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.ShipmentCreate
       x-validate: null
-    Tag:
-      example:
-        color: 008000
-        created_at: '2024-09-25T19:17:54.871490'
-        created_by: null
-        description: null
-        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
-        is_active: false
-        name: ct-warehouse
-        updated_at: '2024-09-25T19:19:01.648283'
-        updated_by: null
-      properties:
-        color:
-          description: The hexadecimal color code for the tag, without the leading `#`.
-          example: 0000FF
-          maxLength: 6
-          minLength: 6
-          pattern: ^[0-9A-F]{6}$
-          type: string
-          x-struct: null
-          x-validate: null
-        created_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        created_by:
-          description: The user ID associated with the user who created the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        description:
-          description: An optional, brief description for this tag.
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          description: The id of the tag in UUID format
-          format: uuid
-          type: string
-          x-struct: null
-          x-validate: null
-        is_active:
-          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
-          type: boolean
-          x-struct: null
-          x-validate: null
-        name:
-          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
-          example: la-warehouse
-          maxLength: 50
-          pattern: ^[a-z0-9-]{1,50}$
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_by:
-          description: The user ID associated with the last user to edit the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-      title: Tag
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
-      x-validate: null
-    Error:
-      properties:
-        errors:
-          properties:
-            detail:
-              description: A human-readable explanation specific to this occurrence of the problem
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      title: Error
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Error
-      x-validate: null
     Location:
       properties:
         access_restrictions:
@@ -1692,6 +1269,634 @@ components:
       title: Location
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Location
+      x-validate: null
+    MonetaryAmount:
+      example: '2500.00'
+      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
+      title: MonetaryAmount
+      type: string
+      x-struct: null
+      x-validate: null
+    Currency:
+      default: USD
+      description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+      example: USD
+      maxLength: 3
+      minLength: 3
+      pattern: ^[A-Z]{3}$
+      title: Currency
+      type: string
+      x-struct: null
+      x-validate: null
+    Service:
+      properties:
+        amount:
+          $ref: '#/components/schemas/MonetaryAmount'
+        amount_currency:
+          $ref: '#/components/schemas/Currency'
+        included_services:
+          description: A list of service IDs that are included in the service
+          items:
+            properties:
+              name:
+                description: The name of the service
+                example: Consolidated Trucking
+                type: string
+                x-struct: null
+                x-validate: null
+              sub_subtype:
+                description: The service subsubtype ID. Options are defined in the Service types metadata endpoint
+                example: road_groupage
+                pattern: ^[0-9a-z_]{1,56}$
+                type: string
+                x-struct: null
+                x-validate: null
+              subtype:
+                description: The service subtype ID. Options are defined in the Service types metadata endpoint
+                example: consolidated
+                pattern: ^[0-9a-z_]{1,56}$
+                type: string
+                x-struct: null
+                x-validate: null
+              type:
+                description: The service type ID. Options are defined in the Service types metadata endpoint
+                example: transport
+                pattern: ^[0-9a-z_]{1,56}$
+                type: string
+                x-struct: null
+                x-validate: null
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        is_requested:
+          description: Set this flag to true if the service is requested
+          type: boolean
+          x-struct: null
+          x-validate: null
+        is_required:
+          description: Set this flag to true if the service is required
+          type: boolean
+          x-struct: null
+          x-validate: null
+        metadata:
+          description: Additional data about the service. For services with a `type` value of `"transport"` generated through instant quoting, `metadata` may include `reference_rate.provider` and `reference_rate.service_level` fields that indicate the carrier and mode of transport used to price this service
+          example: {}
+          type: object
+          x-struct: null
+          x-validate: null
+        name:
+          description: The name of the service
+          example: Consolidated Trucking
+          type: string
+          x-struct: null
+          x-validate: null
+        sub_subtype:
+          description: The service subsubtype ID. Options are defined in the Service types metadata endpoint
+          example: road_groupage
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        subtype:
+          description: The service subtype ID. Options are defined in the Service types metadata endpoint
+          example: consolidated
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        type:
+          description: The service type ID. Options are defined in the Service types metadata endpoint
+          example: transport
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+      title: Service
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Service
+      x-validate: null
+    Object:
+      properties:
+        components:
+          description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
+
+
+            When components are present, the object value must equal the sum of component values.'
+          items:
+            properties:
+              customs:
+                properties:
+                  country_of_origin:
+                    description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+                    example: US
+                    maxLength: 2
+                    minLength: 2
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  hs_code:
+                    description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+                    example: '123456'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  medium:
+                    description: The medium of the object. This is a description of the material or materials used to create the object
+                    example: oil on canvas
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  temporary_admission:
+                    description: Select true if the goods are currently in the country under a temporary admission declaration
+                    example: true
+                    type: boolean
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              details:
+                properties:
+                  creation_date:
+                    description: Details about the timing in which an object was created
+                    example: '1980'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  creator:
+                    description: The creator of the object
+                    example: Bob Smithson
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  notes:
+                    description: Any notes about the item
+                    example: Artist signature in the lower left corner
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  title:
+                    description: The object title
+                    example: Black Rectangle
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              id:
+                description: The id of the component in UUID format
+                format: uuid
+                type: string
+                x-struct: null
+                x-validate: null
+              internal_reference:
+                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                example: 'Accession ID: 823'
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              public_reference:
+                description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+                example: Round Smithson work
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              type:
+                description: The object component type ID. Options are defined in the Object Component types metadata endpoint
+                example: painting_framed
+                pattern: ^[0-9a-z_]{1,56}$
+                type: string
+                x-struct: null
+                x-validate: null
+              value:
+                $ref: '#/components/schemas/MonetaryAmount'
+              value_currency:
+                $ref: '#/components/schemas/Currency'
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        current_packing:
+          description: A list of packing subtype IDs describing how the item is currently packed
+          items:
+            example: no_packing
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        customs:
+          properties:
+            country_of_origin:
+              description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+              example: US
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-struct: null
+              x-validate: null
+            hs_code:
+              description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+              example: '123456'
+              type: string
+              x-struct: null
+              x-validate: null
+            medium:
+              description: The medium of the object. This is a description of the material or materials used to create the object
+              example: oil on canvas
+              type: string
+              x-struct: null
+              x-validate: null
+            temporary_admission:
+              description: Select true if the goods are currently in the country under a temporary admission declaration
+              example: true
+              type: boolean
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        depth:
+          description: The depth of the object
+          example: '3'
+          type: string
+          x-struct: null
+          x-validate: null
+        details:
+          properties:
+            creation_date:
+              description: Details about the timing in which an object was created
+              example: '1980'
+              type: string
+              x-struct: null
+              x-validate: null
+            creator:
+              description: The creator of the object
+              example: Bob Smithson
+              type: string
+              x-struct: null
+              x-validate: null
+            is_cites:
+              default: false
+              description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
+              type: boolean
+              x-struct: null
+              x-validate: null
+            is_fragile:
+              default: false
+              description: Set this flag to true is the item is fragile. This may effect packing and handling costs
+              type: boolean
+              x-struct: null
+              x-validate: null
+            materials:
+              deprecated: true
+              description: A list of IDs describing the types of materials used
+              items:
+                example: canvas
+                type: string
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+            notes:
+              description: Any notes about the item
+              example: Artist signature in the lower left corner
+              type: string
+              x-struct: null
+              x-validate: null
+            title:
+              description: The object title
+              example: Black Rectangle
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        height:
+          description: The height of the object
+          example: '32'
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        images:
+          description: A list image urls of the object
+          items:
+            example: http://example.com/image.jpg
+            format: uri
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+          example: 'Accession ID: 823'
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+          example: Round Smithson work
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        subtype:
+          description: The object subtype ID. Options are defined in the Object types metadata endpoint
+          example: painting_unframed
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        type:
+          description: The object type id
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        unit_of_measurement:
+          enum:
+          - in
+          - cm
+          example: in
+          type: string
+          x-struct: null
+          x-validate: null
+        value:
+          $ref: '#/components/schemas/MonetaryAmount'
+        value_currency:
+          $ref: '#/components/schemas/Currency'
+        weight:
+          description: The weight of the object
+          example: '3.0'
+          type: string
+          x-struct: null
+          x-validate: null
+        weight_unit:
+          description: The unit of the object
+          enum:
+          - lb
+          - kg
+          example: lb
+          type: string
+          x-struct: null
+          x-validate: null
+        width:
+          description: The width of the object
+          example: '15'
+          type: string
+          x-struct: null
+          x-validate: null
+      title: Object
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Object
+      x-validate: null
+    ShipmentList:
+      example:
+        created_at: '2021-01-21T21:00:58.403150'
+        destination:
+          city: Los Angeles
+          country: US
+          postal_code: '90024'
+          region: CA
+        hosted_session_id: null
+        id: 748dd2cd-f299-446d-8e6e-19b33aa72a83
+        internal_reference: 'cart #425123; user #871'
+        object_count: 1
+        origin:
+          city: Brooklyn
+          country: US
+          postal_code: '11211'
+          region: NY
+        package_count: 1
+        public_reference: null
+        quote_type: parcel
+        shortcode: DEMO-572652
+        status: pending
+        tags: []
+        total: '405.53'
+        total_currency: USD
+        updated_at: '2021-01-21T21:00:58.403150'
+      properties:
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        destination:
+          $ref: '#/components/schemas/MinimalLocation'
+        hosted_session_id:
+          description: The ID of the HostedSession through which this shipment was created
+          example: 4215
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the shipment in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
+          example: 'cart #425123; user #871'
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        object_count:
+          description: The count of objects in this shipment
+          example: 1
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        origin:
+          $ref: '#/components/schemas/MinimalLocation'
+        package_count:
+          description: The number of packages in this shipment
+          example: 1
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
+          example: 'Order #5681'
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        quote_type:
+          description: The ID of the quote type associated with this shipment
+          enum:
+          - premium
+          - select
+          - parcel
+          - self_ship
+          example: premium
+          type: string
+          x-struct: null
+          x-validate: null
+        shortcode:
+          description: A brief identifier for this shipment
+          example: DEMO-B8FIRV
+          type: string
+          x-struct: null
+          x-validate: null
+        status:
+          description: The status for this shipment
+          enum:
+          - pending
+          - confirmed
+          - collected
+          - in_transit
+          - completed
+          - cancelled
+          example: pending
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        tags:
+          description: A list of tags associated with the shipment
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+          x-struct: null
+          x-validate: null
+        total:
+          $ref: '#/components/schemas/MonetaryAmount'
+        total_currency:
+          $ref: '#/components/schemas/Currency'
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+      title: ShipmentList
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.ShipmentList
+      x-validate: null
+    Error:
+      properties:
+        errors:
+          properties:
+            detail:
+              description: A human-readable explanation specific to this occurrence of the problem
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      title: Error
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Error
+      x-validate: null
+    Tag:
+      example:
+        color: 008000
+        created_at: '2024-09-25T19:17:54.871490'
+        created_by: null
+        description: null
+        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
+        is_active: false
+        name: ct-warehouse
+        updated_at: '2024-09-25T19:19:01.648283'
+        updated_by: null
+      properties:
+        color:
+          description: The hexadecimal color code for the tag, without the leading `#`.
+          example: 0000FF
+          maxLength: 6
+          minLength: 6
+          pattern: ^[0-9A-F]{6}$
+          type: string
+          x-struct: null
+          x-validate: null
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        created_by:
+          description: The user ID associated with the user who created the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        description:
+          description: An optional, brief description for this tag.
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the tag in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        is_active:
+          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
+          type: boolean
+          x-struct: null
+          x-validate: null
+        name:
+          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
+          example: la-warehouse
+          maxLength: 50
+          pattern: ^[a-z0-9-]{1,50}$
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_by:
+          description: The user ID associated with the last user to edit the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+      title: Tag
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
       x-validate: null
     Shipment:
       example:
@@ -2379,244 +2584,39 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Shipment
       x-validate: null
-    Currency:
-      default: USD
-      description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
-      example: USD
-      maxLength: 3
-      minLength: 3
-      pattern: ^[A-Z]{3}$
-      title: Currency
-      type: string
+    MinimalLocation:
+      description: A minimal representation of the destination address for the shipment
+      properties:
+        city:
+          description: The destination address city
+          example: Los Angeles
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        country:
+          description: The destination address country in 2-digit ISO 3166-1 alpha-2 format
+          example: US
+          type: string
+          x-struct: null
+          x-validate: null
+        postal_code:
+          description: The destination address postal code
+          example: '90024'
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        region:
+          description: The destination address region
+          example: CA
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+      title: MinimalLocation
+      type: object
       x-struct: null
-      x-validate: null
-    Package:
-      properties:
-        depth:
-          description: The depth of the object
-          example: '3'
-          type: string
-          x-struct: null
-          x-validate: null
-        eta:
-          description: The expected delivery date for this package in the `MM/DD/YYYY` format
-          example: 01/01/2021
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        handle_with_care:
-          description: Set this flag to true if the package should be handled with care
-          type: boolean
-          x-struct: null
-          x-validate: null
-        height:
-          description: The height of the object
-          example: '32'
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          description: The id of the package
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        is_sufficiently_packed:
-          description: Set this flag to true if the package is sufficiently packed
-          type: boolean
-          x-struct: null
-          x-validate: null
-        objects:
-          description: A list of objects in the package
-          items:
-            $ref: '#/components/schemas/Object'
-          type: array
-          x-struct: null
-          x-validate: null
-        packing_materials:
-          description: The id of a material.
-          items:
-            example: cardboard
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        status:
-          description: The status of the package
-          example: pending
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        unit_of_measurement:
-          enum:
-          - in
-          - cm
-          example: in
-          type: string
-          x-struct: null
-          x-validate: null
-        weight:
-          description: The weight of the object
-          example: '3.0'
-          type: string
-          x-struct: null
-          x-validate: null
-        weight_unit:
-          description: The unit of the object
-          enum:
-          - lb
-          - kg
-          example: lb
-          type: string
-          x-struct: null
-          x-validate: null
-        width:
-          description: The width of the object
-          example: '15'
-          type: string
-          x-struct: null
-          x-validate: null
-      title: Package
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Package
-      x-validate: null
-    ShipmentList:
-      example:
-        created_at: '2021-01-21T21:00:58.403150'
-        destination:
-          city: Los Angeles
-          country: US
-          postal_code: '90024'
-          region: CA
-        hosted_session_id: null
-        id: 748dd2cd-f299-446d-8e6e-19b33aa72a83
-        internal_reference: 'cart #425123; user #871'
-        object_count: 1
-        origin:
-          city: Brooklyn
-          country: US
-          postal_code: '11211'
-          region: NY
-        package_count: 1
-        public_reference: null
-        quote_type: parcel
-        shortcode: DEMO-572652
-        status: pending
-        tags: []
-        total: '405.53'
-        total_currency: USD
-        updated_at: '2021-01-21T21:00:58.403150'
-      properties:
-        created_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        destination:
-          $ref: '#/components/schemas/MinimalLocation'
-        hosted_session_id:
-          description: The ID of the HostedSession through which this shipment was created
-          example: 4215
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        id:
-          description: The id of the shipment in UUID format
-          format: uuid
-          type: string
-          x-struct: null
-          x-validate: null
-        internal_reference:
-          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
-          example: 'cart #425123; user #871'
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        object_count:
-          description: The count of objects in this shipment
-          example: 1
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        origin:
-          $ref: '#/components/schemas/MinimalLocation'
-        package_count:
-          description: The number of packages in this shipment
-          example: 1
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        public_reference:
-          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
-          example: 'Order #5681'
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        quote_type:
-          description: The ID of the quote type associated with this shipment
-          enum:
-          - premium
-          - select
-          - parcel
-          - self_ship
-          example: premium
-          type: string
-          x-struct: null
-          x-validate: null
-        shortcode:
-          description: A brief identifier for this shipment
-          example: DEMO-B8FIRV
-          type: string
-          x-struct: null
-          x-validate: null
-        status:
-          description: The status for this shipment
-          enum:
-          - pending
-          - confirmed
-          - collected
-          - in_transit
-          - completed
-          - cancelled
-          example: pending
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        tags:
-          description: A list of tags associated with the shipment
-          items:
-            $ref: '#/components/schemas/Tag'
-          type: array
-          x-struct: null
-          x-validate: null
-        total:
-          $ref: '#/components/schemas/MonetaryAmount'
-        total_currency:
-          $ref: '#/components/schemas/Currency'
-        updated_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-      title: ShipmentList
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.ShipmentList
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

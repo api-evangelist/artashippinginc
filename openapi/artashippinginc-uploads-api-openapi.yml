@@ -380,6 +380,104 @@ paths:
       - Uploads
 components:
   schemas:
+    Upload:
+      properties:
+        created_at:
+          example: '2021-10-27T16:48:38.657228'
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        document_type:
+          description: The document type of the uploaded file
+          enum:
+          - bill_of_lading
+          - certificate_of_insurance
+          - certificate_of_insurance_template
+          - condition_report
+          - condition_check
+          - image
+          - instructions
+          - airway_bill
+          - commercial_invoice
+          - power_of_attorney
+          - proof_of_export
+          - proof_of_delivery
+          - quote
+          - shipping_label
+          - other
+          example: other
+          type: string
+          x-struct: null
+          x-validate: null
+        document_type_label:
+          description: A brief label providing additional context about the `document_type`. Required when "other" is the `document_type`
+          example: Inventory List
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        download_url:
+          example: https://api.arta.io/downloads/kikhAFZ565BzbGooRqLZl
+          nullable: true
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        file_name:
+          description: The name of the uploaded file
+          example: inventory_list_27148_16.pdf
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          example: 1942
+          readOnly: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        mime_type:
+          description: The mime-type of the uploaded file
+          enum:
+          - application/pdf
+          - application/vnd.ms-excel
+          - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+          - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+          - image/jpeg
+          - image/png
+          - text/csv
+          - video/mp4
+          - video/quicktime
+          - application/msword
+          example: application/pdf
+          type: string
+          x-struct: null
+          x-validate: null
+        size:
+          description: The size of the uploaded file in bytes
+          example: 58550
+          type: integer
+          x-struct: null
+          x-validate: null
+        status:
+          enum:
+          - pending
+          - processed
+          - failed
+          example: processed
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+      required:
+      - document_type
+      - file_name
+      - mime_type
+      - size
+      title: Upload
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Upload
+      x-validate: null
     UploadCreate:
       additionalProperties: false
       properties:
@@ -559,104 +657,6 @@ components:
       title: UploadWithPresignedURL
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.UploadWithPresignedURL
-      x-validate: null
-    Upload:
-      properties:
-        created_at:
-          example: '2021-10-27T16:48:38.657228'
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        document_type:
-          description: The document type of the uploaded file
-          enum:
-          - bill_of_lading
-          - certificate_of_insurance
-          - certificate_of_insurance_template
-          - condition_report
-          - condition_check
-          - image
-          - instructions
-          - airway_bill
-          - commercial_invoice
-          - power_of_attorney
-          - proof_of_export
-          - proof_of_delivery
-          - quote
-          - shipping_label
-          - other
-          example: other
-          type: string
-          x-struct: null
-          x-validate: null
-        document_type_label:
-          description: A brief label providing additional context about the `document_type`. Required when "other" is the `document_type`
-          example: Inventory List
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        download_url:
-          example: https://api.arta.io/downloads/kikhAFZ565BzbGooRqLZl
-          nullable: true
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        file_name:
-          description: The name of the uploaded file
-          example: inventory_list_27148_16.pdf
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          example: 1942
-          readOnly: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        mime_type:
-          description: The mime-type of the uploaded file
-          enum:
-          - application/pdf
-          - application/vnd.ms-excel
-          - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-          - application/vnd.openxmlformats-officedocument.wordprocessingml.document
-          - image/jpeg
-          - image/png
-          - text/csv
-          - video/mp4
-          - video/quicktime
-          - application/msword
-          example: application/pdf
-          type: string
-          x-struct: null
-          x-validate: null
-        size:
-          description: The size of the uploaded file in bytes
-          example: 58550
-          type: integer
-          x-struct: null
-          x-validate: null
-        status:
-          enum:
-          - pending
-          - processed
-          - failed
-          example: processed
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-      required:
-      - document_type
-      - file_name
-      - mime_type
-      - size
-      title: Upload
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Upload
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

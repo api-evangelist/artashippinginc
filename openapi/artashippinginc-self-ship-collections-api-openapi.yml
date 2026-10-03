@@ -731,14 +731,6 @@ paths:
       - self_ship_collections
 components:
   schemas:
-    SelfShipCollectionCreate:
-      description: The payload for scheduling a self-ship collection. The expected shape depends on `service.carrier`.
-      oneOf:
-      - $ref: '#/components/schemas/FedexSelfShipCollectionPayload'
-      - $ref: '#/components/schemas/DhlSelfShipCollectionPayload'
-      title: SelfShipCollectionCreate
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionCreate
-      x-validate: null
     DhlSelfShipCollectionPayload:
       additionalProperties: false
       description: Schedule a DHL collection
@@ -988,145 +980,131 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionCreateDhl
       x-validate: null
-    SelfShipCollectionAvailabilityCheck:
-      example:
-        availabilities:
-        - collection_date: '2026-03-06'
-          collection_times:
-          - 07:00:00
-          - 07:30:00
-          - 08:00:00
-          residential_available: true
-        collection_date: '2026-03-06'
-        location:
-          address_line_1: 123 Main St
-          city: New York
-          close_time: '17:00:00'
-          country: US
-          postal_code: '10001'
-          region: NY
-        service:
-          carrier: fedex
-          code: ground
-          route: domestic
+    SelfShipCollectionCreate:
+      description: The payload for scheduling a self-ship collection. The expected shape depends on `service.carrier`.
+      oneOf:
+      - $ref: '#/components/schemas/FedexSelfShipCollectionPayload'
+      - $ref: '#/components/schemas/DhlSelfShipCollectionPayload'
+      title: SelfShipCollectionCreate
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionCreate
+      x-validate: null
+    SelfShipCollectionAvailabilityCheckCreate:
+      additionalProperties: false
       properties:
-        availabilities:
-          description: Available pickup slots. May be empty if no slots are available.
-          items:
-            properties:
-              collection_date:
-                description: Available pickup date (`YYYY-MM-DD`)
-                example: '2026-03-06'
-                format: date
-                type: string
-                x-struct: null
-                x-validate: null
-              collection_times:
-                description: Available pickup times in ISO 8601 format (`HH:MM:SS`)
-                items:
-                  example: 07:00:00
+        self_ship_collection_availability_check:
+          properties:
+            collection_date:
+              description: Date to check availability for in ISO 8601 format (`YYYY-MM-DD`)
+              example: '2026-03-06'
+              format: date
+              type: string
+              x-struct: null
+              x-validate: null
+            location:
+              description: Pickup location to check availability for
+              properties:
+                address_line_1:
+                  description: Street address
+                  example: 123 Main St
+                  minLength: 1
                   type: string
                   x-struct: null
                   x-validate: null
-                type: array
-                x-struct: null
-                x-validate: null
-              residential_available:
-                description: Whether residential pickup is available
-                type: boolean
-                x-struct: null
-                x-validate: null
-            type: object
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        collection_date:
-          description: The date that was checked for availability (`YYYY-MM-DD`)
-          example: '2026-03-06'
-          format: date
-          type: string
-          x-struct: null
-          x-validate: null
-        location:
-          description: The pickup location that was checked
-          properties:
-            address_line_1:
-              description: Street address
-              type: string
+                address_line_2:
+                  description: Additional address info
+                  nullable: true
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                city:
+                  description: City
+                  example: New York
+                  minLength: 1
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                close_time:
+                  description: Location closing time in ISO 8601 format (`HH:MM:SS`)
+                  example: '17:00:00'
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                country:
+                  description: Two-letter country code. Currently `US` and `GB` are supported.
+                  example: US
+                  maxLength: 2
+                  minLength: 2
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                postal_code:
+                  description: Postal code
+                  example: '10001'
+                  minLength: 1
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                region:
+                  description: State or territory code. Required for `US` addresses and must be a valid US state or territory code; may be omitted for `GB` addresses.
+                  example: NY
+                  type: string
+                  x-struct: null
+                  x-validate: null
+              required:
+              - address_line_1
+              - city
+              - country
+              - postal_code
+              - close_time
+              type: object
               x-struct: null
               x-validate: null
-            address_line_2:
-              description: Additional address info
-              nullable: true
-              type: string
+            service:
+              description: Carrier service to check availability for
+              properties:
+                carrier:
+                  description: Carrier identifier. `fedex` and `dhl` are supported.
+                  enum:
+                  - fedex
+                  - dhl
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                code:
+                  description: Service level code
+                  enum:
+                  - ground
+                  - express
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                route:
+                  description: Route type.
+                  enum:
+                  - domestic
+                  - international
+                  type: string
+                  x-struct: null
+                  x-validate: null
+              required:
+              - carrier
+              - code
+              - route
+              type: object
               x-struct: null
               x-validate: null
-            city:
-              description: City
-              type: string
-              x-struct: null
-              x-validate: null
-            close_time:
-              description: Location closing time in ISO 8601 format (`HH:MM:SS`)
-              example: '17:00:00'
-              type: string
-              x-struct: null
-              x-validate: null
-            country:
-              description: Two-letter country code
-              example: US
-              type: string
-              x-struct: null
-              x-validate: null
-            postal_code:
-              description: Postal code
-              type: string
-              x-struct: null
-              x-validate: null
-            region:
-              description: State or province code
-              example: NY
-              type: string
-              x-struct: null
-              x-validate: null
+          required:
+          - location
+          - service
+          - collection_date
           type: object
           x-struct: null
           x-validate: null
-        service:
-          description: The carrier service that was checked
-          properties:
-            carrier:
-              description: Carrier identifier
-              enum:
-              - fedex
-              - dhl
-              type: string
-              x-struct: null
-              x-validate: null
-            code:
-              description: Service level code
-              enum:
-              - ground
-              - express
-              type: string
-              x-struct: null
-              x-validate: null
-            route:
-              description: Route type
-              enum:
-              - domestic
-              - international
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      title: SelfShipCollectionAvailabilityCheck
+      required:
+      - self_ship_collection_availability_check
+      title: SelfShipCollectionAvailabilityCheckCreate
       type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.SelfShipCollectionAvailabilityCheck
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionAvailabilityCheckCreate
       x-validate: null
     FedexSelfShipCollectionPayload:
       additionalProperties: false
@@ -1325,123 +1303,145 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionCreateFedex
       x-validate: null
-    SelfShipCollectionAvailabilityCheckCreate:
-      additionalProperties: false
+    SelfShipCollectionAvailabilityCheck:
+      example:
+        availabilities:
+        - collection_date: '2026-03-06'
+          collection_times:
+          - 07:00:00
+          - 07:30:00
+          - 08:00:00
+          residential_available: true
+        collection_date: '2026-03-06'
+        location:
+          address_line_1: 123 Main St
+          city: New York
+          close_time: '17:00:00'
+          country: US
+          postal_code: '10001'
+          region: NY
+        service:
+          carrier: fedex
+          code: ground
+          route: domestic
       properties:
-        self_ship_collection_availability_check:
+        availabilities:
+          description: Available pickup slots. May be empty if no slots are available.
+          items:
+            properties:
+              collection_date:
+                description: Available pickup date (`YYYY-MM-DD`)
+                example: '2026-03-06'
+                format: date
+                type: string
+                x-struct: null
+                x-validate: null
+              collection_times:
+                description: Available pickup times in ISO 8601 format (`HH:MM:SS`)
+                items:
+                  example: 07:00:00
+                  type: string
+                  x-struct: null
+                  x-validate: null
+                type: array
+                x-struct: null
+                x-validate: null
+              residential_available:
+                description: Whether residential pickup is available
+                type: boolean
+                x-struct: null
+                x-validate: null
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        collection_date:
+          description: The date that was checked for availability (`YYYY-MM-DD`)
+          example: '2026-03-06'
+          format: date
+          type: string
+          x-struct: null
+          x-validate: null
+        location:
+          description: The pickup location that was checked
           properties:
-            collection_date:
-              description: Date to check availability for in ISO 8601 format (`YYYY-MM-DD`)
-              example: '2026-03-06'
-              format: date
+            address_line_1:
+              description: Street address
               type: string
               x-struct: null
               x-validate: null
-            location:
-              description: Pickup location to check availability for
-              properties:
-                address_line_1:
-                  description: Street address
-                  example: 123 Main St
-                  minLength: 1
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                address_line_2:
-                  description: Additional address info
-                  nullable: true
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                city:
-                  description: City
-                  example: New York
-                  minLength: 1
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                close_time:
-                  description: Location closing time in ISO 8601 format (`HH:MM:SS`)
-                  example: '17:00:00'
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                country:
-                  description: Two-letter country code. Currently `US` and `GB` are supported.
-                  example: US
-                  maxLength: 2
-                  minLength: 2
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                postal_code:
-                  description: Postal code
-                  example: '10001'
-                  minLength: 1
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                region:
-                  description: State or territory code. Required for `US` addresses and must be a valid US state or territory code; may be omitted for `GB` addresses.
-                  example: NY
-                  type: string
-                  x-struct: null
-                  x-validate: null
-              required:
-              - address_line_1
-              - city
-              - country
-              - postal_code
-              - close_time
-              type: object
+            address_line_2:
+              description: Additional address info
+              nullable: true
+              type: string
               x-struct: null
               x-validate: null
-            service:
-              description: Carrier service to check availability for
-              properties:
-                carrier:
-                  description: Carrier identifier. `fedex` and `dhl` are supported.
-                  enum:
-                  - fedex
-                  - dhl
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                code:
-                  description: Service level code
-                  enum:
-                  - ground
-                  - express
-                  type: string
-                  x-struct: null
-                  x-validate: null
-                route:
-                  description: Route type.
-                  enum:
-                  - domestic
-                  - international
-                  type: string
-                  x-struct: null
-                  x-validate: null
-              required:
-              - carrier
-              - code
-              - route
-              type: object
+            city:
+              description: City
+              type: string
               x-struct: null
               x-validate: null
-          required:
-          - location
-          - service
-          - collection_date
+            close_time:
+              description: Location closing time in ISO 8601 format (`HH:MM:SS`)
+              example: '17:00:00'
+              type: string
+              x-struct: null
+              x-validate: null
+            country:
+              description: Two-letter country code
+              example: US
+              type: string
+              x-struct: null
+              x-validate: null
+            postal_code:
+              description: Postal code
+              type: string
+              x-struct: null
+              x-validate: null
+            region:
+              description: State or province code
+              example: NY
+              type: string
+              x-struct: null
+              x-validate: null
           type: object
           x-struct: null
           x-validate: null
-      required:
-      - self_ship_collection_availability_check
-      title: SelfShipCollectionAvailabilityCheckCreate
+        service:
+          description: The carrier service that was checked
+          properties:
+            carrier:
+              description: Carrier identifier
+              enum:
+              - fedex
+              - dhl
+              type: string
+              x-struct: null
+              x-validate: null
+            code:
+              description: Service level code
+              enum:
+              - ground
+              - express
+              type: string
+              x-struct: null
+              x-validate: null
+            route:
+              description: Route type
+              enum:
+              - domestic
+              - international
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      title: SelfShipCollectionAvailabilityCheck
       type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.SelfShipCollectionAvailabilityCheckCreate
+      x-struct: Elixir.DocsWeb.Schemas.Response.SelfShipCollectionAvailabilityCheck
       x-validate: null
     SelfShipCollection:
       example:
