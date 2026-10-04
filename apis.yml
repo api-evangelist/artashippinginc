@@ -18,6 +18,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/artashippinginc-capability-edges.yml
+  name: Artashippinginc Business Capability Map
 - type: AgenticAccess
   url: agentic-access/artashippinginc-agentic-access.yml
 - type: Spectral
@@ -48,7 +51,8 @@ apis:
   description: >-
     The address_verifications API from Artashippinginc — 2 operation(s) for address_verifications.
   humanURL: https://api-reference.arta.io
-  tags:
+  tags: []
+  tags_raw:
   - address_verifications
   properties:
   - type: OpenAPI
@@ -70,6 +74,8 @@ apis:
   description: The api_keys API from Artashippinginc — 2 operation(s) for api_keys.
   humanURL: https://api-reference.arta.io
   tags:
+  - APIKeys
+  tags_raw:
   - api_keys
   properties:
   - type: OpenAPI
@@ -91,6 +97,8 @@ apis:
   description: The attachments API from Artashippinginc — 2 operation(s) for attachments.
   humanURL: https://api-reference.arta.io
   tags:
+  - Attachments
+  tags_raw:
   - attachments
   properties:
   - type: OpenAPI
@@ -112,7 +120,8 @@ apis:
   description: >-
     The collection_tag_rules API from Artashippinginc — 2 operation(s) for collection_tag_rules.
   humanURL: https://api-reference.arta.io
-  tags:
+  tags: []
+  tags_raw:
   - collection_tag_rules
   properties:
   - type: OpenAPI
@@ -133,7 +142,8 @@ apis:
   name: Artashippinginc Email Rules API
   description: The email_rules API from Artashippinginc — 2 operation(s) for email_rules.
   humanURL: https://api-reference.arta.io
-  tags:
+  tags: []
+  tags_raw:
   - email_rules
   properties:
   - type: OpenAPI
@@ -156,6 +166,8 @@ apis:
     The email_subscriptions API from Artashippinginc — 2 operation(s) for email_subscriptions.
   humanURL: https://api-reference.arta.io
   tags:
+  - Email Subscriptions
+  tags_raw:
   - email_subscriptions
   properties:
   - type: OpenAPI
@@ -177,6 +189,8 @@ apis:
   description: The hosted_sessions API from Artashippinginc — 3 operation(s) for hosted_sessions.
   humanURL: https://api-reference.arta.io
   tags:
+  - Hosted Sessions
+  tags_raw:
   - hosted_sessions
   properties:
   - type: OpenAPI
@@ -198,7 +212,8 @@ apis:
   description: >-
     The import_cost_estimates API from Artashippinginc — 2 operation(s) for import_cost_estimates.
   humanURL: https://api-reference.arta.io
-  tags:
+  tags: []
+  tags_raw:
   - import_cost_estimates
   properties:
   - type: OpenAPI
@@ -220,6 +235,8 @@ apis:
   description: The invoice_payments API from Artashippinginc — 2 operation(s) for invoice_payments.
   humanURL: https://api-reference.arta.io
   tags:
+  - Invoice Payments
+  tags_raw:
   - invoice_payments
   properties:
   - type: OpenAPI
@@ -241,6 +258,8 @@ apis:
   description: The invoices API from Artashippinginc — 2 operation(s) for invoices.
   humanURL: https://api-reference.arta.io
   tags:
+  - Invoices
+  tags_raw:
   - invoices
   properties:
   - type: OpenAPI
@@ -262,6 +281,8 @@ apis:
   description: The logs API from Artashippinginc — 2 operation(s) for logs.
   humanURL: https://api-reference.arta.io
   tags:
+  - Logs
+  tags_raw:
   - logs
   properties:
   - type: OpenAPI
@@ -283,6 +304,8 @@ apis:
   description: The metadata API from Artashippinginc — 24 operation(s) for metadata.
   humanURL: https://api-reference.arta.io
   tags:
+  - Metadata
+  tags_raw:
   - metadata
   properties:
   - type: OpenAPI
@@ -304,6 +327,8 @@ apis:
   description: The organization API from Artashippinginc — 1 operation(s) for organization.
   humanURL: https://api-reference.arta.io
   tags:
+  - Organization
+  tags_raw:
   - organization
   properties:
   - type: OpenAPI
@@ -325,6 +350,8 @@ apis:
   description: The payments API from Artashippinginc — 2 operation(s) for payments.
   humanURL: https://api-reference.arta.io
   tags:
+  - Payments
+  tags_raw:
   - payments
   properties:
   - type: OpenAPI
@@ -346,6 +373,8 @@ apis:
   description: The requests API from Artashippinginc — 5 operation(s) for requests.
   humanURL: https://api-reference.arta.io
   tags:
+  - Requests
+  tags_raw:
   - requests
   properties:
   - type: OpenAPI
@@ -367,7 +396,8 @@ apis:
   description: >-
     The self_ship_collections API from Artashippinginc — 4 operation(s) for self_ship_collections.
   humanURL: https://api-reference.arta.io
-  tags:
+  tags: []
+  tags_raw:
   - self_ship_collections
   properties:
   - type: OpenAPI
@@ -389,7 +419,8 @@ apis:
   description: >-
     The shipment_exceptions API from Artashippinginc — 2 operation(s) for shipment_exceptions.
   humanURL: https://api-reference.arta.io
-  tags:
+  tags: []
+  tags_raw:
   - shipment_exceptions
   properties:
   - type: OpenAPI
@@ -411,6 +442,8 @@ apis:
   description: The shipments API from Artashippinginc — 2 operation(s) for shipments.
   humanURL: https://api-reference.arta.io
   tags:
+  - Shipments
+  tags_raw:
   - shipments
   properties:
   - type: OpenAPI
@@ -432,6 +465,8 @@ apis:
   description: The tags API from Artashippinginc — 2 operation(s) for tags.
   humanURL: https://api-reference.arta.io
   tags:
+  - Tags
+  tags_raw:
   - tags
   properties:
   - type: OpenAPI
@@ -453,6 +488,8 @@ apis:
   description: The trackings API from Artashippinginc — 1 operation(s) for trackings.
   humanURL: https://api-reference.arta.io
   tags:
+  - Trackings
+  tags_raw:
   - trackings
   properties:
   - type: OpenAPI
@@ -474,6 +511,8 @@ apis:
   description: The uploads API from Artashippinginc — 2 operation(s) for uploads.
   humanURL: https://api-reference.arta.io
   tags:
+  - Uploads
+  tags_raw:
   - uploads
   properties:
   - type: OpenAPI
@@ -495,6 +534,8 @@ apis:
   description: The webhook_deliveries API from Artashippinginc — 2 operation(s) for webhook_deliveries.
   humanURL: https://api-reference.arta.io
   tags:
+  - Webhook Deliveries
+  tags_raw:
   - webhook_deliveries
   properties:
   - type: OpenAPI
@@ -516,6 +557,8 @@ apis:
   description: The webhooks API from Artashippinginc — 5 operation(s) for webhooks.
   humanURL: https://api-reference.arta.io
   tags:
+  - Webhook
+  tags_raw:
   - webhooks
   properties:
   - type: OpenAPI
