@@ -408,6 +408,45 @@ paths:
       - collection_tag_rules
 components:
   schemas:
+    CollectionTagRuleCreate:
+      example:
+        collection_tag_rule:
+          pattern: seller-a-*
+      properties:
+        collection_tag_rule:
+          oneOf:
+          - properties:
+              pattern:
+                description: The pattern to match against shipment tags. For exact_match, this should be the exact tag name. For pattern_match, supports * wildcard.
+                example: seller-a-*
+                maxLength: 100
+                type: string
+                x-struct: null
+                x-validate: null
+            required:
+            - pattern
+            type: object
+            x-struct: null
+            x-validate: null
+          - properties:
+              tag_id:
+                description: The ID of the tag to match against shipment tags.
+                example: uuid
+                type: uuid
+                x-struct: null
+                x-validate: null
+            required:
+            - tag_id
+            type: object
+            x-struct: null
+            x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      title: CollectionTagRuleCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.CollectionTagRuleCreate
+      x-validate: null
     Error:
       properties:
         errors:
@@ -469,45 +508,6 @@ components:
       title: CollectionTagRule
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.CollectionTagRule
-      x-validate: null
-    CollectionTagRuleCreate:
-      example:
-        collection_tag_rule:
-          pattern: seller-a-*
-      properties:
-        collection_tag_rule:
-          oneOf:
-          - properties:
-              pattern:
-                description: The pattern to match against shipment tags. For exact_match, this should be the exact tag name. For pattern_match, supports * wildcard.
-                example: seller-a-*
-                maxLength: 100
-                type: string
-                x-struct: null
-                x-validate: null
-            required:
-            - pattern
-            type: object
-            x-struct: null
-            x-validate: null
-          - properties:
-              tag_id:
-                description: The ID of the tag to match against shipment tags.
-                example: uuid
-                type: uuid
-                x-struct: null
-                x-validate: null
-            required:
-            - tag_id
-            type: object
-            x-struct: null
-            x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      title: CollectionTagRuleCreate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.CollectionTagRuleCreate
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

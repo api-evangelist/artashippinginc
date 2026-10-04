@@ -374,27 +374,6 @@ paths:
       - API Keys
 components:
   schemas:
-    ApiKeyCreate:
-      additionalProperties: false
-      properties:
-        api_key:
-          properties:
-            is_testing:
-              default: false
-              description: Whether this API Key should operate in Live or Test mode.
-              example: true
-              type: boolean
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - api_key
-      title: ApiKeyCreate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.ApiKeyCreate
-      x-validate: null
     APIKey:
       properties:
         created_at:
@@ -426,6 +405,27 @@ components:
       title: APIKey
       type: object
       x-struct: Elixir.DocsWeb.Schemas.APIKey
+      x-validate: null
+    ApiKeyCreate:
+      additionalProperties: false
+      properties:
+        api_key:
+          properties:
+            is_testing:
+              default: false
+              description: Whether this API Key should operate in Live or Test mode.
+              example: true
+              type: boolean
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - api_key
+      title: ApiKeyCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.ApiKeyCreate
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

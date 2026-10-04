@@ -421,6 +421,43 @@ paths:
       - Attachments
 components:
   schemas:
+    AttachmentCreate:
+      additionalProperties: false
+      example:
+        attachment:
+          request_id: 506d79b6-1e5e-4e8c-a266-74658fdaf4ee
+          upload_id: 4791
+      properties:
+        attachment:
+          properties:
+            request_id:
+              description: The string ID of the request resource being associated to an upload. Do not include a request_id in the attachment parameters if you are associating a shipment
+              example: 506d79b6-1e5e-4e8c-a266-74658fdaf4ee
+              type: string
+              x-struct: null
+              x-validate: null
+            shipment_id:
+              description: The string ID of the shipment resource being associated to an upload. Do not include a shipment_id in the attachment parameters if you are associating a shipment
+              type: string
+              x-struct: null
+              x-validate: null
+            upload_id:
+              description: The integer ID of the upload resource being attached
+              example: 4791
+              type: integer
+              x-struct: null
+              x-validate: null
+          required:
+          - upload_id
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - attachment
+      title: AttachmentCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.AttachmentCreate
+      x-validate: null
     Attachment:
       example:
         created_at: '2021-10-27T16:48:38.657228'
@@ -472,43 +509,6 @@ components:
       title: Attachment
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Attachment
-      x-validate: null
-    AttachmentCreate:
-      additionalProperties: false
-      example:
-        attachment:
-          request_id: 506d79b6-1e5e-4e8c-a266-74658fdaf4ee
-          upload_id: 4791
-      properties:
-        attachment:
-          properties:
-            request_id:
-              description: The string ID of the request resource being associated to an upload. Do not include a request_id in the attachment parameters if you are associating a shipment
-              example: 506d79b6-1e5e-4e8c-a266-74658fdaf4ee
-              type: string
-              x-struct: null
-              x-validate: null
-            shipment_id:
-              description: The string ID of the shipment resource being associated to an upload. Do not include a shipment_id in the attachment parameters if you are associating a shipment
-              type: string
-              x-struct: null
-              x-validate: null
-            upload_id:
-              description: The integer ID of the upload resource being attached
-              example: 4791
-              type: integer
-              x-struct: null
-              x-validate: null
-          required:
-          - upload_id
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - attachment
-      title: AttachmentCreate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.AttachmentCreate
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

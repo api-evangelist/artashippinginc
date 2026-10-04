@@ -1025,33 +1025,127 @@ paths:
       - Metadata
 components:
   schemas:
-    MetadataInsurance:
+    MetadataObjectMaterial:
       items:
         properties:
           description:
-            description: A long form description
-            example: Arta full risk coverage transit insurance.
+            description: A long form description of the currency
+            example: a strong, coarse unbleached cloth made from hemp, flax, cotton, or a similar yarn
             type: string
             x-struct: null
             x-validate: null
           id:
             description: The ID representing the resource
-            example: arta_transit_insurance
+            example: canvas
             type: string
             x-struct: null
             x-validate: null
           name:
-            description: A brief title for the resource
-            example: Arta Full Risk
+            description: A brief label for the resource
+            example: Canvas
             type: string
             x-struct: null
             x-validate: null
         type: object
         x-struct: null
         x-validate: null
-      title: MetadataInsurance
+      title: MetadataObjectMaterial
       type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.Insurance
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ObjectMaterial
+      x-validate: null
+    MetadataApiVersion:
+      items:
+        properties:
+          authentication:
+            description: The list of authentication schema supported by this API version
+            items:
+              example: api_key
+              type: string
+              x-struct: null
+              x-validate: null
+            type: array
+            x-struct: null
+            x-validate: null
+          description:
+            description: A long form description
+            example: A key-authenticated API Version released on October 22, 2020.
+            type: string
+            x-struct: null
+            x-validate: null
+          id:
+            description: The ID representing the resource
+            example: '2020-10-22'
+            type: string
+            x-struct: null
+            x-validate: null
+          status:
+            description: Indicates whether the API version is active, beta, or deprecated
+            example: active
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataApiVersion
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ApiVersion
+      x-validate: null
+    MetadataRequestStatus:
+      items:
+        properties:
+          description:
+            description: A long form description
+            example: Eligible shipment quotes have been added to the request
+            type: string
+            x-struct: null
+            x-validate: null
+          id:
+            description: The ID representing the resource
+            example: quoted
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief title for the resource
+            example: Quoted
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataRequestStatus
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.RequestStatus
+      x-validate: null
+    MetadataInsurancePolicyBookingDisqualification:
+      items:
+        properties:
+          description:
+            description: A long form description
+            example: Insurance coverage cannot be activated because one or more packages have already been picked up by the carrier. Coverage must be purchased before shipment begins.
+            type: string
+            x-struct: null
+            x-validate: null
+          id:
+            description: The ID representing the resource
+            example: package_in_transit
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief title for the resource
+            example: Package in transit
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataInsurancePolicyBookingDisqualification
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.InsurancePolicyBookingDisqualification
       x-validate: null
     MetadataPaymentProcessType:
       items:
@@ -1080,6 +1174,131 @@ components:
       title: MetadataPaymentProcessType
       type: array
       x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.PaymentProcessType
+      x-validate: null
+    MetadataCommercialCarrier:
+      example:
+      - id: dhl_express
+        name: DHL Express
+      - id: fedex
+        name: FedEx
+      - id: ups
+        name: UPS
+      - id: usps
+        name: USPS
+      items:
+        properties:
+          id:
+            description: The ID representing the carrier
+            example: dhl_express
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief label for the carrier
+            example: DHL Express
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataCommercialCarrier
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.CommercialCarrier
+      x-validate: null
+    MetadataQuote:
+      items:
+        properties:
+          description:
+            description: A long form description
+            example: Specialized climate-controlled transportation operated by trained technicians from wall-to-wall
+            type: string
+            x-struct: null
+            x-validate: null
+          id:
+            description: The ID representing the resource
+            example: premium
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief title for the resource
+            example: Arta Premium
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataQuote
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.Quote
+      x-validate: null
+    MetadataEmailNotification:
+      items:
+        properties:
+          description:
+            description: A long form description
+            example: Delivered when a shipment is confirmed.
+            type: string
+            x-struct: null
+            x-validate: null
+          id:
+            description: The ID representing the resource
+            example: booking
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief title for the resource
+            example: Booking Confirmation
+            type: string
+            x-struct: null
+            x-validate: null
+          optional_recipients:
+            description: The list of configurable recipients for this notification
+            items:
+              example: destination
+              type: string
+              x-struct: null
+              x-validate: null
+            type: array
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataEmailNotification
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.EmailNotification
+      x-validate: null
+    MetadataObjectComponent:
+      items:
+        properties:
+          description:
+            description: A long form description
+            example: A painting that is framed behind a glass face.
+            type: string
+            x-struct: null
+            x-validate: null
+          id:
+            description: The ID representing the resource
+            example: painting_framed_glass
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief title for the resource
+            example: Painting (framed with glass)
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataObjectComponent
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ObjectComponent
       x-validate: null
     MetadataPacking:
       items:
@@ -1138,43 +1357,155 @@ components:
       type: array
       x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.Packing
       x-validate: null
-    MetadataApiVersion:
+    MetadataQuotingStrategy:
       items:
         properties:
-          authentication:
-            description: The list of authentication schema supported by this API version
-            items:
-              example: api_key
-              type: string
-              x-struct: null
-              x-validate: null
-            type: array
-            x-struct: null
-            x-validate: null
           description:
             description: A long form description
-            example: A key-authenticated API Version released on October 22, 2020.
+            example: Returns the lowest-cost option per transport service. This strategy is ideal when cost efficiency is the priority and carrier choice is not a concern.
             type: string
             x-struct: null
             x-validate: null
           id:
             description: The ID representing the resource
-            example: '2020-10-22'
+            example: best_rate
             type: string
             x-struct: null
             x-validate: null
-          status:
-            description: Indicates whether the API version is active, beta, or deprecated
-            example: active
+          name:
+            description: A brief title for the resource
+            example: Best Rate
             type: string
             x-struct: null
             x-validate: null
         type: object
         x-struct: null
         x-validate: null
-      title: MetadataApiVersion
+      title: MetadataQuotingStrategy
       type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ApiVersion
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.QuotingStrategy
+      x-validate: null
+    MetadataReferenceRateServiceLevel:
+      example:
+      - id: arta
+        name: Arta
+      - id: dhl_express_worldwide
+        name: DHL Express
+      - id: fedex_2_day
+        name: FedEx Priority
+      - id: fedex_ground
+        name: FedEx Ground
+      - id: ups_ground
+        name: UPS Ground
+      items:
+        properties:
+          id:
+            description: The ID representing the service level
+            example: ups_2nd_day_air
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief label for the service level
+            example: UPS 2nd Day Air
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataReferenceRateServiceLevel
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ReferenceRateServiceLevel
+      x-validate: null
+    MetadataShipmentStatus:
+      items:
+        properties:
+          description:
+            description: A long form description
+            example: A quote has been booked and is awaiting confirmation by an Arta logistics specialist
+            type: string
+            x-struct: null
+            x-validate: null
+          id:
+            description: The ID representing the resource
+            example: pending
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief title for the resource
+            example: Pending
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataShipmentStatus
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ShipmentStatus
+      x-validate: null
+    MetadataParcelTransportService:
+      items:
+        properties:
+          description:
+            description: A long form description
+            example: Delivers the following business day once shipped. Available in the contiguous US and Puerto Rico.
+            type: string
+            x-struct: null
+            x-validate: null
+          id:
+            description: The ID representing the resource
+            example: next_day_air
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief title for the resource
+            example: Next Day Air
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataParcelTransportService
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ParcelTransportService
+      x-validate: null
+    MetadataReferenceRateProvider:
+      example:
+      - id: arta
+        name: Arta
+      - id: dhl_express
+        name: DHL Express
+      - id: fedex
+        name: FedEx
+      - id: ups
+        name: UPS
+      - id: usps
+        name: USPS
+      items:
+        properties:
+          id:
+            description: The ID representing the carrier
+            example: dhl_express
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief label for the carrier
+            example: DHL Express
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataReferenceRateProvider
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ReferenceRateProvider
       x-validate: null
     MetadataService:
       items:
@@ -1268,33 +1599,33 @@ components:
       type: array
       x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.Service
       x-validate: null
-    MetadataInsurancePolicyBookingDisqualification:
+    MetadataInsurancePolicyStatus:
       items:
         properties:
           description:
             description: A long form description
-            example: Insurance coverage cannot be activated because one or more packages have already been picked up by the carrier. Coverage must be purchased before shipment begins.
+            example: in transit state
             type: string
             x-struct: null
             x-validate: null
           id:
             description: The ID representing the resource
-            example: package_in_transit
+            example: active
             type: string
             x-struct: null
             x-validate: null
           name:
             description: A brief title for the resource
-            example: Package in transit
+            example: Active
             type: string
             x-struct: null
             x-validate: null
         type: object
         x-struct: null
         x-validate: null
-      title: MetadataInsurancePolicyBookingDisqualification
+      title: MetadataInsurancePolicyStatus
       type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.InsurancePolicyBookingDisqualification
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.InsurancePolicyStatus
       x-validate: null
     MetadataObject:
       items:
@@ -1352,267 +1683,6 @@ components:
       title: MetadataObject
       type: array
       x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.Object
-      x-validate: null
-    MetadataLocationAccessRestriction:
-      deprecated: true
-      items:
-        properties:
-          description:
-            description: A long form description
-            example: The location can only be accessed by elevator
-            type: string
-            x-struct: null
-            x-validate: null
-          id:
-            description: The ID representing the resource
-            example: elevator_only
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief label for the resource
-            example: Only Elevator
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataLocationAccessRestriction
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.LocationAccessRestriction
-      x-validate: null
-    MetadataObjectMaterial:
-      items:
-        properties:
-          description:
-            description: A long form description of the currency
-            example: a strong, coarse unbleached cloth made from hemp, flax, cotton, or a similar yarn
-            type: string
-            x-struct: null
-            x-validate: null
-          id:
-            description: The ID representing the resource
-            example: canvas
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief label for the resource
-            example: Canvas
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataObjectMaterial
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ObjectMaterial
-      x-validate: null
-    MetadataObjectComponent:
-      items:
-        properties:
-          description:
-            description: A long form description
-            example: A painting that is framed behind a glass face.
-            type: string
-            x-struct: null
-            x-validate: null
-          id:
-            description: The ID representing the resource
-            example: painting_framed_glass
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief title for the resource
-            example: Painting (framed with glass)
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataObjectComponent
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ObjectComponent
-      x-validate: null
-    MetadataInsurancePolicyCoverageType:
-      items:
-        properties:
-          description:
-            description: A long form description
-            example: Coverage for shipments handled through Arta's shipping services
-            type: string
-            x-struct: null
-            x-validate: null
-          id:
-            description: The ID representing the resource
-            example: arta_shipping
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief title for the resource
-            example: Arta Shipping
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataInsurancePolicyCoverageType
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.InsurancePolicyCoverageType
-      x-validate: null
-    MetadataInsurancePolicyStatus:
-      items:
-        properties:
-          description:
-            description: A long form description
-            example: in transit state
-            type: string
-            x-struct: null
-            x-validate: null
-          id:
-            description: The ID representing the resource
-            example: active
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief title for the resource
-            example: Active
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataInsurancePolicyStatus
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.InsurancePolicyStatus
-      x-validate: null
-    MetadataReferenceRateProvider:
-      example:
-      - id: arta
-        name: Arta
-      - id: dhl_express
-        name: DHL Express
-      - id: fedex
-        name: FedEx
-      - id: ups
-        name: UPS
-      - id: usps
-        name: USPS
-      items:
-        properties:
-          id:
-            description: The ID representing the carrier
-            example: dhl_express
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief label for the carrier
-            example: DHL Express
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataReferenceRateProvider
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ReferenceRateProvider
-      x-validate: null
-    MetadataQuotingStrategy:
-      items:
-        properties:
-          description:
-            description: A long form description
-            example: Returns the lowest-cost option per transport service. This strategy is ideal when cost efficiency is the priority and carrier choice is not a concern.
-            type: string
-            x-struct: null
-            x-validate: null
-          id:
-            description: The ID representing the resource
-            example: best_rate
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief title for the resource
-            example: Best Rate
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataQuotingStrategy
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.QuotingStrategy
-      x-validate: null
-    MetadataRequestStatus:
-      items:
-        properties:
-          description:
-            description: A long form description
-            example: Eligible shipment quotes have been added to the request
-            type: string
-            x-struct: null
-            x-validate: null
-          id:
-            description: The ID representing the resource
-            example: quoted
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief title for the resource
-            example: Quoted
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataRequestStatus
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.RequestStatus
-      x-validate: null
-    MetadataCommercialCarrier:
-      example:
-      - id: dhl_express
-        name: DHL Express
-      - id: fedex
-        name: FedEx
-      - id: ups
-        name: UPS
-      - id: usps
-        name: USPS
-      items:
-        properties:
-          id:
-            description: The ID representing the carrier
-            example: dhl_express
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief label for the carrier
-            example: DHL Express
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataCommercialCarrier
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.CommercialCarrier
       x-validate: null
     MetadataShipmentExceptionType:
       example:
@@ -1763,95 +1833,6 @@ components:
       type: array
       x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ShipmentExceptionType
       x-validate: null
-    MetadataPackageStatus:
-      items:
-        properties:
-          description:
-            description: A long form description
-            example: Item has shipped from originating and is en route to its destination
-            type: string
-            x-struct: null
-            x-validate: null
-          id:
-            description: The ID representing this status
-            example: transit
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief title for the resource
-            example: Transit
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataPackageStatus
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.PackageStatus
-      x-validate: null
-    MetadataReferenceRateServiceLevel:
-      example:
-      - id: arta
-        name: Arta
-      - id: dhl_express_worldwide
-        name: DHL Express
-      - id: fedex_2_day
-        name: FedEx Priority
-      - id: fedex_ground
-        name: FedEx Ground
-      - id: ups_ground
-        name: UPS Ground
-      items:
-        properties:
-          id:
-            description: The ID representing the service level
-            example: ups_2nd_day_air
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief label for the service level
-            example: UPS 2nd Day Air
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataReferenceRateServiceLevel
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ReferenceRateServiceLevel
-      x-validate: null
-    MetadataParcelTransportService:
-      items:
-        properties:
-          description:
-            description: A long form description
-            example: Delivers the following business day once shipped. Available in the contiguous US and Puerto Rico.
-            type: string
-            x-struct: null
-            x-validate: null
-          id:
-            description: The ID representing the resource
-            example: next_day_air
-            type: string
-            x-struct: null
-            x-validate: null
-          name:
-            description: A brief title for the resource
-            example: Next Day Air
-            type: string
-            x-struct: null
-            x-validate: null
-        type: object
-        x-struct: null
-        x-validate: null
-      title: MetadataParcelTransportService
-      type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ParcelTransportService
-      x-validate: null
     MetadataCurrency:
       items:
         properties:
@@ -1880,99 +1861,118 @@ components:
       type: array
       x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.Currency
       x-validate: null
-    MetadataQuote:
+    MetadataInsurance:
       items:
         properties:
           description:
             description: A long form description
-            example: Specialized climate-controlled transportation operated by trained technicians from wall-to-wall
+            example: Arta full risk coverage transit insurance.
             type: string
             x-struct: null
             x-validate: null
           id:
             description: The ID representing the resource
-            example: premium
+            example: arta_transit_insurance
             type: string
             x-struct: null
             x-validate: null
           name:
             description: A brief title for the resource
-            example: Arta Premium
+            example: Arta Full Risk
             type: string
             x-struct: null
             x-validate: null
         type: object
         x-struct: null
         x-validate: null
-      title: MetadataQuote
+      title: MetadataInsurance
       type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.Quote
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.Insurance
       x-validate: null
-    MetadataShipmentStatus:
+    MetadataPackageStatus:
       items:
         properties:
           description:
             description: A long form description
-            example: A quote has been booked and is awaiting confirmation by an Arta logistics specialist
+            example: Item has shipped from originating and is en route to its destination
             type: string
             x-struct: null
             x-validate: null
           id:
-            description: The ID representing the resource
-            example: pending
+            description: The ID representing this status
+            example: transit
             type: string
             x-struct: null
             x-validate: null
           name:
             description: A brief title for the resource
-            example: Pending
+            example: Transit
             type: string
             x-struct: null
             x-validate: null
         type: object
         x-struct: null
         x-validate: null
-      title: MetadataShipmentStatus
+      title: MetadataPackageStatus
       type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.ShipmentStatus
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.PackageStatus
       x-validate: null
-    MetadataEmailNotification:
+    MetadataInsurancePolicyCoverageType:
       items:
         properties:
           description:
             description: A long form description
-            example: Delivered when a shipment is confirmed.
+            example: Coverage for shipments handled through Arta's shipping services
             type: string
             x-struct: null
             x-validate: null
           id:
             description: The ID representing the resource
-            example: booking
+            example: arta_shipping
             type: string
             x-struct: null
             x-validate: null
           name:
             description: A brief title for the resource
-            example: Booking Confirmation
+            example: Arta Shipping
             type: string
-            x-struct: null
-            x-validate: null
-          optional_recipients:
-            description: The list of configurable recipients for this notification
-            items:
-              example: destination
-              type: string
-              x-struct: null
-              x-validate: null
-            type: array
             x-struct: null
             x-validate: null
         type: object
         x-struct: null
         x-validate: null
-      title: MetadataEmailNotification
+      title: MetadataInsurancePolicyCoverageType
       type: array
-      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.EmailNotification
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.InsurancePolicyCoverageType
+      x-validate: null
+    MetadataLocationAccessRestriction:
+      deprecated: true
+      items:
+        properties:
+          description:
+            description: A long form description
+            example: The location can only be accessed by elevator
+            type: string
+            x-struct: null
+            x-validate: null
+          id:
+            description: The ID representing the resource
+            example: elevator_only
+            type: string
+            x-struct: null
+            x-validate: null
+          name:
+            description: A brief label for the resource
+            example: Only Elevator
+            type: string
+            x-struct: null
+            x-validate: null
+        type: object
+        x-struct: null
+        x-validate: null
+      title: MetadataLocationAccessRestriction
+      type: array
+      x-struct: Elixir.DocsWeb.Schemas.Response.Metadata.LocationAccessRestriction
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

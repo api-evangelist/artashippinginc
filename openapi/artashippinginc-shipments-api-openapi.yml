@@ -380,6 +380,771 @@ paths:
       - Shipments
 components:
   schemas:
+    Shipment:
+      example:
+        schedule:
+          delivery_end: null
+          delivery_start: null
+          delivery_window_modifier: ''
+          pickup_end: null
+          pickup_start: null
+          pickup_window_modifier: ''
+        insurance_policy: null
+        customs_end_use: not_for_resale
+        origin:
+          access_restrictions: []
+          address_line_1: 11 W 53rd St
+          address_line_2: null
+          address_line_3: null
+          city: New York
+          contacts:
+          - email_address: mary@example.com
+            name: Mary Quinn Sullivan
+            phone_number: (333) 333-3333
+          country: US
+          postal_code: '10019'
+          region: NY
+          title: Warehouse
+        in_transit_at: '2021-01-23T09:45:00.000000'
+        eei_form_url: null
+        quote_type: parcel
+        eei_form_status: null
+        payment_process: invoicing
+        internal_reference: null
+        packages:
+        - depth: '6.0'
+          eta: 05/09/2022
+          handle_with_care: false
+          height: '14.5'
+          id: 131
+          is_sufficiently_packed: false
+          objects:
+          - components:
+            - customs:
+                country_of_origin: US
+                hs_code: '123456'
+                medium: oil on canvas
+                temporary_admission: true
+              details:
+                creation_date: '1980'
+                creator: Bob Smithson
+                notes: Artist signature in the lower left corner
+                title: Black Rectangle
+              id: 1f26b6e1-ce25-43a9-b4ea-2ceaac24ec3a
+              internal_reference: 'Accession ID: 823'
+              public_reference: Round Smithson work
+              type: painting_framed
+              value: '15000'
+              value_currency: USD
+            current_packing:
+            - cardboard_box
+            depth: '2'
+            details:
+              creation_date: null
+              creator: null
+              is_cites: false
+              is_fragile: false
+              materials: []
+              notes: null
+              title: null
+            height: '10.5'
+            id: 621
+            images: []
+            internal_reference: null
+            public_reference: null
+            subtype: prepacked_box
+            type: client_package
+            unit_of_measurement: in
+            value: '15000'
+            value_currency: USD
+            weight: '3.5'
+            weight_unit: lb
+            width: '10'
+          - components: []
+            current_packing: []
+            customs:
+              country_of_origin: US
+              hs_code: '123456'
+              medium: oil on canvas
+              temporary_admission: true
+            depth: '2'
+            details:
+              creation_date: null
+              creator: Robert Irwin
+              is_cites: false
+              is_fragile: false
+              materials: []
+              notes: Artist signature in the lower left corner
+              title: All That Jazz
+            height: '10.5'
+            id: 620
+            images: []
+            internal_reference: null
+            public_reference: null
+            subtype: painting_unframed
+            type: art
+            unit_of_measurement: in
+            value: '1500'
+            value_currency: USD
+            weight: '3.5'
+            weight_unit: lb
+            width: '10'
+          packing_materials:
+          - strongbox
+          status: pending
+          weight: '3.5'
+          weight_unit: lb
+          width: '14.0'
+        status: pending
+        updated_at: '2021-01-21T21:00:58.579870'
+        customs_process: ddu
+        id: 6b12c76a-5217-4cd6-82d8-7aa5265ebaad
+        destination:
+          access_restrictions: []
+          address_line_1: 87 Richardson St
+          address_line_2: null
+          address_line_3: null
+          city: New York
+          contacts:
+          - email_address: al@example.com
+            name: Alfred Barr
+            phone_number: (222) 222-2222
+          country: US
+          postal_code: '11249'
+          region: NY
+          title: Home
+        tracking: []
+        total_currency: USD
+        shipping_notes: null
+        collected_at: '2021-01-22T15:30:00.000000'
+        emissions_unit: kg_co2e
+        object_count: 1
+        tags: []
+        url: https://connect.shiparta.com/shipments/6b12c76a-5217-4cd6-82d8-7aa5265egood/5xTRnCvYkdMFdcFFMWUZaCmXz
+        exceptions: []
+        confirmed_at: '2021-01-21T22:10:00.000000'
+        emissions: '0.03'
+        package_count: 1
+        cancelled_at: null
+        completed_at: null
+        total: '4'
+        services:
+        - amount: '1'
+          amount_currency: USD
+          included_services: []
+          is_requested: false
+          is_required: true
+          metadata:
+            reference_rate:
+              provider: fedex
+              service_level: fedex_standard_overnight
+          name: UPS Next Day Air
+          sub_subtype: parcel
+          subtype: parcel
+          type: transport
+        - amount: '1'
+          amount_currency: USD
+          included_services: []
+          is_requested: false
+          is_required: true
+          metadata: {}
+          name: Strongbox
+          sub_subtype: strongbox
+          subtype: packing_materials
+          type: packing
+        - amount: '1'
+          amount_currency: USD
+          included_services: []
+          is_requested: false
+          is_required: true
+          metadata: {}
+          name: Collection
+          sub_subtype: collection
+          subtype: collection
+          type: location
+        - amount: '1'
+          amount_currency: USD
+          included_services: []
+          is_requested: false
+          is_required: true
+          metadata: {}
+          name: Fuel Surcharge
+          sub_subtype: fuel_surcharge
+          subtype: fees
+          type: taxes_duties_fees
+        shortcode: MA-452144
+        public_reference: null
+        created_at: '2021-01-21T21:00:58.403150'
+      properties:
+        schedule:
+          description: The schedule for the shipment
+          properties:
+            delivery_end:
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            delivery_start:
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            delivery_window_modifier:
+              description: A qualifying word indicating how delivery_start and delivery_end together shape the delivery window. When present, values may be "after", "by", "on", or "between"
+              example: 'on'
+              type: string
+              x-struct: null
+              x-validate: null
+            pickup_end:
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            pickup_start:
+              nullable: true
+              type: string
+              x-struct: null
+              x-validate: null
+            pickup_window_modifier:
+              description: A qualifying word indicating how delivery_start and delivery_end together shape the delivery window. When present, values may be "after", "by", "on", or "between"
+              example: 'on'
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        insurance_policy:
+          nullable: true
+          properties:
+            amount:
+              $ref: '#/components/schemas/MonetaryAmount'
+            amount_currency:
+              $ref: '#/components/schemas/Currency'
+            id:
+              example: arta_transit_insurance
+              type: string
+              x-struct: null
+              x-validate: null
+            insured_value:
+              $ref: '#/components/schemas/MonetaryAmount'
+            insured_value_currency:
+              $ref: '#/components/schemas/Currency'
+          type: object
+          x-struct: null
+          x-validate: null
+        customs_end_use:
+          description: The intended end use of the items being shipped for customs purposes
+          enum:
+          - for_resale
+          - not_for_resale
+          example: not_for_resale
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        origin:
+          $ref: '#/components/schemas/Location'
+        in_transit_at:
+          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the in_transit status with microsecond precision. Returns null if the shipment has not entered transit
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        eei_form_url:
+          description: The URL for an associated electronic export information form required for customs clearance. Returns null if the shipment does not have an associated EEI Form
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        quote_type:
+          description: The ID of the quote type associated with this shipment
+          enum:
+          - premium
+          - select
+          - parcel
+          - self_ship
+          example: premium
+          type: string
+          x-struct: null
+          x-validate: null
+        eei_form_status:
+          description: The status of an associated electronic export information document required for customs clearance. Returns null if the shipment does not have an associated EEI Form
+          enum:
+          - approved
+          - cleared
+          - pending
+          - rejected
+          - submitted
+          example: pending
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        payment_process:
+          description: The primary method by which payment to Arta will be handled for any shipment booked through this hosted session
+          enum:
+          - checkout
+          - invoicing
+          example: checkout
+          type: string
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        packages:
+          items:
+            $ref: '#/components/schemas/Package'
+          type: array
+          x-struct: null
+          x-validate: null
+        status:
+          description: The status for this shipment
+          enum:
+          - pending
+          - confirmed
+          - collected
+          - in_transit
+          - completed
+          - cancelled
+          example: pending
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        customs_process:
+          description: The customs process for the shipment. "ddu" (Delivery Duties Unpaid) means the receiver is responsible for paying duties and taxes. "ddp" (Delivery Duties Paid) means the sender prepays duties and taxes. "ddp_optional" means the receiver will decide whether to pay estimated duties, fees, and taxes prior to fulfillment
+          enum:
+          - ddu
+          - ddp
+          - ddp_optional
+          example: ddu
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the shipment in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        destination:
+          $ref: '#/components/schemas/Location'
+        log_request_id:
+          description: A string identifying the API request that created the shipment. This `log_request_id` may be used to find the Log associated with the source API request
+          example: F-uX-m3bUWEb2vwAECSB
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        tracking:
+          description: A list of tracking details for the packages in a shipment
+          items:
+            properties:
+              carrier_name:
+                description: The name of the carrier providing transport services for a specific package
+                example: UPS
+                type: string
+                x-struct: null
+                x-validate: null
+              label_format_urls:
+                description: A map of shipping label format types to their respective download URLs. Returns null if no shipping label exists
+                example:
+                  pdf_4_x_6: https://labels.example.com/labels/456/token123?format=pdf_4_x_6
+                  pdf_a4: https://labels.example.com/labels/456/token123?format=pdf_a4
+                  pdf_a4_half_page: https://labels.example.com/labels/456/token123?format=pdf_a4_half_page
+                  pdf_letter: https://labels.example.com/labels/456/token123?format=pdf_letter
+                  pdf_letter_half_page: https://labels.example.com/labels/456/token123?format=pdf_letter_half_page
+                  png_4_x_6: https://labels.example.com/labels/456/token123?format=png_4_x_6
+                  zpl_12dpmm: https://labels.example.com/labels/456/token123?format=zpl_12dpmm
+                  zpl_8dpmm: https://labels.example.com/labels/456/token123?format=zpl_8dpmm
+                nullable: true
+                properties:
+                  pdf_4_x_6:
+                    description: PDF 4x6 inch label - centered and scaled to full size with 0.5 inch margins on all sides
+                    example: https://labels.example.com/labels/456/token123?format=pdf_4_x_6
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  pdf_a4:
+                    description: PDF A4 (8.3x11.7 inch) - centered and scaled to full size with 1 inch top/bottom and 1.25 inch left/right margins
+                    example: https://labels.example.com/labels/456/token123?format=pdf_a4
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  pdf_a4_half_page:
+                    description: PDF A4 landscape (11.7x8.3 inch) - 4x6 label on left half with 1.15 inch top/bottom and 1.85 inch left/right margins
+                    example: https://labels.example.com/labels/456/token123?format=pdf_a4_half_page
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  pdf_letter:
+                    description: PDF US Letter (8.5x11 inch) - centered and scaled to full size with 1 inch margins on all sides
+                    example: https://labels.example.com/labels/456/token123?format=pdf_letter
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  pdf_letter_half_page:
+                    description: PDF US Letter landscape (11x8.5 inch) - 4x6 label on left half with 1.5 inch top/bottom and 1.25 inch left/right margins
+                    example: https://labels.example.com/labels/456/token123?format=pdf_letter_half_page
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  png_4_x_6:
+                    description: PNG 4x6 inch label - centered on the page and scaled to fill exactly 4x6 inches (no margins)
+                    example: https://labels.example.com/labels/456/token123?format=png_4_x_6
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  zpl_12dpmm:
+                    description: ZPL for 12 dots/mm (300 DPI) printers - 4x6 label centered on the media at native resolution
+                    example: https://labels.example.com/labels/456/token123?format=zpl_12dpmm
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  zpl_8dpmm:
+                    description: ZPL for 8 dots/mm (203 DPI) printers - 4x6 label centered on the media at native resolution
+                    example: https://labels.example.com/labels/456/token123?format=zpl_8dpmm
+                    nullable: true
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              label_url:
+                description: A URL at which parcel package shipping labels may be downloaded and printed
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              package_id:
+                description: The ID associated with the tracking detail's corresponding package
+                example: '12345'
+                format: int64
+                type: integer
+                x-struct: null
+                x-validate: null
+              tracking_number:
+                description: The carrier-providing tracking number for this package
+                example: 1ZXXXXXXXXXXXXXXXX
+                type: string
+                x-struct: null
+                x-validate: null
+              url:
+                description: A carrier-provided URL for fetching delivery events related to this package's transport
+                example: https://www.ups.com/track?loc=en_us&tracknum=1ZXXXXXXXXXXXXXXXX&Requester=NS/
+                type: string
+                x-struct: null
+                x-validate: null
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        total_currency:
+          $ref: '#/components/schemas/Currency'
+        shipping_notes:
+          description: Any additional unstructured notes to Arta about the shipment
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        collected_at:
+          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the collected status with microsecond precision. Returns null if the shipment has not been collected
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        emissions_unit:
+          description: The unit of measurement for emissions for this shipment. Typically measured in "kg_co2e" or "kilograms of carbon dioxide equivalent"
+          example: kg_co2e
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        object_count:
+          description: The count of objects included in the shipment
+          example: 1
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        tags:
+          description: A list of tags associated with the shipment
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+          x-struct: null
+          x-validate: null
+        url:
+          description: The track URL for this shipment on the Arta web platform
+          example: https://connect.shiparta.com/shipments/6b12c76a-5217-4cd6-82d8-7aa5265egood/5xTRnCvYkdMFdcFFMWUZaCmXz
+          type: string
+          x-struct: null
+          x-validate: null
+        exceptions:
+          description: Shipment exceptions provide context about holds, delays, and other circumstances that may interrupt a shipment's fulfillment
+          items:
+            properties:
+              created_at:
+                description: A NaiveDatetime-formatted timestamp describing when the exception was created with microsecond precision
+                example: '2024-08-13T22:44:39.593704'
+                format: date-time
+                type: string
+                x-struct: null
+                x-validate: null
+              exception_type_label:
+                description: An additional label providing context about the exception type (optional)
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              hold_until:
+                description: The date the shipment will be held until
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              id:
+                description: The id of the exception in UUID format
+                format: uuid
+                type: string
+                x-struct: null
+                x-validate: null
+              package_id:
+                description: The package associated with this exception (optional)
+                example: '12345'
+                format: int64
+                nullable: true
+                type: integer
+                x-struct: null
+                x-validate: null
+              resolution:
+                description: A brief description of the method by which this exception was resolved
+                example: Balance Cleared
+                nullable: true
+                type: string
+                x-struct: null
+                x-validate: null
+              source:
+                description: The source of the exception
+                example: arta_team
+                type: string
+                x-struct: null
+                x-validate: null
+              status:
+                description: The current status for this exception
+                enum:
+                - new
+                - in_progress
+                - resolved
+                example: resolved
+                type: string
+                x-struct: null
+                x-validate: null
+              type:
+                description: The type of exception
+                example: prepayment_required
+                type: string
+                x-struct: null
+                x-validate: null
+              updated_at:
+                description: A NaiveDatetime-formatted timestamp describing when the exception was last updated with microsecond precision
+                example: '2024-08-13T22:44:39.593704'
+                format: date-time
+                type: string
+                x-struct: null
+                x-validate: null
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        confirmed_at:
+          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the confirmed status with microsecond precision. Returns null if the shipment has not been confirmed
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        emissions:
+          description: The estimated CO2 emissions for the shipment
+          example: '0.5'
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        package_count:
+          description: The count of packages included in the shipment
+          example: 1
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        cancelled_at:
+          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the cancelled status with microsecond precision. Returns null if the shipment has not been cancelled
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        completed_at:
+          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the completed status with microsecond precision. Returns null if the shipment has not been completed
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        total:
+          $ref: '#/components/schemas/MonetaryAmount'
+        services:
+          description: A list of services included in the shipment
+          items:
+            $ref: '#/components/schemas/Service'
+          type: array
+          x-struct: null
+          x-validate: null
+        shortcode:
+          description: A brief identifier for this shipment
+          example: DEMO-B8FIRV
+          type: string
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        hosted_session_id:
+          description: The ID of the HostedSession through which this shipment was created
+          example: 4215
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+      title: Shipment
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Shipment
+      x-validate: null
+    Tag:
+      example:
+        color: 008000
+        created_at: '2024-09-25T19:17:54.871490'
+        created_by: null
+        description: null
+        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
+        is_active: false
+        name: ct-warehouse
+        updated_at: '2024-09-25T19:19:01.648283'
+        updated_by: null
+      properties:
+        color:
+          description: The hexadecimal color code for the tag, without the leading `#`.
+          example: 0000FF
+          maxLength: 6
+          minLength: 6
+          pattern: ^[0-9A-F]{6}$
+          type: string
+          x-struct: null
+          x-validate: null
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        created_by:
+          description: The user ID associated with the user who created the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        description:
+          description: An optional, brief description for this tag.
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the tag in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        is_active:
+          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
+          type: boolean
+          x-struct: null
+          x-validate: null
+        name:
+          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
+          example: la-warehouse
+          maxLength: 50
+          pattern: ^[a-z0-9-]{1,50}$
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_by:
+          description: The user ID associated with the last user to edit the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+      title: Tag
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
+      x-validate: null
     Package:
       properties:
         depth:
@@ -473,6 +1238,583 @@ components:
       title: Package
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Package
+      x-validate: null
+    ShipmentList:
+      example:
+        created_at: '2021-01-21T21:00:58.403150'
+        destination:
+          city: Los Angeles
+          country: US
+          postal_code: '90024'
+          region: CA
+        hosted_session_id: null
+        id: 748dd2cd-f299-446d-8e6e-19b33aa72a83
+        internal_reference: 'cart #425123; user #871'
+        object_count: 1
+        origin:
+          city: Brooklyn
+          country: US
+          postal_code: '11211'
+          region: NY
+        package_count: 1
+        public_reference: null
+        quote_type: parcel
+        shortcode: DEMO-572652
+        status: pending
+        tags: []
+        total: '405.53'
+        total_currency: USD
+        updated_at: '2021-01-21T21:00:58.403150'
+      properties:
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        destination:
+          $ref: '#/components/schemas/MinimalLocation'
+        hosted_session_id:
+          description: The ID of the HostedSession through which this shipment was created
+          example: 4215
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the shipment in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
+          example: 'cart #425123; user #871'
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        object_count:
+          description: The count of objects in this shipment
+          example: 1
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        origin:
+          $ref: '#/components/schemas/MinimalLocation'
+        package_count:
+          description: The number of packages in this shipment
+          example: 1
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
+          example: 'Order #5681'
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        quote_type:
+          description: The ID of the quote type associated with this shipment
+          enum:
+          - premium
+          - select
+          - parcel
+          - self_ship
+          example: premium
+          type: string
+          x-struct: null
+          x-validate: null
+        shortcode:
+          description: A brief identifier for this shipment
+          example: DEMO-B8FIRV
+          type: string
+          x-struct: null
+          x-validate: null
+        status:
+          description: The status for this shipment
+          enum:
+          - pending
+          - confirmed
+          - collected
+          - in_transit
+          - completed
+          - cancelled
+          example: pending
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        tags:
+          description: A list of tags associated with the shipment
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+          x-struct: null
+          x-validate: null
+        total:
+          $ref: '#/components/schemas/MonetaryAmount'
+        total_currency:
+          $ref: '#/components/schemas/Currency'
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+      title: ShipmentList
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.ShipmentList
+      x-validate: null
+    Error:
+      properties:
+        errors:
+          properties:
+            detail:
+              description: A human-readable explanation specific to this occurrence of the problem
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      title: Error
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Error
+      x-validate: null
+    MonetaryAmount:
+      example: '2500.00'
+      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
+      title: MonetaryAmount
+      type: string
+      x-struct: null
+      x-validate: null
+    Object:
+      properties:
+        components:
+          description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
+
+
+            When components are present, the object value must equal the sum of component values.'
+          items:
+            properties:
+              customs:
+                properties:
+                  country_of_origin:
+                    description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+                    example: US
+                    maxLength: 2
+                    minLength: 2
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  hs_code:
+                    description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+                    example: '123456'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  medium:
+                    description: The medium of the object. This is a description of the material or materials used to create the object
+                    example: oil on canvas
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  temporary_admission:
+                    description: Select true if the goods are currently in the country under a temporary admission declaration
+                    example: true
+                    type: boolean
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              details:
+                properties:
+                  creation_date:
+                    description: Details about the timing in which an object was created
+                    example: '1980'
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  creator:
+                    description: The creator of the object
+                    example: Bob Smithson
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  notes:
+                    description: Any notes about the item
+                    example: Artist signature in the lower left corner
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  title:
+                    description: The object title
+                    example: Black Rectangle
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                type: object
+                x-struct: null
+                x-validate: null
+              id:
+                description: The id of the component in UUID format
+                format: uuid
+                type: string
+                x-struct: null
+                x-validate: null
+              internal_reference:
+                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+                example: 'Accession ID: 823'
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              public_reference:
+                description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+                example: Round Smithson work
+                maxLength: 255
+                type: string
+                x-struct: null
+                x-validate: null
+              type:
+                description: The object component type ID. Options are defined in the Object Component types metadata endpoint
+                example: painting_framed
+                pattern: ^[0-9a-z_]{1,56}$
+                type: string
+                x-struct: null
+                x-validate: null
+              value:
+                $ref: '#/components/schemas/MonetaryAmount'
+              value_currency:
+                $ref: '#/components/schemas/Currency'
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        current_packing:
+          description: A list of packing subtype IDs describing how the item is currently packed
+          items:
+            example: no_packing
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        customs:
+          properties:
+            country_of_origin:
+              description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
+              example: US
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-struct: null
+              x-validate: null
+            hs_code:
+              description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
+              example: '123456'
+              type: string
+              x-struct: null
+              x-validate: null
+            medium:
+              description: The medium of the object. This is a description of the material or materials used to create the object
+              example: oil on canvas
+              type: string
+              x-struct: null
+              x-validate: null
+            temporary_admission:
+              description: Select true if the goods are currently in the country under a temporary admission declaration
+              example: true
+              type: boolean
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        depth:
+          description: The depth of the object
+          example: '3'
+          type: string
+          x-struct: null
+          x-validate: null
+        details:
+          properties:
+            creation_date:
+              description: Details about the timing in which an object was created
+              example: '1980'
+              type: string
+              x-struct: null
+              x-validate: null
+            creator:
+              description: The creator of the object
+              example: Bob Smithson
+              type: string
+              x-struct: null
+              x-validate: null
+            is_cites:
+              default: false
+              description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
+              type: boolean
+              x-struct: null
+              x-validate: null
+            is_fragile:
+              default: false
+              description: Set this flag to true is the item is fragile. This may effect packing and handling costs
+              type: boolean
+              x-struct: null
+              x-validate: null
+            materials:
+              deprecated: true
+              description: A list of IDs describing the types of materials used
+              items:
+                example: canvas
+                type: string
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+            notes:
+              description: Any notes about the item
+              example: Artist signature in the lower left corner
+              type: string
+              x-struct: null
+              x-validate: null
+            title:
+              description: The object title
+              example: Black Rectangle
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        height:
+          description: The height of the object
+          example: '32'
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        images:
+          description: A list image urls of the object
+          items:
+            example: http://example.com/image.jpg
+            format: uri
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        internal_reference:
+          description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
+          example: 'Accession ID: 823'
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        public_reference:
+          description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
+          example: Round Smithson work
+          maxLength: 255
+          type: string
+          x-struct: null
+          x-validate: null
+        subtype:
+          description: The object subtype ID. Options are defined in the Object types metadata endpoint
+          example: painting_unframed
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        type:
+          description: The object type id
+          pattern: ^[0-9a-z_]{1,56}$
+          type: string
+          x-struct: null
+          x-validate: null
+        unit_of_measurement:
+          enum:
+          - in
+          - cm
+          example: in
+          type: string
+          x-struct: null
+          x-validate: null
+        value:
+          $ref: '#/components/schemas/MonetaryAmount'
+        value_currency:
+          $ref: '#/components/schemas/Currency'
+        weight:
+          description: The weight of the object
+          example: '3.0'
+          type: string
+          x-struct: null
+          x-validate: null
+        weight_unit:
+          description: The unit of the object
+          enum:
+          - lb
+          - kg
+          example: lb
+          type: string
+          x-struct: null
+          x-validate: null
+        width:
+          description: The width of the object
+          example: '15'
+          type: string
+          x-struct: null
+          x-validate: null
+      title: Object
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Object
+      x-validate: null
+    Location:
+      properties:
+        access_restrictions:
+          deprecated: true
+          items:
+            description: Id of location restriction type
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        address_line_1:
+          description: First line of address
+          example: 87 Richardson St
+          type: string
+          x-struct: null
+          x-validate: null
+        address_line_2:
+          description: Second line of address
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        address_line_3:
+          description: Third line of address
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        city:
+          description: City
+          example: Brooklyn
+          type: string
+          x-struct: null
+          x-validate: null
+        contacts:
+          description: A list of contacts at the location
+          items:
+            properties:
+              email_address:
+                example: docs@arta.io
+                type: string
+                x-struct: null
+                x-validate: null
+              name:
+                example: Contact Name
+                type: string
+                x-struct: null
+                x-validate: null
+              phone_number:
+                example: 646 828 7333
+                type: string
+                x-struct: null
+                x-validate: null
+            required:
+            - name
+            type: object
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        country:
+          description: The ISO 3166-1 alpha-2 country code of the current or last known location if available
+          example: US
+          maxLength: 2
+          minLength: 2
+          type: string
+          x-struct: null
+          x-validate: null
+        postal_code:
+          description: The postal code
+          example: '11211'
+          type: string
+          x-struct: null
+          x-validate: null
+        region:
+          description: Political region name, for US states and Canada provinces, use 2 letter abbreviations
+          example: NY
+          type: string
+          x-struct: null
+          x-validate: null
+        title:
+          description: The title or name of the location
+          example: Gallery
+          type: string
+          x-struct: null
+          x-validate: null
+      required:
+      - country
+      title: Location
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Location
+      x-validate: null
+    MinimalLocation:
+      description: A minimal representation of the destination address for the shipment
+      properties:
+        city:
+          description: The destination address city
+          example: Los Angeles
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        country:
+          description: The destination address country in 2-digit ISO 3166-1 alpha-2 format
+          example: US
+          type: string
+          x-struct: null
+          x-validate: null
+        postal_code:
+          description: The destination address postal code
+          example: '90024'
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        region:
+          description: The destination address region
+          example: CA
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+      title: MinimalLocation
+      type: object
+      x-struct: null
       x-validate: null
     ShipmentCreate:
       oneOf:
@@ -1175,108 +2517,6 @@ components:
       title: ShipmentCreate
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.ShipmentCreate
       x-validate: null
-    Location:
-      properties:
-        access_restrictions:
-          deprecated: true
-          items:
-            description: Id of location restriction type
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        address_line_1:
-          description: First line of address
-          example: 87 Richardson St
-          type: string
-          x-struct: null
-          x-validate: null
-        address_line_2:
-          description: Second line of address
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        address_line_3:
-          description: Third line of address
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        city:
-          description: City
-          example: Brooklyn
-          type: string
-          x-struct: null
-          x-validate: null
-        contacts:
-          description: A list of contacts at the location
-          items:
-            properties:
-              email_address:
-                example: docs@arta.io
-                type: string
-                x-struct: null
-                x-validate: null
-              name:
-                example: Contact Name
-                type: string
-                x-struct: null
-                x-validate: null
-              phone_number:
-                example: 646 828 7333
-                type: string
-                x-struct: null
-                x-validate: null
-            required:
-            - name
-            type: object
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        country:
-          description: The ISO 3166-1 alpha-2 country code of the current or last known location if available
-          example: US
-          maxLength: 2
-          minLength: 2
-          type: string
-          x-struct: null
-          x-validate: null
-        postal_code:
-          description: The postal code
-          example: '11211'
-          type: string
-          x-struct: null
-          x-validate: null
-        region:
-          description: Political region name, for US states and Canada provinces, use 2 letter abbreviations
-          example: NY
-          type: string
-          x-struct: null
-          x-validate: null
-        title:
-          description: The title or name of the location
-          example: Gallery
-          type: string
-          x-struct: null
-          x-validate: null
-      required:
-      - country
-      title: Location
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Location
-      x-validate: null
-    MonetaryAmount:
-      example: '2500.00'
-      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
-      title: MonetaryAmount
-      type: string
-      x-struct: null
-      x-validate: null
     Currency:
       default: USD
       description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
@@ -1377,1246 +2617,6 @@ components:
       title: Service
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Service
-      x-validate: null
-    Object:
-      properties:
-        components:
-          description: 'A list of components in the object. Should be used only with a `prepacked_box` object subtype.
-
-
-            When components are present, the object value must equal the sum of component values.'
-          items:
-            properties:
-              customs:
-                properties:
-                  country_of_origin:
-                    description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
-                    example: US
-                    maxLength: 2
-                    minLength: 2
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  hs_code:
-                    description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
-                    example: '123456'
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  medium:
-                    description: The medium of the object. This is a description of the material or materials used to create the object
-                    example: oil on canvas
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  temporary_admission:
-                    description: Select true if the goods are currently in the country under a temporary admission declaration
-                    example: true
-                    type: boolean
-                    x-struct: null
-                    x-validate: null
-                type: object
-                x-struct: null
-                x-validate: null
-              details:
-                properties:
-                  creation_date:
-                    description: Details about the timing in which an object was created
-                    example: '1980'
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  creator:
-                    description: The creator of the object
-                    example: Bob Smithson
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  notes:
-                    description: Any notes about the item
-                    example: Artist signature in the lower left corner
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  title:
-                    description: The object title
-                    example: Black Rectangle
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                type: object
-                x-struct: null
-                x-validate: null
-              id:
-                description: The id of the component in UUID format
-                format: uuid
-                type: string
-                x-struct: null
-                x-validate: null
-              internal_reference:
-                description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
-                example: 'Accession ID: 823'
-                maxLength: 255
-                type: string
-                x-struct: null
-                x-validate: null
-              public_reference:
-                description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
-                example: Round Smithson work
-                maxLength: 255
-                type: string
-                x-struct: null
-                x-validate: null
-              type:
-                description: The object component type ID. Options are defined in the Object Component types metadata endpoint
-                example: painting_framed
-                pattern: ^[0-9a-z_]{1,56}$
-                type: string
-                x-struct: null
-                x-validate: null
-              value:
-                $ref: '#/components/schemas/MonetaryAmount'
-              value_currency:
-                $ref: '#/components/schemas/Currency'
-            type: object
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        current_packing:
-          description: A list of packing subtype IDs describing how the item is currently packed
-          items:
-            example: no_packing
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        customs:
-          properties:
-            country_of_origin:
-              description: The ISO 3166-1 alpha-2 country code where the object was made or manufactured
-              example: US
-              maxLength: 2
-              minLength: 2
-              type: string
-              x-struct: null
-              x-validate: null
-            hs_code:
-              description: The Harmonized System code for the object. This is a 6-10 digit code used to classify traded products
-              example: '123456'
-              type: string
-              x-struct: null
-              x-validate: null
-            medium:
-              description: The medium of the object. This is a description of the material or materials used to create the object
-              example: oil on canvas
-              type: string
-              x-struct: null
-              x-validate: null
-            temporary_admission:
-              description: Select true if the goods are currently in the country under a temporary admission declaration
-              example: true
-              type: boolean
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        depth:
-          description: The depth of the object
-          example: '3'
-          type: string
-          x-struct: null
-          x-validate: null
-        details:
-          properties:
-            creation_date:
-              description: Details about the timing in which an object was created
-              example: '1980'
-              type: string
-              x-struct: null
-              x-validate: null
-            creator:
-              description: The creator of the object
-              example: Bob Smithson
-              type: string
-              x-struct: null
-              x-validate: null
-            is_cites:
-              default: false
-              description: Set to true if the object is governed by the Convention on International Trade in Endangered Species of Wild Fauna and Flora
-              type: boolean
-              x-struct: null
-              x-validate: null
-            is_fragile:
-              default: false
-              description: Set this flag to true is the item is fragile. This may effect packing and handling costs
-              type: boolean
-              x-struct: null
-              x-validate: null
-            materials:
-              deprecated: true
-              description: A list of IDs describing the types of materials used
-              items:
-                example: canvas
-                type: string
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-            notes:
-              description: Any notes about the item
-              example: Artist signature in the lower left corner
-              type: string
-              x-struct: null
-              x-validate: null
-            title:
-              description: The object title
-              example: Black Rectangle
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        height:
-          description: The height of the object
-          example: '32'
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        images:
-          description: A list image urls of the object
-          items:
-            example: http://example.com/image.jpg
-            format: uri
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        internal_reference:
-          description: This field can be used to pass through any data that you may want returned unaltered for your own later usage
-          example: 'Accession ID: 823'
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        public_reference:
-          description: A client defined name for the object. The value provided for public_reference may be presented in notification emails and on shipment detail pages
-          example: Round Smithson work
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        subtype:
-          description: The object subtype ID. Options are defined in the Object types metadata endpoint
-          example: painting_unframed
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-        type:
-          description: The object type id
-          pattern: ^[0-9a-z_]{1,56}$
-          type: string
-          x-struct: null
-          x-validate: null
-        unit_of_measurement:
-          enum:
-          - in
-          - cm
-          example: in
-          type: string
-          x-struct: null
-          x-validate: null
-        value:
-          $ref: '#/components/schemas/MonetaryAmount'
-        value_currency:
-          $ref: '#/components/schemas/Currency'
-        weight:
-          description: The weight of the object
-          example: '3.0'
-          type: string
-          x-struct: null
-          x-validate: null
-        weight_unit:
-          description: The unit of the object
-          enum:
-          - lb
-          - kg
-          example: lb
-          type: string
-          x-struct: null
-          x-validate: null
-        width:
-          description: The width of the object
-          example: '15'
-          type: string
-          x-struct: null
-          x-validate: null
-      title: Object
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Object
-      x-validate: null
-    ShipmentList:
-      example:
-        created_at: '2021-01-21T21:00:58.403150'
-        destination:
-          city: Los Angeles
-          country: US
-          postal_code: '90024'
-          region: CA
-        hosted_session_id: null
-        id: 748dd2cd-f299-446d-8e6e-19b33aa72a83
-        internal_reference: 'cart #425123; user #871'
-        object_count: 1
-        origin:
-          city: Brooklyn
-          country: US
-          postal_code: '11211'
-          region: NY
-        package_count: 1
-        public_reference: null
-        quote_type: parcel
-        shortcode: DEMO-572652
-        status: pending
-        tags: []
-        total: '405.53'
-        total_currency: USD
-        updated_at: '2021-01-21T21:00:58.403150'
-      properties:
-        created_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        destination:
-          $ref: '#/components/schemas/MinimalLocation'
-        hosted_session_id:
-          description: The ID of the HostedSession through which this shipment was created
-          example: 4215
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        id:
-          description: The id of the shipment in UUID format
-          format: uuid
-          type: string
-          x-struct: null
-          x-validate: null
-        internal_reference:
-          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
-          example: 'cart #425123; user #871'
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        object_count:
-          description: The count of objects in this shipment
-          example: 1
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        origin:
-          $ref: '#/components/schemas/MinimalLocation'
-        package_count:
-          description: The number of packages in this shipment
-          example: 1
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        public_reference:
-          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
-          example: 'Order #5681'
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        quote_type:
-          description: The ID of the quote type associated with this shipment
-          enum:
-          - premium
-          - select
-          - parcel
-          - self_ship
-          example: premium
-          type: string
-          x-struct: null
-          x-validate: null
-        shortcode:
-          description: A brief identifier for this shipment
-          example: DEMO-B8FIRV
-          type: string
-          x-struct: null
-          x-validate: null
-        status:
-          description: The status for this shipment
-          enum:
-          - pending
-          - confirmed
-          - collected
-          - in_transit
-          - completed
-          - cancelled
-          example: pending
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        tags:
-          description: A list of tags associated with the shipment
-          items:
-            $ref: '#/components/schemas/Tag'
-          type: array
-          x-struct: null
-          x-validate: null
-        total:
-          $ref: '#/components/schemas/MonetaryAmount'
-        total_currency:
-          $ref: '#/components/schemas/Currency'
-        updated_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-      title: ShipmentList
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.ShipmentList
-      x-validate: null
-    Error:
-      properties:
-        errors:
-          properties:
-            detail:
-              description: A human-readable explanation specific to this occurrence of the problem
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      title: Error
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Error
-      x-validate: null
-    Tag:
-      example:
-        color: 008000
-        created_at: '2024-09-25T19:17:54.871490'
-        created_by: null
-        description: null
-        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
-        is_active: false
-        name: ct-warehouse
-        updated_at: '2024-09-25T19:19:01.648283'
-        updated_by: null
-      properties:
-        color:
-          description: The hexadecimal color code for the tag, without the leading `#`.
-          example: 0000FF
-          maxLength: 6
-          minLength: 6
-          pattern: ^[0-9A-F]{6}$
-          type: string
-          x-struct: null
-          x-validate: null
-        created_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        created_by:
-          description: The user ID associated with the user who created the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        description:
-          description: An optional, brief description for this tag.
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          description: The id of the tag in UUID format
-          format: uuid
-          type: string
-          x-struct: null
-          x-validate: null
-        is_active:
-          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
-          type: boolean
-          x-struct: null
-          x-validate: null
-        name:
-          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
-          example: la-warehouse
-          maxLength: 50
-          pattern: ^[a-z0-9-]{1,50}$
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_by:
-          description: The user ID associated with the last user to edit the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-      title: Tag
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
-      x-validate: null
-    Shipment:
-      example:
-        schedule:
-          delivery_end: null
-          delivery_start: null
-          delivery_window_modifier: ''
-          pickup_end: null
-          pickup_start: null
-          pickup_window_modifier: ''
-        insurance_policy: null
-        customs_end_use: not_for_resale
-        origin:
-          access_restrictions: []
-          address_line_1: 11 W 53rd St
-          address_line_2: null
-          address_line_3: null
-          city: New York
-          contacts:
-          - email_address: mary@example.com
-            name: Mary Quinn Sullivan
-            phone_number: (333) 333-3333
-          country: US
-          postal_code: '10019'
-          region: NY
-          title: Warehouse
-        in_transit_at: '2021-01-23T09:45:00.000000'
-        eei_form_url: null
-        quote_type: parcel
-        eei_form_status: null
-        payment_process: invoicing
-        internal_reference: null
-        packages:
-        - depth: '6.0'
-          eta: 05/09/2022
-          handle_with_care: false
-          height: '14.5'
-          id: 131
-          is_sufficiently_packed: false
-          objects:
-          - components:
-            - customs:
-                country_of_origin: US
-                hs_code: '123456'
-                medium: oil on canvas
-                temporary_admission: true
-              details:
-                creation_date: '1980'
-                creator: Bob Smithson
-                notes: Artist signature in the lower left corner
-                title: Black Rectangle
-              id: 1f26b6e1-ce25-43a9-b4ea-2ceaac24ec3a
-              internal_reference: 'Accession ID: 823'
-              public_reference: Round Smithson work
-              type: painting_framed
-              value: '15000'
-              value_currency: USD
-            current_packing:
-            - cardboard_box
-            depth: '2'
-            details:
-              creation_date: null
-              creator: null
-              is_cites: false
-              is_fragile: false
-              materials: []
-              notes: null
-              title: null
-            height: '10.5'
-            id: 621
-            images: []
-            internal_reference: null
-            public_reference: null
-            subtype: prepacked_box
-            type: client_package
-            unit_of_measurement: in
-            value: '15000'
-            value_currency: USD
-            weight: '3.5'
-            weight_unit: lb
-            width: '10'
-          - components: []
-            current_packing: []
-            customs:
-              country_of_origin: US
-              hs_code: '123456'
-              medium: oil on canvas
-              temporary_admission: true
-            depth: '2'
-            details:
-              creation_date: null
-              creator: Robert Irwin
-              is_cites: false
-              is_fragile: false
-              materials: []
-              notes: Artist signature in the lower left corner
-              title: All That Jazz
-            height: '10.5'
-            id: 620
-            images: []
-            internal_reference: null
-            public_reference: null
-            subtype: painting_unframed
-            type: art
-            unit_of_measurement: in
-            value: '1500'
-            value_currency: USD
-            weight: '3.5'
-            weight_unit: lb
-            width: '10'
-          packing_materials:
-          - strongbox
-          status: pending
-          weight: '3.5'
-          weight_unit: lb
-          width: '14.0'
-        status: pending
-        updated_at: '2021-01-21T21:00:58.579870'
-        customs_process: ddu
-        id: 6b12c76a-5217-4cd6-82d8-7aa5265ebaad
-        destination:
-          access_restrictions: []
-          address_line_1: 87 Richardson St
-          address_line_2: null
-          address_line_3: null
-          city: New York
-          contacts:
-          - email_address: al@example.com
-            name: Alfred Barr
-            phone_number: (222) 222-2222
-          country: US
-          postal_code: '11249'
-          region: NY
-          title: Home
-        tracking: []
-        total_currency: USD
-        shipping_notes: null
-        collected_at: '2021-01-22T15:30:00.000000'
-        emissions_unit: kg_co2e
-        object_count: 1
-        tags: []
-        url: https://connect.shiparta.com/shipments/6b12c76a-5217-4cd6-82d8-7aa5265egood/5xTRnCvYkdMFdcFFMWUZaCmXz
-        exceptions: []
-        confirmed_at: '2021-01-21T22:10:00.000000'
-        emissions: '0.03'
-        package_count: 1
-        cancelled_at: null
-        completed_at: null
-        total: '4'
-        services:
-        - amount: '1'
-          amount_currency: USD
-          included_services: []
-          is_requested: false
-          is_required: true
-          metadata:
-            reference_rate:
-              provider: fedex
-              service_level: fedex_standard_overnight
-          name: UPS Next Day Air
-          sub_subtype: parcel
-          subtype: parcel
-          type: transport
-        - amount: '1'
-          amount_currency: USD
-          included_services: []
-          is_requested: false
-          is_required: true
-          metadata: {}
-          name: Strongbox
-          sub_subtype: strongbox
-          subtype: packing_materials
-          type: packing
-        - amount: '1'
-          amount_currency: USD
-          included_services: []
-          is_requested: false
-          is_required: true
-          metadata: {}
-          name: Collection
-          sub_subtype: collection
-          subtype: collection
-          type: location
-        - amount: '1'
-          amount_currency: USD
-          included_services: []
-          is_requested: false
-          is_required: true
-          metadata: {}
-          name: Fuel Surcharge
-          sub_subtype: fuel_surcharge
-          subtype: fees
-          type: taxes_duties_fees
-        shortcode: MA-452144
-        public_reference: null
-        created_at: '2021-01-21T21:00:58.403150'
-      properties:
-        schedule:
-          description: The schedule for the shipment
-          properties:
-            delivery_end:
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            delivery_start:
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            delivery_window_modifier:
-              description: A qualifying word indicating how delivery_start and delivery_end together shape the delivery window. When present, values may be "after", "by", "on", or "between"
-              example: 'on'
-              type: string
-              x-struct: null
-              x-validate: null
-            pickup_end:
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            pickup_start:
-              nullable: true
-              type: string
-              x-struct: null
-              x-validate: null
-            pickup_window_modifier:
-              description: A qualifying word indicating how delivery_start and delivery_end together shape the delivery window. When present, values may be "after", "by", "on", or "between"
-              example: 'on'
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        insurance_policy:
-          nullable: true
-          properties:
-            amount:
-              $ref: '#/components/schemas/MonetaryAmount'
-            amount_currency:
-              $ref: '#/components/schemas/Currency'
-            id:
-              example: arta_transit_insurance
-              type: string
-              x-struct: null
-              x-validate: null
-            insured_value:
-              $ref: '#/components/schemas/MonetaryAmount'
-            insured_value_currency:
-              $ref: '#/components/schemas/Currency'
-          type: object
-          x-struct: null
-          x-validate: null
-        customs_end_use:
-          description: The intended end use of the items being shipped for customs purposes
-          enum:
-          - for_resale
-          - not_for_resale
-          example: not_for_resale
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        origin:
-          $ref: '#/components/schemas/Location'
-        in_transit_at:
-          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the in_transit status with microsecond precision. Returns null if the shipment has not entered transit
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        eei_form_url:
-          description: The URL for an associated electronic export information form required for customs clearance. Returns null if the shipment does not have an associated EEI Form
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        quote_type:
-          description: The ID of the quote type associated with this shipment
-          enum:
-          - premium
-          - select
-          - parcel
-          - self_ship
-          example: premium
-          type: string
-          x-struct: null
-          x-validate: null
-        eei_form_status:
-          description: The status of an associated electronic export information document required for customs clearance. Returns null if the shipment does not have an associated EEI Form
-          enum:
-          - approved
-          - cleared
-          - pending
-          - rejected
-          - submitted
-          example: pending
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        payment_process:
-          description: The primary method by which payment to Arta will be handled for any shipment booked through this hosted session
-          enum:
-          - checkout
-          - invoicing
-          example: checkout
-          type: string
-          x-struct: null
-          x-validate: null
-        internal_reference:
-          description: This field can be used to pass through any character data that you may want returned unaltered for your own later usage
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        packages:
-          items:
-            $ref: '#/components/schemas/Package'
-          type: array
-          x-struct: null
-          x-validate: null
-        status:
-          description: The status for this shipment
-          enum:
-          - pending
-          - confirmed
-          - collected
-          - in_transit
-          - completed
-          - cancelled
-          example: pending
-          maxLength: 255
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        customs_process:
-          description: The customs process for the shipment. "ddu" (Delivery Duties Unpaid) means the receiver is responsible for paying duties and taxes. "ddp" (Delivery Duties Paid) means the sender prepays duties and taxes. "ddp_optional" means the receiver will decide whether to pay estimated duties, fees, and taxes prior to fulfillment
-          enum:
-          - ddu
-          - ddp
-          - ddp_optional
-          example: ddu
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          description: The id of the shipment in UUID format
-          format: uuid
-          type: string
-          x-struct: null
-          x-validate: null
-        destination:
-          $ref: '#/components/schemas/Location'
-        log_request_id:
-          description: A string identifying the API request that created the shipment. This `log_request_id` may be used to find the Log associated with the source API request
-          example: F-uX-m3bUWEb2vwAECSB
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        tracking:
-          description: A list of tracking details for the packages in a shipment
-          items:
-            properties:
-              carrier_name:
-                description: The name of the carrier providing transport services for a specific package
-                example: UPS
-                type: string
-                x-struct: null
-                x-validate: null
-              label_format_urls:
-                description: A map of shipping label format types to their respective download URLs. Returns null if no shipping label exists
-                example:
-                  pdf_4_x_6: https://labels.example.com/labels/456/token123?format=pdf_4_x_6
-                  pdf_a4: https://labels.example.com/labels/456/token123?format=pdf_a4
-                  pdf_a4_half_page: https://labels.example.com/labels/456/token123?format=pdf_a4_half_page
-                  pdf_letter: https://labels.example.com/labels/456/token123?format=pdf_letter
-                  pdf_letter_half_page: https://labels.example.com/labels/456/token123?format=pdf_letter_half_page
-                  png_4_x_6: https://labels.example.com/labels/456/token123?format=png_4_x_6
-                  zpl_12dpmm: https://labels.example.com/labels/456/token123?format=zpl_12dpmm
-                  zpl_8dpmm: https://labels.example.com/labels/456/token123?format=zpl_8dpmm
-                nullable: true
-                properties:
-                  pdf_4_x_6:
-                    description: PDF 4x6 inch label - centered and scaled to full size with 0.5 inch margins on all sides
-                    example: https://labels.example.com/labels/456/token123?format=pdf_4_x_6
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  pdf_a4:
-                    description: PDF A4 (8.3x11.7 inch) - centered and scaled to full size with 1 inch top/bottom and 1.25 inch left/right margins
-                    example: https://labels.example.com/labels/456/token123?format=pdf_a4
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  pdf_a4_half_page:
-                    description: PDF A4 landscape (11.7x8.3 inch) - 4x6 label on left half with 1.15 inch top/bottom and 1.85 inch left/right margins
-                    example: https://labels.example.com/labels/456/token123?format=pdf_a4_half_page
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  pdf_letter:
-                    description: PDF US Letter (8.5x11 inch) - centered and scaled to full size with 1 inch margins on all sides
-                    example: https://labels.example.com/labels/456/token123?format=pdf_letter
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  pdf_letter_half_page:
-                    description: PDF US Letter landscape (11x8.5 inch) - 4x6 label on left half with 1.5 inch top/bottom and 1.25 inch left/right margins
-                    example: https://labels.example.com/labels/456/token123?format=pdf_letter_half_page
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  png_4_x_6:
-                    description: PNG 4x6 inch label - centered on the page and scaled to fill exactly 4x6 inches (no margins)
-                    example: https://labels.example.com/labels/456/token123?format=png_4_x_6
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  zpl_12dpmm:
-                    description: ZPL for 12 dots/mm (300 DPI) printers - 4x6 label centered on the media at native resolution
-                    example: https://labels.example.com/labels/456/token123?format=zpl_12dpmm
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  zpl_8dpmm:
-                    description: ZPL for 8 dots/mm (203 DPI) printers - 4x6 label centered on the media at native resolution
-                    example: https://labels.example.com/labels/456/token123?format=zpl_8dpmm
-                    nullable: true
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                type: object
-                x-struct: null
-                x-validate: null
-              label_url:
-                description: A URL at which parcel package shipping labels may be downloaded and printed
-                nullable: true
-                type: string
-                x-struct: null
-                x-validate: null
-              package_id:
-                description: The ID associated with the tracking detail's corresponding package
-                example: '12345'
-                format: int64
-                type: integer
-                x-struct: null
-                x-validate: null
-              tracking_number:
-                description: The carrier-providing tracking number for this package
-                example: 1ZXXXXXXXXXXXXXXXX
-                type: string
-                x-struct: null
-                x-validate: null
-              url:
-                description: A carrier-provided URL for fetching delivery events related to this package's transport
-                example: https://www.ups.com/track?loc=en_us&tracknum=1ZXXXXXXXXXXXXXXXX&Requester=NS/
-                type: string
-                x-struct: null
-                x-validate: null
-            type: object
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        total_currency:
-          $ref: '#/components/schemas/Currency'
-        shipping_notes:
-          description: Any additional unstructured notes to Arta about the shipment
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        collected_at:
-          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the collected status with microsecond precision. Returns null if the shipment has not been collected
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        emissions_unit:
-          description: The unit of measurement for emissions for this shipment. Typically measured in "kg_co2e" or "kilograms of carbon dioxide equivalent"
-          example: kg_co2e
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        object_count:
-          description: The count of objects included in the shipment
-          example: 1
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        tags:
-          description: A list of tags associated with the shipment
-          items:
-            $ref: '#/components/schemas/Tag'
-          type: array
-          x-struct: null
-          x-validate: null
-        url:
-          description: The track URL for this shipment on the Arta web platform
-          example: https://connect.shiparta.com/shipments/6b12c76a-5217-4cd6-82d8-7aa5265egood/5xTRnCvYkdMFdcFFMWUZaCmXz
-          type: string
-          x-struct: null
-          x-validate: null
-        exceptions:
-          description: Shipment exceptions provide context about holds, delays, and other circumstances that may interrupt a shipment's fulfillment
-          items:
-            properties:
-              created_at:
-                description: A NaiveDatetime-formatted timestamp describing when the exception was created with microsecond precision
-                example: '2024-08-13T22:44:39.593704'
-                format: date-time
-                type: string
-                x-struct: null
-                x-validate: null
-              exception_type_label:
-                description: An additional label providing context about the exception type (optional)
-                nullable: true
-                type: string
-                x-struct: null
-                x-validate: null
-              hold_until:
-                description: The date the shipment will be held until
-                nullable: true
-                type: string
-                x-struct: null
-                x-validate: null
-              id:
-                description: The id of the exception in UUID format
-                format: uuid
-                type: string
-                x-struct: null
-                x-validate: null
-              package_id:
-                description: The package associated with this exception (optional)
-                example: '12345'
-                format: int64
-                nullable: true
-                type: integer
-                x-struct: null
-                x-validate: null
-              resolution:
-                description: A brief description of the method by which this exception was resolved
-                example: Balance Cleared
-                nullable: true
-                type: string
-                x-struct: null
-                x-validate: null
-              source:
-                description: The source of the exception
-                example: arta_team
-                type: string
-                x-struct: null
-                x-validate: null
-              status:
-                description: The current status for this exception
-                enum:
-                - new
-                - in_progress
-                - resolved
-                example: resolved
-                type: string
-                x-struct: null
-                x-validate: null
-              type:
-                description: The type of exception
-                example: prepayment_required
-                type: string
-                x-struct: null
-                x-validate: null
-              updated_at:
-                description: A NaiveDatetime-formatted timestamp describing when the exception was last updated with microsecond precision
-                example: '2024-08-13T22:44:39.593704'
-                format: date-time
-                type: string
-                x-struct: null
-                x-validate: null
-            type: object
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        confirmed_at:
-          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the confirmed status with microsecond precision. Returns null if the shipment has not been confirmed
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        emissions:
-          description: The estimated CO2 emissions for the shipment
-          example: '0.5'
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        package_count:
-          description: The count of packages included in the shipment
-          example: 1
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        cancelled_at:
-          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the cancelled status with microsecond precision. Returns null if the shipment has not been cancelled
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        completed_at:
-          description: A NaiveDatetime-formatted timestamp describing when the shipment transitioned to the completed status with microsecond precision. Returns null if the shipment has not been completed
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        total:
-          $ref: '#/components/schemas/MonetaryAmount'
-        services:
-          description: A list of services included in the shipment
-          items:
-            $ref: '#/components/schemas/Service'
-          type: array
-          x-struct: null
-          x-validate: null
-        shortcode:
-          description: A brief identifier for this shipment
-          example: DEMO-B8FIRV
-          type: string
-          x-struct: null
-          x-validate: null
-        public_reference:
-          description: A client defined name for the resource. The value provided for the public_reference field may appear in notification emails and public web pages
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        hosted_session_id:
-          description: The ID of the HostedSession through which this shipment was created
-          example: 4215
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        created_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-      title: Shipment
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Shipment
-      x-validate: null
-    MinimalLocation:
-      description: A minimal representation of the destination address for the shipment
-      properties:
-        city:
-          description: The destination address city
-          example: Los Angeles
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        country:
-          description: The destination address country in 2-digit ISO 3166-1 alpha-2 format
-          example: US
-          type: string
-          x-struct: null
-          x-validate: null
-        postal_code:
-          description: The destination address postal code
-          example: '90024'
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        region:
-          description: The destination address region
-          example: CA
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-      title: MinimalLocation
-      type: object
-      x-struct: null
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

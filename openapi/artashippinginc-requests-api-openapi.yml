@@ -609,6 +609,85 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestUpdateCustom
       x-validate: null
+    Tag:
+      example:
+        color: 008000
+        created_at: '2024-09-25T19:17:54.871490'
+        created_by: null
+        description: null
+        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
+        is_active: false
+        name: ct-warehouse
+        updated_at: '2024-09-25T19:19:01.648283'
+        updated_by: null
+      properties:
+        color:
+          description: The hexadecimal color code for the tag, without the leading `#`.
+          example: 0000FF
+          maxLength: 6
+          minLength: 6
+          pattern: ^[0-9A-F]{6}$
+          type: string
+          x-struct: null
+          x-validate: null
+        created_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        created_by:
+          description: The user ID associated with the user who created the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        description:
+          description: An optional, brief description for this tag.
+          maxLength: 255
+          nullable: true
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The id of the tag in UUID format
+          format: uuid
+          type: string
+          x-struct: null
+          x-validate: null
+        is_active:
+          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
+          type: boolean
+          x-struct: null
+          x-validate: null
+        name:
+          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
+          example: la-warehouse
+          maxLength: 50
+          pattern: ^[a-z0-9-]{1,50}$
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
+          example: '2024-08-13T22:44:39.593704'
+          format: date-time
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_by:
+          description: The user ID associated with the last user to edit the tag when applicable.
+          format: int64
+          nullable: true
+          type: integer
+          x-struct: null
+          x-validate: null
+      title: Tag
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
+      x-validate: null
     RequestCreate:
       description: Create a new request
       properties:
@@ -1234,6 +1313,91 @@ components:
       title: RequestCreate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestCreate
+      x-validate: null
+    RequestUpdateContacts:
+      example:
+        destination:
+          contacts:
+          - email_address: destination@example.com
+            name: Destination Contact
+            phone_number: (310) 123-4567
+        origin:
+          contacts:
+          - email_address: origin@example.com
+            name: Origin Contact
+            phone_number: (310) 234-5678
+      properties:
+        destination:
+          properties:
+            contacts:
+              items:
+                properties:
+                  email_address:
+                    description: The email address for this contact
+                    example: destination@example.com
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  name:
+                    description: The contact's name
+                    example: Destination Contact
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  phone_number:
+                    description: The phone number for this contact
+                    example: (310) 123-4567
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - name
+                type: object
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+        origin:
+          properties:
+            contacts:
+              items:
+                properties:
+                  email_address:
+                    description: The email address for this contact
+                    example: origin@example.com
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  name:
+                    description: The contact's name
+                    example: Origin Contact
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                  phone_number:
+                    description: The phone number for this contact
+                    example: (310) 234-5678
+                    type: string
+                    x-struct: null
+                    x-validate: null
+                required:
+                - name
+                type: object
+                x-struct: null
+                x-validate: null
+              type: array
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      title: RequestUpdateContacts
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestUpdateContacts
       x-validate: null
     Request:
       example:
@@ -2395,109 +2559,6 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Request
       x-validate: null
-    MonetaryAmount:
-      example: '2500.00'
-      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
-      title: MonetaryAmount
-      type: string
-      x-struct: null
-      x-validate: null
-    Currency:
-      default: USD
-      description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
-      example: USD
-      maxLength: 3
-      minLength: 3
-      pattern: ^[A-Z]{3}$
-      title: Currency
-      type: string
-      x-struct: null
-      x-validate: null
-    RequestUpdateContacts:
-      example:
-        destination:
-          contacts:
-          - email_address: destination@example.com
-            name: Destination Contact
-            phone_number: (310) 123-4567
-        origin:
-          contacts:
-          - email_address: origin@example.com
-            name: Origin Contact
-            phone_number: (310) 234-5678
-      properties:
-        destination:
-          properties:
-            contacts:
-              items:
-                properties:
-                  email_address:
-                    description: The email address for this contact
-                    example: destination@example.com
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  name:
-                    description: The contact's name
-                    example: Destination Contact
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  phone_number:
-                    description: The phone number for this contact
-                    example: (310) 123-4567
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                required:
-                - name
-                type: object
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-        origin:
-          properties:
-            contacts:
-              items:
-                properties:
-                  email_address:
-                    description: The email address for this contact
-                    example: origin@example.com
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  name:
-                    description: The contact's name
-                    example: Origin Contact
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                  phone_number:
-                    description: The phone number for this contact
-                    example: (310) 234-5678
-                    type: string
-                    x-struct: null
-                    x-validate: null
-                required:
-                - name
-                type: object
-                x-struct: null
-                x-validate: null
-              type: array
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      title: RequestUpdateContacts
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.RequestUpdateContacts
-      x-validate: null
     Object:
       properties:
         components:
@@ -2789,6 +2850,13 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Object
       x-validate: null
+    MonetaryAmount:
+      example: '2500.00'
+      pattern: ^(0|([1-9]+[0-9]*))(\.[0-9]{1,2})?$
+      title: MonetaryAmount
+      type: string
+      x-struct: null
+      x-validate: null
     RequestListItem:
       example:
         bookable:
@@ -3029,84 +3097,16 @@ components:
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.RequestListItem
       x-validate: null
-    Tag:
-      example:
-        color: 008000
-        created_at: '2024-09-25T19:17:54.871490'
-        created_by: null
-        description: null
-        id: f7e4b35b-5131-47c2-9a88-238bd6e62e2d
-        is_active: false
-        name: ct-warehouse
-        updated_at: '2024-09-25T19:19:01.648283'
-        updated_by: null
-      properties:
-        color:
-          description: The hexadecimal color code for the tag, without the leading `#`.
-          example: 0000FF
-          maxLength: 6
-          minLength: 6
-          pattern: ^[0-9A-F]{6}$
-          type: string
-          x-struct: null
-          x-validate: null
-        created_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was created with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        created_by:
-          description: The user ID associated with the user who created the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        description:
-          description: An optional, brief description for this tag.
-          maxLength: 255
-          nullable: true
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          description: The id of the tag in UUID format
-          format: uuid
-          type: string
-          x-struct: null
-          x-validate: null
-        is_active:
-          description: Indicates whether or not the tag is active. Inactive tags may not be associated to new resources
-          type: boolean
-          x-struct: null
-          x-validate: null
-        name:
-          description: The name for the tag. It may contain lower case letters, dashes, and alphanumeric characters only. The maximum character count is 50.
-          example: la-warehouse
-          maxLength: 50
-          pattern: ^[a-z0-9-]{1,50}$
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_at:
-          description: A NaiveDatetime-formatted timestamp describing when the resource was last updated with microsecond precision
-          example: '2024-08-13T22:44:39.593704'
-          format: date-time
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_by:
-          description: The user ID associated with the last user to edit the tag when applicable.
-          format: int64
-          nullable: true
-          type: integer
-          x-struct: null
-          x-validate: null
-      title: Tag
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.Tag
+    Currency:
+      default: USD
+      description: ISO 4217 three-letter alphabetic currency code. Options are defined in the Currencies metadata endpoint
+      example: USD
+      maxLength: 3
+      minLength: 3
+      pattern: ^[A-Z]{3}$
+      title: Currency
+      type: string
+      x-struct: null
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

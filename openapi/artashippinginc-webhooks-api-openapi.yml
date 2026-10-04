@@ -675,44 +675,6 @@ paths:
       - Webhooks
 components:
   schemas:
-    WebhookSecretToken:
-      properties:
-        secret_token:
-          description: The secret token associated with the webhook endpoint
-          example: zASePCHfe2FYKjXl1YhFukNY5T7hCqgX0RRBUVi_289ubnhBvN9U03uOqG8oB2Oz
-          type: string
-          x-struct: null
-          x-validate: null
-      title: WebhookSecretToken
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.WebhookSecretToken
-      x-validate: null
-    WebhookUpdate:
-      additionalProperties: false
-      properties:
-        webhook:
-          properties:
-            name:
-              description: The name for this Webhook.
-              example: hello@shiparta.com
-              type: string
-              x-struct: null
-              x-validate: null
-            url:
-              description: The URL for this Webhook.
-              example: Arta
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - webhook
-      title: WebhookUpdate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.WebhookUpdate
-      x-validate: null
     Webhook:
       example:
         created_at: '2020-10-22T21:12:48.839165'
@@ -771,6 +733,44 @@ components:
       title: WebhookCreate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.WebhookCreate
+      x-validate: null
+    WebhookUpdate:
+      additionalProperties: false
+      properties:
+        webhook:
+          properties:
+            name:
+              description: The name for this Webhook.
+              example: hello@shiparta.com
+              type: string
+              x-struct: null
+              x-validate: null
+            url:
+              description: The URL for this Webhook.
+              example: Arta
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - webhook
+      title: WebhookUpdate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.WebhookUpdate
+      x-validate: null
+    WebhookSecretToken:
+      properties:
+        secret_token:
+          description: The secret token associated with the webhook endpoint
+          example: zASePCHfe2FYKjXl1YhFukNY5T7hCqgX0RRBUVi_289ubnhBvN9U03uOqG8oB2Oz
+          type: string
+          x-struct: null
+          x-validate: null
+      title: WebhookSecretToken
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.WebhookSecretToken
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

@@ -465,6 +465,45 @@ paths:
       - email_rules
 components:
   schemas:
+    EmailRule:
+      properties:
+        created_at:
+          example: '2021-10-27T16:48:38.657228'
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        email_notification_id:
+          example: complete
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          example: 1942
+          readOnly: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        recipients:
+          example:
+          - destination
+          items:
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        updated_at:
+          example: '2021-10-27T16:48:38.657228'
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+      title: EmailRule
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.EmailRule
+      x-validate: null
     EmailRuleCreate:
       additionalProperties: false
       properties:
@@ -527,45 +566,6 @@ components:
       title: EmailRuleUpdate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.EmailRuleUpdate
-      x-validate: null
-    EmailRule:
-      properties:
-        created_at:
-          example: '2021-10-27T16:48:38.657228'
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        email_notification_id:
-          example: complete
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          example: 1942
-          readOnly: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        recipients:
-          example:
-          - destination
-          items:
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        updated_at:
-          example: '2021-10-27T16:48:38.657228'
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-      title: EmailRule
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.EmailRule
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.
