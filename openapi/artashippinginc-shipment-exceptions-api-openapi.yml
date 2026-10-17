@@ -356,6 +356,34 @@ paths:
       - shipment_exceptions
 components:
   schemas:
+    ShipmentExceptionUpdate:
+      example:
+        shipment_exception:
+          hold_until: '2023-08-15'
+          status: resolved
+      properties:
+        shipment_exception:
+          properties:
+            hold_until:
+              description: Optionally provide a date to hold collection for the shipment. Values should be in the `YYYY-MM-DD` format. Hold until dates must be fewer than 30 days from the shipment's `created_at` datetime.
+              type: string
+              x-struct: null
+              x-validate: null
+            status:
+              description: The current status for this exception
+              example: resolved
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - shipment_exception
+      title: ShipmentExceptionUpdate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.ShipmentExceptionUpdate
+      x-validate: null
     ShipmentExceptionCreate:
       example:
         shipment_exception:
@@ -394,34 +422,6 @@ components:
       title: ShipmentExceptionCreate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.ShipmentExceptionCreate
-      x-validate: null
-    ShipmentExceptionUpdate:
-      example:
-        shipment_exception:
-          hold_until: '2023-08-15'
-          status: resolved
-      properties:
-        shipment_exception:
-          properties:
-            hold_until:
-              description: Optionally provide a date to hold collection for the shipment. Values should be in the `YYYY-MM-DD` format. Hold until dates must be fewer than 30 days from the shipment's `created_at` datetime.
-              type: string
-              x-struct: null
-              x-validate: null
-            status:
-              description: The current status for this exception
-              example: resolved
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - shipment_exception
-      title: ShipmentExceptionUpdate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.ShipmentExceptionUpdate
       x-validate: null
     ShipmentException:
       example:

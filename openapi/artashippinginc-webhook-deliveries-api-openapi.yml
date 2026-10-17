@@ -196,102 +196,6 @@ paths:
       - webhook_deliveries
 components:
   schemas:
-    WebhookDeliveryListItem:
-      properties:
-        created_at:
-          example: '2021-10-27T16:48:38.657228'
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        id:
-          description: The string ID for this webhook delivery resource
-          example: 5b6e1621-454f-4f18-aecf-87192406effe
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        next_retry:
-          description: The UTC timestamp describing when a follow up webhook delivery event will be attempted if this one has failed
-          nullable: true
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        resource_id:
-          description: The ID of the resource that triggered the webhook event
-          example: 9c67b26c-6b5d-4e19-a703-f7356f82d7e0
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        resource_type:
-          description: The type of resource that triggered the webhook event
-          enum:
-          - ping
-          - request
-          - shipment
-          example: request
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        response_status_code:
-          example: 202
-          readOnly: true
-          type: number
-          x-struct: null
-          x-validate: null
-        status:
-          description: The status of the webhook delivery event
-          enum:
-          - delivered
-          - failed
-          example: delivered
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        type:
-          description: The type of webhook delivery sent to your endpoint
-          enum:
-          - ping
-          - request.created
-          - request.shared
-          - request.status.updated
-          - request.updated
-          - shipment.created
-          - shipment.eei_form_status.updated
-          - shipment.exceptions.updated
-          - shipment.schedule.updated
-          - shipment.status.updated
-          - shipment.tracking.updated
-          - shipment.updated
-          - shipment_exception.created
-          - shipment_exception.status.updated
-          example: ping
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-        webhook_id:
-          description: The ID belonging to your webhook endpoint in Arta's system
-          example: 432672
-          readOnly: true
-          type: integer
-          x-struct: null
-          x-validate: null
-        webhook_url:
-          description: The URL belonging to your webhook endpoint in Arta's system at the time Arta attempted delivery of the webhook event
-          example: https://hooks.mydomain.xyz/arta
-          readOnly: true
-          type: string
-          x-struct: null
-          x-validate: null
-      title: WebhookDeliveryListItem
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.WebhookDeliveryListItem
-      x-validate: null
     WebhookDelivery:
       properties:
         created_at:
@@ -402,6 +306,102 @@ components:
       title: WebhookDelivery
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.WebhookDelivery
+      x-validate: null
+    WebhookDeliveryListItem:
+      properties:
+        created_at:
+          example: '2021-10-27T16:48:38.657228'
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        id:
+          description: The string ID for this webhook delivery resource
+          example: 5b6e1621-454f-4f18-aecf-87192406effe
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        next_retry:
+          description: The UTC timestamp describing when a follow up webhook delivery event will be attempted if this one has failed
+          nullable: true
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        resource_id:
+          description: The ID of the resource that triggered the webhook event
+          example: 9c67b26c-6b5d-4e19-a703-f7356f82d7e0
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        resource_type:
+          description: The type of resource that triggered the webhook event
+          enum:
+          - ping
+          - request
+          - shipment
+          example: request
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        response_status_code:
+          example: 202
+          readOnly: true
+          type: number
+          x-struct: null
+          x-validate: null
+        status:
+          description: The status of the webhook delivery event
+          enum:
+          - delivered
+          - failed
+          example: delivered
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        type:
+          description: The type of webhook delivery sent to your endpoint
+          enum:
+          - ping
+          - request.created
+          - request.shared
+          - request.status.updated
+          - request.updated
+          - shipment.created
+          - shipment.eei_form_status.updated
+          - shipment.exceptions.updated
+          - shipment.schedule.updated
+          - shipment.status.updated
+          - shipment.tracking.updated
+          - shipment.updated
+          - shipment_exception.created
+          - shipment_exception.status.updated
+          example: ping
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+        webhook_id:
+          description: The ID belonging to your webhook endpoint in Arta's system
+          example: 432672
+          readOnly: true
+          type: integer
+          x-struct: null
+          x-validate: null
+        webhook_url:
+          description: The URL belonging to your webhook endpoint in Arta's system at the time Arta attempted delivery of the webhook event
+          example: https://hooks.mydomain.xyz/arta
+          readOnly: true
+          type: string
+          x-struct: null
+          x-validate: null
+      title: WebhookDeliveryListItem
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.WebhookDeliveryListItem
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

@@ -465,51 +465,6 @@ paths:
       - email_subscriptions
 components:
   schemas:
-    EmailSubscription:
-      example:
-        created_at: '2020-10-14T15:25:48.298369'
-        email_address: notifications@shiparta.com
-        email_notification_ids:
-        - booking
-        - complete
-        - scheduling
-        id: 6
-        name: Arta Notifications
-        updated_at: '2020-10-14T15:25:48.298369'
-      properties:
-        created_at:
-          type: string
-          x-struct: null
-          x-validate: null
-        email_address:
-          type: string
-          x-struct: null
-          x-validate: null
-        email_notification_ids:
-          items:
-            type: string
-            x-struct: null
-            x-validate: null
-          type: array
-          x-struct: null
-          x-validate: null
-        id:
-          format: int64
-          type: integer
-          x-struct: null
-          x-validate: null
-        name:
-          type: string
-          x-struct: null
-          x-validate: null
-        updated_at:
-          type: string
-          x-struct: null
-          x-validate: null
-      title: EmailSubscription
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.Response.EmailSubscription
-      x-validate: null
     EmailSubscriptionCreate:
       additionalProperties: false
       properties:
@@ -575,6 +530,51 @@ components:
       title: EmailSubscriptionUpdate
       type: object
       x-struct: Elixir.DocsWeb.Schemas.RequestBody.EmailSubscriptionUpdate
+      x-validate: null
+    EmailSubscription:
+      example:
+        created_at: '2020-10-14T15:25:48.298369'
+        email_address: notifications@shiparta.com
+        email_notification_ids:
+        - booking
+        - complete
+        - scheduling
+        id: 6
+        name: Arta Notifications
+        updated_at: '2020-10-14T15:25:48.298369'
+      properties:
+        created_at:
+          type: string
+          x-struct: null
+          x-validate: null
+        email_address:
+          type: string
+          x-struct: null
+          x-validate: null
+        email_notification_ids:
+          items:
+            type: string
+            x-struct: null
+            x-validate: null
+          type: array
+          x-struct: null
+          x-validate: null
+        id:
+          format: int64
+          type: integer
+          x-struct: null
+          x-validate: null
+        name:
+          type: string
+          x-struct: null
+          x-validate: null
+        updated_at:
+          type: string
+          x-struct: null
+          x-validate: null
+      title: EmailSubscription
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.Response.EmailSubscription
       x-validate: null
 x-topics:
 - content: 'The Arta API accepts server-to-server communications authenticated by API keys. Your API keys are self-managed and unique to your organization.

@@ -675,6 +675,32 @@ paths:
       - Webhooks
 components:
   schemas:
+    WebhookCreate:
+      additionalProperties: false
+      properties:
+        webhook:
+          properties:
+            name:
+              description: The name for this Webhook.
+              example: Production webhooks endpoint
+              type: string
+              x-struct: null
+              x-validate: null
+            url:
+              description: The URL for this Webhook.
+              example: https://notifications.example.com/
+              type: string
+              x-struct: null
+              x-validate: null
+          type: object
+          x-struct: null
+          x-validate: null
+      required:
+      - webhook
+      title: WebhookCreate
+      type: object
+      x-struct: Elixir.DocsWeb.Schemas.RequestBody.WebhookCreate
+      x-validate: null
     Webhook:
       example:
         created_at: '2020-10-22T21:12:48.839165'
@@ -707,32 +733,6 @@ components:
       title: Webhook
       type: object
       x-struct: Elixir.DocsWeb.Schemas.Response.Webhook
-      x-validate: null
-    WebhookCreate:
-      additionalProperties: false
-      properties:
-        webhook:
-          properties:
-            name:
-              description: The name for this Webhook.
-              example: Production webhooks endpoint
-              type: string
-              x-struct: null
-              x-validate: null
-            url:
-              description: The URL for this Webhook.
-              example: https://notifications.example.com/
-              type: string
-              x-struct: null
-              x-validate: null
-          type: object
-          x-struct: null
-          x-validate: null
-      required:
-      - webhook
-      title: WebhookCreate
-      type: object
-      x-struct: Elixir.DocsWeb.Schemas.RequestBody.WebhookCreate
       x-validate: null
     WebhookUpdate:
       additionalProperties: false
