@@ -65,4 +65,139 @@
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
 Artashippinginc is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://equityzen.com/company/artashippinginc
+
+**Areas:** Company
+
+## Artashippinginc on APIs.io
+
+Everything profiled for Artashippinginc is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/artashippinginc/](https://apis.io/providers/artashippinginc/)** — or go straight to one of the APIs or properties below.
+
+### APIs (23)
+
+- [Artashippinginc Address Verifications API](https://apis.io/apis/artashippinginc/artashippinginc-address-verifications-api/) — The address_verifications API from Artashippinginc — 2 operation(s) for address_verifications.
+- [Artashippinginc API Keys API](https://apis.io/apis/artashippinginc/artashippinginc-api-keys-api/) — The api_keys API from Artashippinginc — 2 operation(s) for api_keys.
+- [Artashippinginc Attachments API](https://apis.io/apis/artashippinginc/artashippinginc-attachments-api/) — The attachments API from Artashippinginc — 2 operation(s) for attachments.
+- [Artashippinginc Collection Tag Rules API](https://apis.io/apis/artashippinginc/artashippinginc-collection-tag-rules-api/) — The collection_tag_rules API from Artashippinginc — 2 operation(s) for collection_tag_rules.
+- [Artashippinginc Email Rules API](https://apis.io/apis/artashippinginc/artashippinginc-email-rules-api/) — The email_rules API from Artashippinginc — 2 operation(s) for email_rules.
+- [Artashippinginc Email Subscriptions API](https://apis.io/apis/artashippinginc/artashippinginc-email-subscriptions-api/) — The email_subscriptions API from Artashippinginc — 2 operation(s) for email_subscriptions.
+- [Artashippinginc Hosted Sessions API](https://apis.io/apis/artashippinginc/artashippinginc-hosted-sessions-api/) — The hosted_sessions API from Artashippinginc — 3 operation(s) for hosted_sessions.
+- [Artashippinginc Import Cost Estimates API](https://apis.io/apis/artashippinginc/artashippinginc-import-cost-estimates-api/) — The import_cost_estimates API from Artashippinginc — 2 operation(s) for import_cost_estimates.
+- [Artashippinginc Invoice Payments API](https://apis.io/apis/artashippinginc/artashippinginc-invoice-payments-api/) — The invoice_payments API from Artashippinginc — 2 operation(s) for invoice_payments.
+- [Artashippinginc Invoices API](https://apis.io/apis/artashippinginc/artashippinginc-invoices-api/) — The invoices API from Artashippinginc — 2 operation(s) for invoices.
+- [Artashippinginc Logs API](https://apis.io/apis/artashippinginc/artashippinginc-logs-api/) — The logs API from Artashippinginc — 2 operation(s) for logs.
+- [Artashippinginc Metadata API](https://apis.io/apis/artashippinginc/artashippinginc-metadata-api/) — The metadata API from Artashippinginc — 24 operation(s) for metadata.
+- [Artashippinginc Organization API](https://apis.io/apis/artashippinginc/artashippinginc-organization-api/) — The organization API from Artashippinginc — 1 operation(s) for organization.
+- [Artashippinginc Payments API](https://apis.io/apis/artashippinginc/artashippinginc-payments-api/) — The payments API from Artashippinginc — 2 operation(s) for payments.
+- [Artashippinginc Requests API](https://apis.io/apis/artashippinginc/artashippinginc-requests-api/) — The requests API from Artashippinginc — 5 operation(s) for requests.
+- [Artashippinginc Self Ship Collections API](https://apis.io/apis/artashippinginc/artashippinginc-self-ship-collections-api/) — The self_ship_collections API from Artashippinginc — 4 operation(s) for self_ship_collections.
+- [Artashippinginc Shipment Exceptions API](https://apis.io/apis/artashippinginc/artashippinginc-shipment-exceptions-api/) — The shipment_exceptions API from Artashippinginc — 2 operation(s) for shipment_exceptions.
+- [Artashippinginc Shipments API](https://apis.io/apis/artashippinginc/artashippinginc-shipments-api/) — The shipments API from Artashippinginc — 2 operation(s) for shipments.
+- [Artashippinginc Tags API](https://apis.io/apis/artashippinginc/artashippinginc-tags-api/) — The tags API from Artashippinginc — 2 operation(s) for tags.
+- [Artashippinginc Trackings API](https://apis.io/apis/artashippinginc/artashippinginc-trackings-api/) — The trackings API from Artashippinginc — 1 operation(s) for trackings.
+- [Artashippinginc Uploads API](https://apis.io/apis/artashippinginc/artashippinginc-uploads-api/) — The uploads API from Artashippinginc — 2 operation(s) for uploads.
+- [Artashippinginc Webhook Deliveries API](https://apis.io/apis/artashippinginc/artashippinginc-webhook-deliveries-api/) — The webhook_deliveries API from Artashippinginc — 2 operation(s) for webhook_deliveries.
+- [Artashippinginc Webhooks API](https://apis.io/apis/artashippinginc/artashippinginc-webhooks-api/) — The webhooks API from Artashippinginc — 5 operation(s) for webhooks.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [artashippinginc-mcp.yml](https://apis.io/servers/artashippinginc/artashippinginc-mcp-yml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Artashippinginc Agentic Access](https://apis.io/agentic-access/artashippinginc/artashippinginc-agentic-access/)
+
+#### JSON Schema (6)
+
+The data models the API reads and writes.
+
+- [HostedSession](https://apis.io/schemas/artashippinginc/artashippinginc-hosted-session/)
+- [HostedSessionCreate](https://apis.io/schemas/artashippinginc/artashippinginc-hosted-session-create/)
+- [Request](https://apis.io/schemas/artashippinginc/artashippinginc-request/)
+- [RequestCreate](https://apis.io/schemas/artashippinginc/artashippinginc-request-create/)
+- [Shipment](https://apis.io/schemas/artashippinginc/artashippinginc-shipment/)
+- [ShipmentCreate](https://apis.io/schemas/artashippinginc/artashippinginc-shipment-create/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Artashippinginc Context](https://apis.io/jsonld/artashippinginc/artashippinginc-context/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Artashippinginc API Rules](https://apis.io/rules/artashippinginc/artashippinginc-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Artashippinginc Domain Security](https://apis.io/security/artashippinginc/artashippinginc-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://equityzen.com/company/artashippinginc)
+
+## API Evangelist rating
+
+**Kin Score 21.2** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 35.7 |
+| Contract quality | 65.1 |
+| Contract governance | 19.7 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 1.8 |
+| Access clarity | 0.0 |
+
+**Agent readiness 23.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/artashippinginc/](https://apis.io/providers/artashippinginc/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Artashippinginc: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/artashippinginc/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
